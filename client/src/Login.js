@@ -49,7 +49,7 @@ function Login() {
           <button onClick={login}>Log in</button> <br />
         </div>
         {/* Termina front end de login */}
-      <h1>{loginStatus}</h1>            
+      <h2>{loginStatus}</h2>            
           
       </div>
     );
