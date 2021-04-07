@@ -1,0 +1,117 @@
+@font-face {
+    font-family: "titleFont";
+    src: url("fonts/AzoSans-Bold.ttf");
+  }
+  
+  @font-face {
+    font-family: "textFont";
+    src: url("fonts/Roadgeek_2005_Series_D.ttf")
+  }
+  
+  .logo {
+    width: 227px;
+    left: 23px;
+    top: 13px;
+  }
+  
+  h1 {
+    position: absolute;
+    left: 500px;
+    top: 13px;
+    
+    text-align: center;
+    font-family: "titleFont";
+    font-size: 96px;
+  }
+  
+  .forma {
+    text-align: center;
+    font-family: "textFont";
+    font-size: 24px;
+    padding-top: 70px;
+  }
+  
+  button {
+    width: 278px;
+    height: 31px;
+  
+    font-family: "textFont";
+    font-size: 24px;
+    line-height: 22px;
+  
+    background: #FFFFFF;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+  }
+  
+  .buttons {
+    padding: 20px;
+  }
+  
+  #iniciarses{
+    width: 278px;
+    height: 31px;
+  
+    font-family: "textFont";
+    font-size: 24px;
+    line-height: 22px;
+  
+    background: #FFFFFF;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+  }
+  
+  input {
+    width: 322px;
+    height: 36px;
+    
+    background: #FFFFFF;
+    border: 2px solid #000000;
+    box-sizing: border-box;
+  }
+  
+  p {
+    font-family: "textFont";
+    font-size: larger;
+  }
+  
+  .footer {
+    position: absolute;
+    width: 100%;
+    height: 12.5%;
+    left: 0px;
+    top: 849px;
+  
+    background: #28333E;
+    
+  }
+  
+  .footer h3{
+    font-size: 24px;
+    line-height: 8px;
+    align-items: center;
+    text-align: center;
+  
+    font-family: "textFont";
+    font-style: normal;
+    font-weight: normal;
+    color: whitesmoke;
+    padding: 0%;
+  }
+  
+  .footer p{
+    font-size: 14px;
+    line-height: 14px;
+    align-items: center;
+    text-align: center;
+  
+    font-family: "textFont";
+    font-style: normal;
+    font-weight: normal;
+    color: whitesmoke;
+    padding: 0%;
+  }
+  /* Para remarcar el link de la sección activa */
+  .active {
+    background-color: #0099FF;
+  }
