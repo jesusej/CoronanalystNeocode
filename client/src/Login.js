@@ -1,5 +1,7 @@
-import React, {useState } from "react";
+import React, {useState} from "react";
 import Axios from "axios";
+import {NavLink, Redirect} from "react-router-dom";
+
  
 function Login() {
 
@@ -8,6 +10,7 @@ function Login() {
  const [password, setPassword] = useState("")
 
  const [loginStatus, setLoginStatus] = useState("")
+ const [tipoCuenta, setTipoCuenta] = useState("")
 
  const login = () => {
   Axios.post("http://localhost:3001/login", {
@@ -21,12 +24,23 @@ function Login() {
       setLoginStatus(response.data.message);
     } else {
         setLoginStatus(response.data[0].Usuario);
-    }
+        //setTipoCuenta(response.data[0].idTipo_De_Cuenta);
+        if (response.data[0].idTipo_De_Cuenta === 1){
+          setTipoCuenta(response.data[0].idTipo_De_Cuenta);
+          setTipoCuenta("Es cuenta usuario");
+          return <Redirect to="/menu_Usuario"></Redirect> 
+        } else if (response.data[0].idTipo_De_Cuenta === 2) {
+          setTipoCuenta("Es cuenta cliente");
+        } else if (response.data[0].idTipo_De_Cuenta === 3) {
+          setTipoCuenta("Es cuenta admin");
+        }
+      }
   });
 };
 
 
     return (
+    
       <div className="Login">
         {/* Inicia Front end de login*/}
         <h2>Login</h2>
@@ -46,11 +60,17 @@ function Login() {
         /><br /> <br/> 
 
         <div className="button">
-          <button onClick={login}>Log in</button> <br />
+            <button onClick={login}>Log in</button> <br />
+            <button onClick={login}> Log in y pasar a Menu de Usuario </button>
+            
+                   
         </div>
+        
         {/* Termina front end de login */}
-      <h2>{loginStatus}</h2>            
-          
+      <h2>{loginStatus}</h2>
+      <h2>{tipoCuenta}</h2>
+
+                
       </div>
     );
   }

@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 import {NavLink} from "react-router-dom";
 
 
-class Home extends Component {
-  render() {
-    return (
+
+function Home() {
+  return(
       <div>
         <div classname="content"> 
           <h2>Sección principal</h2>
@@ -14,12 +14,11 @@ class Home extends Component {
         </div>
 
         <div classname="conexion"> 
-            <li><NavLink to="/login">Iniciar sesión</NavLink></li>
-            <li><NavLink to="/registro">Crear cuenta</NavLink></li>
+            <button><NavLink to="/login">Iniciar sesión</NavLink></button><br></br>
+            <button><NavLink to="/registro">Crear cuenta</NavLink></button>
         </div>
       </div>
-    );
+  );
   }
-}
  
 export default Home;

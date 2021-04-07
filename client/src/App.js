@@ -5,6 +5,11 @@ import pkglobal from './images/pkglobal.png';
 import Home from "./Home";
 import Login from "./Login";
 import Registro from "./Registro";
+import MenuUsuario from "./MenuUsuario";
+import Encuesta from "./Encuesta";
+import Datos from "./Datos";
+import CerrarSesion from "./CerrarSesion";
+
 
 function App() {
 
@@ -16,7 +21,7 @@ function App() {
               <img className="logo" src={pkglobal} alt="No se pudo cargar el logo" />
               <h1>CORONANALYST</h1>
               <ul className="header">
-                <li><NavLink exact to="/">Menu de inicio</NavLink></li>
+                <button><NavLink exact to="/">Menu de inicio</NavLink></button>
                 
               </ul>
             </div>
@@ -24,7 +29,12 @@ function App() {
             <div className="conexiones">
                 <Route exact path="/" component={Home}/>
                 <Route path="/login" component={Login}/>
-                <Route path="/registro" component={Registro}/>       
+                <Route path="/registro" component={Registro}/>
+
+                <Route path="/menu_usuario" component={MenuUsuario}/>
+                <Route path="/encuesta" component={Encuesta}/>
+                <Route path="/datos" component={Datos}/>
+                <Route path="/cerrar_sesion" component={CerrarSesion}/> 
             </div>
 
             <div className="footer">
