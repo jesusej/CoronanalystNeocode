@@ -50,6 +50,7 @@ app.post('/login', (req, res) => {
     );
 });
 
+
 app.post('/encuesta', (req, res) => {
 
     db.query(
@@ -86,6 +87,7 @@ app.post('/datos_personales', (req, res) => {
         }
     );
 });
+
 
 app.listen(3001, () => {
     console.log("Funcionando en puerto 3001");
