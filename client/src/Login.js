@@ -12,6 +12,43 @@ function Login() {
  const [loginStatus, setLoginStatus] = useState("")
  const [tipoCuenta, setTipoCuenta] = useState("")
 
+
+
+
+
+ //Función prueba
+const [loginShow, setLoginShow] = useState("")
+
+const loginShowfunc = () => {
+  Axios.post("http://localhost:3001/loginShow", {
+  }).then((response) => {
+
+      console.log(response.data[0].Usuario);
+
+      var i = 0;
+      var bdLength = response.data.length;
+      var dbArray = [""];
+
+      while (i < bdLength){
+        if (i == 0) {
+          dbArray[0] = ("El usuario es: " + response.data[i].Usuario +
+          "  y la contraseña es: " + response.data[i].Contraseña);
+        } else {
+          dbArray.push("El usuario es: " + response.data[i].Usuario +
+          "  y la contraseña es: " + response.data[i].Contraseña);
+        }
+        i++;
+      }
+        setLoginShow(dbArray.map((number) => <li>{number}</li>));
+  });
+};
+
+
+
+
+
+
+
  const login = () => {
   Axios.post("http://localhost:3001/login", {
     username: username,
@@ -23,7 +60,8 @@ function Login() {
     if(response.data.message) {
       setLoginStatus(response.data.message);
     } else {
-        setLoginStatus(response.data[0].Usuario);
+        setLoginStatus("El usuario es: " + response.data[0].Usuario +
+        "  y la contraseña es: " + response.data[0].Contraseña);
         //setTipoCuenta(response.data[0].idTipo_De_Cuenta);
         if (response.data[0].idTipo_De_Cuenta === 1){
           setTipoCuenta(response.data[0].idTipo_De_Cuenta);
@@ -61,7 +99,9 @@ function Login() {
 
         <div className="button">
             <button onClick={login}>Log in</button> <br />
-            <button onClick={login}> Log in y pasar a Menu de Usuario </button>
+            <button onClick={login}><NavLink to="/menu_Usuario">Log in y pasar a Menu de Usuario </NavLink></button>
+            {/* prueba */}
+            <button onClick={loginShowfunc}>Log in Show</button> <br />
             
                    
         </div>
@@ -69,6 +109,9 @@ function Login() {
         {/* Termina front end de login */}
       <h2>{loginStatus}</h2>
       <h2>{tipoCuenta}</h2>
+
+      {/* prueba */}
+      <h2>{loginShow}</h2>
 
                 
       </div>

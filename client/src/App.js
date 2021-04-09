@@ -6,6 +6,7 @@ import Home from "./Home";
 import Login from "./Login";
 import Registro from "./Registro";
 import MenuUsuario from "./MenuUsuario";
+import DatosPersonales from "./DatosPersonales";
 import Encuesta from "./Encuesta";
 import Datos from "./Datos";
 import CerrarSesion from "./CerrarSesion";
@@ -32,6 +33,7 @@ function App() {
                 <Route path="/registro" component={Registro}/>
 
                 <Route path="/menu_usuario" component={MenuUsuario}/>
+                <Route path="/datos_personales" component={DatosPersonales}/> 
                 <Route path="/encuesta" component={Encuesta}/>
                 <Route path="/datos" component={Datos}/>
                 <Route path="/cerrar_sesion" component={CerrarSesion}/> 

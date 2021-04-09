@@ -50,6 +50,48 @@ app.post('/login', (req, res) => {
     );
 });
 
+app.post('/loginShow', (req, res) => {
+
+
+    db.query(
+        //"SELECT Usuario, Contraseña FROM cuenta",
+        "SELECT * FROM cuenta",
+        (err, result) => {
+            if (err) {
+                res.send({err:err})
+            }
+            
+            if (result.length > 0) {
+                res.send(result);
+            } else {
+                res.send({message: "No existe la combinación de correo y contraseña"});
+            }
+        }
+    );
+});
+
+app.post('/datos_personales', (req, res) => {
+
+    const edad = req.body.edad;
+    const nivelEstudios = req.body.nivelEstudios;
+    const localidad = req.body.localidad;
+    const estadoCivil = req.body.estadoCivil;
+    const ip = req.body.ip;
+    const dispositivo = req.body.dispositivo;
+    const so= req.body.so;
+    const nivelSocioeconomico= req.body.nivelSocioeconomico;
+    const tipoComplexion= req.body.tipoComplexion;
+    const factoresRiesgo = req.body.factoresRiesgo;
+    //id de cuenta
+
+    db.query(
+        "INSERT INTO datos_personales (Edad, Nivel_estudios, Localidad, Estado_Civil, Nivel_socioeconomico, Tipo_complexion, Factores_Riesgo, idCuenta, IP, Dispositivo, SO) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        [edad, nivelEstudios, localidad, estadoCivil, nivelSocioeconomico, tipoComplexion, factoresRiesgo, ip, dispositivo, so],
+        (err, result) => {
+            console.log(err);
+        }
+    );
+});
 
 app.listen(3001, () => {
     console.log("Funcionando en puerto 3001");
