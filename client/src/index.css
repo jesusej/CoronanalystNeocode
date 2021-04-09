@@ -85,6 +85,17 @@ p {
   font-family: "textFont";
   font-size: larger;
 }
+
+/* Encuesta */
+
+.conexiones {
+  margin-bottom: 13vh;
+}
+
+li {
+  list-style: none;
+}
+
   
 footer {
   position: fixed;
