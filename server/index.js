@@ -50,6 +50,42 @@ app.post('/login', (req, res) => {
     );
 });
 
+app.post('/encuesta', (req, res) => {
+
+    db.query(
+        "SELECT * FROM preguntas AS P JOIN opciones AS O WHERE P.idPreguntas = O.idPreguntas",
+        (err, result) => {
+            if (err) {
+                res.send({err:err})
+            }
+            res.send(result);
+        }
+    );
+});
+
+app.post('/datos_personales', (req, res) => {
+
+    const edad = req.body.edad;
+    const nivelEstudios = req.body.nivelEstudios;
+    const localidad = req.body.localidad;
+    const estadoCivil = req.body.estadoCivil;
+    const ip = req.body.ip;
+    const dispositivo = req.body.dispositivo;
+    const so= req.body.so;
+    const nivelSocioeconomico= req.body.nivelSocioeconomico;
+    const tipoComplexion= req.body.tipoComplexion;
+    const factoresRiesgo = req.body.factoresRiesgo;
+    const frecuenciaEjercicio = req.body.frecuenciaEjercicio;
+    //id de cuenta
+
+    db.query(
+        "INSERT INTO datos_personales (Edad, Nivel_estudios, Localidad, Estado_Civil, Nivel_socioeconómico, Tipo_de_complexion, Factores_de_riesgo, Frecuencia_de_ejercicio, idCuenta, IP, Dispositivo, SO) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        [edad, nivelEstudios, localidad, estadoCivil, nivelSocioeconomico, tipoComplexion, factoresRiesgo, frecuenciaEjercicio, ip, dispositivo, so],
+        (err, result) => {
+            console.log(err);
+        }
+    );
+});
 
 app.listen(3001, () => {
     console.log("Funcionando en puerto 3001");
