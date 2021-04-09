@@ -13,42 +13,6 @@ function Login() {
  const [tipoCuenta, setTipoCuenta] = useState("")
 
 
-
-
-
- //Función prueba
-const [loginShow, setLoginShow] = useState("")
-
-const loginShowfunc = () => {
-  Axios.post("http://localhost:3001/loginShow", {
-  }).then((response) => {
-
-      console.log(response.data[0].Usuario);
-
-      var i = 0;
-      var bdLength = response.data.length;
-      var dbArray = [""];
-
-      while (i < bdLength){
-        if (i == 0) {
-          dbArray[0] = ("El usuario es: " + response.data[i].Usuario +
-          "  y la contraseña es: " + response.data[i].Contraseña);
-        } else {
-          dbArray.push("El usuario es: " + response.data[i].Usuario +
-          "  y la contraseña es: " + response.data[i].Contraseña);
-        }
-        i++;
-      }
-        setLoginShow(dbArray.map((number) => <li>{number}</li>));
-  });
-};
-
-
-
-
-
-
-
  const login = () => {
   Axios.post("http://localhost:3001/login", {
     username: username,
@@ -100,8 +64,6 @@ const loginShowfunc = () => {
         <div className="button">
             <button onClick={login}>Log in</button> <br />
             <button onClick={login}><NavLink to="/menu_Usuario">Log in y pasar a Menu de Usuario </NavLink></button>
-            {/* prueba */}
-            <button onClick={loginShowfunc}>Log in Show</button> <br />
             
                    
         </div>
@@ -109,10 +71,6 @@ const loginShowfunc = () => {
         {/* Termina front end de login */}
       <h2>{loginStatus}</h2>
       <h2>{tipoCuenta}</h2>
-
-      {/* prueba */}
-      <h2>{loginShow}</h2>
-
                 
       </div>
     );

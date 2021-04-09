@@ -50,22 +50,15 @@ app.post('/login', (req, res) => {
     );
 });
 
-app.post('/loginShow', (req, res) => {
-
+app.post('/encuesta', (req, res) => {
 
     db.query(
-        //"SELECT Usuario, Contraseña FROM cuenta",
-        "SELECT * FROM cuenta",
+        "SELECT * FROM preguntas AS P JOIN opciones AS O WHERE P.idPreguntas = O.idPreguntas",
         (err, result) => {
             if (err) {
                 res.send({err:err})
             }
-            
-            if (result.length > 0) {
-                res.send(result);
-            } else {
-                res.send({message: "No existe la combinación de correo y contraseña"});
-            }
+            res.send(result);
         }
     );
 });
@@ -82,11 +75,12 @@ app.post('/datos_personales', (req, res) => {
     const nivelSocioeconomico= req.body.nivelSocioeconomico;
     const tipoComplexion= req.body.tipoComplexion;
     const factoresRiesgo = req.body.factoresRiesgo;
+    const frecuenciaEjercicio = req.body.frecuenciaEjercicio;
     //id de cuenta
 
     db.query(
-        "INSERT INTO datos_personales (Edad, Nivel_estudios, Localidad, Estado_Civil, Nivel_socioeconomico, Tipo_complexion, Factores_Riesgo, idCuenta, IP, Dispositivo, SO) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-        [edad, nivelEstudios, localidad, estadoCivil, nivelSocioeconomico, tipoComplexion, factoresRiesgo, ip, dispositivo, so],
+        "INSERT INTO datos_personales (Edad, Nivel_estudios, Localidad, Estado_Civil, Nivel_socioeconómico, Tipo_de_complexion, Factores_de_riesgo, Frecuencia_de_ejercicio, idCuenta, IP, Dispositivo, SO) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        [edad, nivelEstudios, localidad, estadoCivil, nivelSocioeconomico, tipoComplexion, factoresRiesgo, frecuenciaEjercicio, ip, dispositivo, so],
         (err, result) => {
             console.log(err);
         }

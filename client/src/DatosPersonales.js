@@ -15,6 +15,7 @@ function DatosPersonales () {
     const [nivelSocioeconomico, setNivelSocioeconomico] = useState("")
     const [tipoComplexion, setTipoComplexion] = useState("")
     const [factoresRiesgo, setFactoresRiesgo] = useState("")
+    const [frecuenciaEjercicio, setFrecuenciaEjercicio] = useState("")
 
     const regDatPer = () => {
         Axios.post("http://localhost:3001/datos_personales", {
@@ -29,6 +30,7 @@ function DatosPersonales () {
             nivelSocioeconomico: nivelSocioeconomico,
             tipoComplexion: tipoComplexion,
             factoresRiesgo: factoresRiesgo,
+            frecuenciaEjercicio: frecuenciaEjercicio,
 
         }).then((response) => {
 
