@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {Route, NavLink, HashRouter} from "react-router-dom";
 import './index.css';
 import pkglobal from './images/pkglobal.png';
@@ -10,9 +10,23 @@ import DatosPersonales from "./DatosPersonales";
 import Encuesta from "./Encuesta";
 import Datos from "./Datos";
 import CerrarSesion from "./CerrarSesion";
+import Axios from "axios";
 
 
 function App() {
+
+  // Constante loginStatus para definir estado del login dependiente del cookie (se necesita mejorar, ver variables globales)
+  const [loginStatus, setLoginStatus] = useState("")
+
+  Axios.defaults.withCredentials = true;
+  
+  useEffect(()=> {
+    Axios.get("http://localhost:3001/login").then((response) => {
+      if (response.data.loggedIn){
+        setLoginStatus(response.data.user[0].Usuario);
+      }
+    });
+  }, []);
 
   return (
 

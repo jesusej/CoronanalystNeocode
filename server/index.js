@@ -2,10 +2,34 @@ const express = require("express")
 const mysql = require("mysql");
 const cors = require ("cors");
 
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+// Especifica que métodos se usan, credenciales y el uso de cookies
+app.use(
+    cors({
+        origin: ["http://localhost:3000"],
+        methods: ["GET", "POST"],
+        credentials: true,
+    })
+);
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true}));
+
+// Especifica el nombre de la cookie, expiración, clave de hashing y opciones
+app.use(session({
+    key: "userId",
+    secret: "pkglobalred",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        expires: 60*60*24,
+    },
+}));
 
 const db = mysql.createConnection({
     user: "root",
@@ -28,20 +52,33 @@ app.post('/register', (req, res) => {
     );
 });
 
+// Método GET de login que manda los datos de un usuario registrado si es que existe
+app.get("/login", (req, res)=> {
+    if (req.session.user){
+        res.send({ loggedIn: true, user: req.session.user })
+    } else {
+        res.send({ loggedIn: false })
+    }
+})
+
 app.post('/login', (req, res) => {
 
     const username = req.body.username;
     const password = req.body.password;
 
     db.query(
-        "SELECT * FROM cuenta WHERE Usuario = ? AND Contraseña = ?",
+        "SELECT * FROM cuenta WHERE Usuario = ? AND Contraseña = ?;",
         [username, password],
         (err, result) => {
             if (err) {
                 res.send({err:err})
             }
             
+            //console.log(result);
+            // Envía los resultados como cookie
             if (result.length > 0) {
+                req.session.user = result;
+                console.log(req.session.user);
                 res.send(result);
             } else {
                 res.send({message: "No existe la combinación de correo y contraseña"});
