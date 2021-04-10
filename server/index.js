@@ -90,5 +90,9 @@ app.post('/datos_personales', (req, res) => {
 
 
 app.listen(3001, () => {
+    db.connect(function(err){
+        if (err) throw err;
+        console.log("Connected!");
+      });
     console.log("Funcionando en puerto 3001");
 });
