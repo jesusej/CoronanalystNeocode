@@ -44,55 +44,55 @@ function DatosPersonales () {
         <div className="DatPer">
             <h3> Pagina de Encuesta</h3>
             <h4> Datos Personales</h4>
-            <p>Pagina donde se muestran los campos para llenar los datos personales </p> <br></br>
+            <p>Pagina donde se muestran los campos para llenar los datos personales </p>
 
-            <label> Edad </label>
+            <label> Edad </label> <br />
             <input type="text"  name="age" required
             onChange={(e) => {
                 setEdad(e.target.value)
-            }} />
+            }} /> <br />
 
-            <label> Nivel Estudios </label>
+            <label> Nivel Estudios </label> <br />
             <input type="text"  name="studies" required
             onChange={(e) => {
                 setNivelEstudios(e.target.value)
-            }} />
+            }} /> <br />
 
-            <label> Localidad </label>
+            <label> Localidad </label> <br />
             <input type="text"  name="locality" required
             onChange={(e) => {
                 setLocalidad(e.target.value)
-            }} />
+            }} /> <br />
 
-            <label> Estado Civil </label>
+            <label> Estado Civil </label> <br />
             <input type="text"  name="civilStatus" required
             onChange={(e) => {
                 setEstadoCivil(e.target.value)
-            }} />
+            }} /> <br />
 
-            <label> Nivel Socioeconómico </label>
+            <label> Nivel Socioeconómico </label> <br />
             <input type="text"  name="socioeconomic" required
             onChange={(e) => {
                 setNivelSocioeconomico(e.target.value)
-            }} />
+            }} /> <br />
 
-            <label> Tipo de complexión </label>
+            <label> Tipo de complexión </label> <br />
             <input type="text"  name="bodyType" required
             onChange={(e) => {
                 setTipoComplexion(e.target.value)
-            }} />
+            }} /> <br />
             
-            <label> Factores de riesgo </label>
+            <label> Factores de riesgo </label> <br />
             <input type="text"  name="factors" required
             onChange={(e) => {
                 setFactoresRiesgo(e.target.value)
-            }} />
+            }} /> <br />
             
-            <label> Frecuencia de ejercicio </label>
+            <label> Frecuencia de ejercicio </label> <br />
             <input type="text"  name="exerciseFrecuency" required
             onChange={(e) => {
                 setFrecuenciaEjercicio(e.target.value)
-            }} />
+            }} /> <br /> <br /> <br />
 
             { /* Insertar IP, sistema operativo y dispositivo */ }
 
