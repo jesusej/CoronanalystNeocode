@@ -18,24 +18,24 @@ function Login() {
       username: username,
       password: password,
     }).then((response) => {
-
+  
       console.log(response.data);
-
-    if(response.data.message) {
-      setLoginStatus(response.data.message);
-    } else {
-        setLoginStatus("El usuario es: " + response.data[0].Usuario +
-        "  y la contraseña es: " + response.data[0].Contraseña);
-        //setTipoCuenta(response.data[0].idTipo_De_Cuenta);
-        if (response.data[0].idTipo_De_Cuenta === 1){
-          setTipoCuenta(response.data[0].idTipo_De_Cuenta);
-          setTipoCuenta("Es cuenta usuario");
-          return <Redirect to="/menu_Usuario"></Redirect> 
-        } else if (response.data[0].idTipo_De_Cuenta === 2) {
-          setTipoCuenta("Es cuenta cliente");
-        } else if (response.data[0].idTipo_De_Cuenta === 3) {
-          setTipoCuenta("Es cuenta admin");
-
+  
+      if(response.data.message) {
+        setLoginStatus(response.data.message);
+      } else {
+          setLoginStatus("El usuario es: " + response.data[0].Usuario +
+          "  y la contraseña es: " + response.data[0].Contraseña);
+          //setTipoCuenta(response.data[0].idTipo_De_Cuenta);
+          if (response.data[0].idTipo_De_Cuenta === 1){
+            setTipoCuenta(response.data[0].idTipo_De_Cuenta);
+            setTipoCuenta("Es cuenta usuario");
+            return <Redirect to="/menu_Usuario"></Redirect> 
+          } else if (response.data[0].idTipo_De_Cuenta === 2) {
+            setTipoCuenta("Es cuenta cliente");
+          } else if (response.data[0].idTipo_De_Cuenta === 3) {
+            setTipoCuenta("Es cuenta admin");
+          }
         }
     });
   };
