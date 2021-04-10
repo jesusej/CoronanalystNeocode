@@ -46,13 +46,55 @@ function DatosPersonales () {
             <h4> Datos Personales</h4>
             <p>Pagina donde se muestran los campos para llenar los datos personales </p> <br></br>
 
+            <label> Edad </label>
+            <input type="text"  name="age" required
+            onChange={(e) => {
+                setEdad(e.target.value)
+            }} />
 
+            <label> Nivel Estudios </label>
+            <input type="text"  name="studies" required
+            onChange={(e) => {
+                setNivelEstudios(e.target.value)
+            }} />
 
+            <label> Localidad </label>
+            <input type="text"  name="locality" required
+            onChange={(e) => {
+                setLocalidad(e.target.value)
+            }} />
 
+            <label> Estado Civil </label>
+            <input type="text"  name="civilStatus" required
+            onChange={(e) => {
+                setEstadoCivil(e.target.value)
+            }} />
 
+            <label> Nivel Socioeconómico </label>
+            <input type="text"  name="socioeconomic" required
+            onChange={(e) => {
+                setNivelSocioeconomico(e.target.value)
+            }} />
 
+            <label> Tipo de complexión </label>
+            <input type="text"  name="bodyType" required
+            onChange={(e) => {
+                setTipoComplexion(e.target.value)
+            }} />
+            
+            <label> Factores de riesgo </label>
+            <input type="text"  name="factors" required
+            onChange={(e) => {
+                setFactoresRiesgo(e.target.value)
+            }} />
+            
+            <label> Frecuencia de ejercicio </label>
+            <input type="text"  name="exerciseFrecuency" required
+            onChange={(e) => {
+                setFrecuenciaEjercicio(e.target.value)
+            }} />
 
-
+            { /* Insertar IP, sistema operativo y dispositivo */ }
 
             <button>< NavLink to="/encuesta" > Continuar encuesta</NavLink></button> <br></br>
             <button>< NavLink to="/menu_Usuario" >Regresar al menú de sesión</NavLink></button> <br></br>
