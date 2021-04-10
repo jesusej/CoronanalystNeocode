@@ -38,6 +38,25 @@ const db = mysql.createConnection({
     database: "coronanalyst",
 });
 
+app.get('/register', (req, res) => {
+    
+    const username = req.body.username;
+
+    db.query(
+        "SELECT * FROM cuenta WHERE Usuario = ?",
+        [username],
+        (err, result) => {
+            console.log(err);
+
+            if (result.length > 0){
+                res.send(true);
+            } else {
+                res.send(false);
+            }
+        }
+    );
+});
+
 app.post('/register', (req, res) => {
 
     const username = req.body.username;
