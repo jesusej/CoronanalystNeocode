@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
-import {Route, NavLink, HashRouter} from "react-router-dom";
+import {Route, NavLink, HashRouter, Router} from "react-router-dom";
+import Axios from "axios";
+
 import './index.css';
 import pkglobal from './images/pkglobal.png';
+
 import Home from "./Home";
 import Login from "./Login";
 import Registro from "./Registro";
@@ -10,26 +13,29 @@ import DatosPersonales from "./DatosPersonales";
 import Encuesta from "./Encuesta";
 import Datos from "./Datos";
 import CerrarSesion from "./CerrarSesion";
-import Axios from "axios";
+import MenuAdmin from "./MenuAdmin";
+import MenuCliente from "./MenuCliente";
 
+import { LoginContext, idContext } from "./Helper/Context";
 
 function App() {
 
   // Constante loginStatus para definir estado del login dependiente del cookie (se necesita mejorar, ver variables globales)
   const [loginStatus, setLoginStatus] = useState("")
+  const [id, setId] = useState("")
 
   Axios.defaults.withCredentials = true;
   
   useEffect(()=> {
     Axios.get("http://localhost:3001/login").then((response) => {
       if (response.data.loggedIn){
-        setLoginStatus(response.data.user[0].Usuario);
+        setLoginStatus(response.data.user[0].Usuario); // Cambiar por true en cueanto esté listo el log off
+        setId(response.data.user[0].idCuenta);
       }
     });
   }, []);
 
   return (
-
       <HashRouter>
           <div>
             <div className="header">
@@ -41,17 +47,26 @@ function App() {
               </ul>
             </div>
 
+            <LoginContext.Provider value={{ loginStatus, setLoginStatus }} >
+            
             <div className="conexiones">
                 <Route exact path="/" component={Home}/>
                 <Route path="/login" component={Login}/>
                 <Route path="/registro" component={Registro}/>
 
                 <Route path="/menu_usuario" component={MenuUsuario}/>
+                <Route path="/menuCliente" component={MenuCliente}/>
+                <Route path="/menuAdmin" component={MenuAdmin}/>
+
+                <idContext.Provider value = {{id, setId}} >
                 <Route path="/datos_personales" component={DatosPersonales}/> 
                 <Route path="/encuesta" component={Encuesta}/>
+                </ idContext.Provider>
+
                 <Route path="/datos" component={Datos}/>
                 <Route path="/cerrar_sesion" component={CerrarSesion}/> 
             </div>
+            </ LoginContext.Provider>
 
             <footer>
               <h3>Aviso de privacidad</h3>
