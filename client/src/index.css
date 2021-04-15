@@ -75,12 +75,10 @@ button {
   font-weight: 700;
   margin-top: 2rem;
   min-width: 200px;
-  -webkit-transition: all .2s linear;
   transition: all .2s linear;
   transition-property: all;
   transition-duration: 0.2s;
   transition-timing-function: linear;
-  transition-delay: 0s;
 
 /*  width: 278px;
   height: 31px;
@@ -193,4 +191,12 @@ footer p{
   margin-left: 40%;
   font-family: "textFont";
   text-align: center;
+}
+
+select {
+  background: black;
+  font-size: 1.2em;
+  color: white;
+  width: 40%;
+  font-family: "textFont";
 }

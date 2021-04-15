@@ -72,7 +72,7 @@ function DatosPersonales () {
               <option value="Más de 60">Más de 60</option>
             </select>
             <br />
-  
+            
 
             <label> Nivel Estudios </label> <br />
             <input type="text"  name="studies" required
