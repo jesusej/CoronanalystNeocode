@@ -1,6 +1,7 @@
 /*
  - Cambiar orden de las etiquetas para hacerlo más entendible
  - Cambiar manejo de píxeles por porcentajes, viewport-height (vh), etc.
+    -porcentajes listos, acomodo de botones, logo y titulo
  - Agregar cualquier otro estilo necesario  
 */
 
@@ -20,19 +21,27 @@ body{
 }
   
 .logo {
-  width: 227px;
+  width: 15vh;
+/*  min-width: 15vh;*/
+  /*width: 227px;
   left: 23px;
-  top: 13px;
+  top: 13px;*/
 }
   
 h1 {
-  position: absolute;
-  left: 500px;
+/*  padding: 1.2em 0;*/
+  font-family: "titleFont";
+  font-size: 5rem;
+  margin-top: -13vh;
+  margin-left: 15vh;
+
+/*  position: absolute;*/
+  /*left: 500px;
   top: 13px;
     
   text-align: center;
   font-family: "titleFont";
-  font-size: 96px;
+  font-size: 96px;*/
 }
   
 .forma {
@@ -43,7 +52,37 @@ h1 {
 }
   
 button {
-  width: 278px;
+/*  position: absolute;*/
+  margin-left: 50%;
+  width: 250px;
+  height: 4em;
+ 
+  font-family: "textFont";
+  /*font-size: 1.5rem;
+
+  background: #FFFFFF;
+  border: 1px solid #000000;
+  box-sizing: border-box;
+  margin-top: 2em;*/
+
+  background-color: #c70000;
+  border-color: #c70000;
+  border-radius: 0;
+  border-style: solid;
+  border-width: 4px;
+  color: white;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-top: 2rem;
+  min-width: 200px;
+  -webkit-transition: all .2s linear;
+  transition: all .2s linear;
+  transition-property: all;
+  transition-duration: 0.2s;
+  transition-timing-function: linear;
+  transition-delay: 0s;
+
+/*  width: 278px;
   height: 31px;
   
   font-family: "textFont";
@@ -52,12 +91,23 @@ button {
   
   background: #FFFFFF;
   border: 1px solid #000000;
-  box-sizing: border-box;
+  box-sizing: border-box;*/
+}
+
+button:hover{
+  background-color: white;
+  color: red;
+}
+
+
+.buttoncoso { /*para los botones en paralelo*/
+  /*  position: absolute;*/
+    margin-left: -100%;
 }
   
-.buttons {
+/*.buttons {
   padding: 20px;
-}
+}*/
   
 #iniciarses{
   width: 278px;
@@ -135,6 +185,12 @@ footer p{
 }
 
 /* Para remarcar el link de la sección activa */
-.active {
+/*.active {
   background-color: #0099FF;
+}*/
+
+.DatPer {
+  margin-left: 40%;
+  font-family: "textFont";
+  text-align: center;
 }

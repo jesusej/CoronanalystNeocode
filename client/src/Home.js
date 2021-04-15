@@ -1,9 +1,10 @@
 import React from "react";
-import {NavLink} from "react-router-dom";
-
+import { useHistory} from "react-router-dom";
 
 
 function Home() {
+  const history = useHistory();
+
   return(
       <div>
         <div classname="content"> 
@@ -14,8 +15,8 @@ function Home() {
         </div>
 
         <div classname="conexion"> 
-            <button><NavLink to="/login">Iniciar sesión</NavLink></button><br></br>
-            <button><NavLink to="/registro">Crear cuenta</NavLink></button>
+          <button onClick={()=> history.push("/login")}>Login</button>
+          <button onClick={()=> history.push("/registro")}>Registro</button>
         </div>
       </div>
   );

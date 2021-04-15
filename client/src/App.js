@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {Route, NavLink, HashRouter, Router} from "react-router-dom";
+import {Route, HashRouter, NavLink} from "react-router-dom";
 import Axios from "axios";
 
 import './index.css';
@@ -36,16 +36,13 @@ function App() {
   }, []);
 
   return (
-      <HashRouter>
-          <div>
-            <div className="header">
-              <img className="logo" src={pkglobal} alt="No se pudo cargar el logo" />
-              <h1>CORONANALYST</h1>
-              <ul className="header">
-                <button><NavLink exact to="/">Menu de inicio</NavLink></button>
-                
-              </ul>
-            </div>
+    <HashRouter>
+        <div>
+          <div className="header">
+            <img className="logo" src={pkglobal} alt="No se pudo cargar el logo" />
+            <h1>CORONANALYST</h1>
+              <NavLink exact to="/"><button type="button">Menu de Inicio</button></NavLink>
+          </div>
 
             <LoginContext.Provider value={{ loginStatus, setLoginStatus }} >
             
@@ -74,7 +71,14 @@ function App() {
             </footer>
          
           </div>
-        </HashRouter>
+
+          <footer>
+            <h3>Aviso de privacidad</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum iaculis nisl leo, ac tincidunt nibh finibus at. Sed sit amet hendrerit lectus. Donec placerat lectus cursus risus commodo, id molestie lacus dictum. Curabitur in ex vitae massa pharetra porttitor in et mi. Nulla sit amet elementum elit. Mauris quis dignissim quam, sit amet rhoncus augue. Nulla condimentum ante in ultrices dignissim. Proin vestibulum risus non elementum tempus. Nunc velit mauris, egestas sed consequat a, rhoncus lacinia lorem. Praesent non erat a libero ornare convallis et in sem. Aliquam pellentesque, augue vitae tristique iaculis, leo risus malesuada tellus, quis interdum nibh lorem ut dolor. </p>
+          </footer>
+        
+        </div>
+    </HashRouter>
 
 
   );

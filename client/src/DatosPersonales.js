@@ -1,10 +1,12 @@
 import React, {useContext, useState } from "react";
 import {NavLink} from "react-router-dom";
 import Axios from "axios";
+import {useHistory} from "react-router-dom";
 
 import { idContext } from "./Helper/Context";
 
 function DatosPersonales () {
+    const history = useHistory();
 
     const {id, setId} = useContext(idContext);
 
@@ -50,11 +52,27 @@ function DatosPersonales () {
             <h4> Datos Personales</h4>
             <p>Pagina donde se muestran los campos para llenar los datos personales </p>
 
-            <label> Edad </label> <br />
-            <input type="text"  name="age" required
+            <label> Edad </label> <br />           
+
+            <select id="age" name="age" required
             onChange={(e) => {
                 setEdad(e.target.value)
-            }} /> <br />
+            }}>
+              <option value="select">Select</option>  
+              <option value="Menor de 15">Menor de 15</option>
+              <option value="15-20">15-20</option>
+              <option value="21-25">21-25</option>
+              <option value="26-30">26-30</option>
+              <option value="31-35">31-35</option>
+              <option value="36-40">36-40</option>
+              <option value="41-45">41-45</option>
+              <option value="46-50">46-50</option>
+              <option value="51-55">51-55</option>
+              <option value="56-60">56-60</option>
+              <option value="Más de 60">Más de 60</option>
+            </select>
+            <br />
+  
 
             <label> Nivel Estudios </label> <br />
             <input type="text"  name="studies" required
@@ -99,9 +117,12 @@ function DatosPersonales () {
             }} /> <br /> <br /> <br />
 
             { /* Insertar IP, sistema operativo y dispositivo */ }
-
-            <button>< NavLink to="/encuesta" > Continuar encuesta</NavLink></button> <br></br>
-            <button>< NavLink to="/menu_Usuario" >Regresar al menú de sesión</NavLink></button> <br></br>
+            <div className= "buttoncoso">
+                <button onClick={()=> history.push("/encuesta")}>Continuar encuesta</button>
+            </div>
+            <div className= "buttoncoso">
+                <button onClick={()=> history.push("/menu_Usuario")}>Regresar al menú de sesión</button>
+            </div>
           </div>
     );
 }
