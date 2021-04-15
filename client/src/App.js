@@ -42,7 +42,7 @@ function App() {
             <img className="logo" src={pkglobal} alt="No se pudo cargar el logo" />
             <h1>CORONANALYST</h1>
               <NavLink exact to="/"><button type="button">Menu de Inicio</button></NavLink>
-          </div>
+          
 
             <LoginContext.Provider value={{ loginStatus, setLoginStatus }} >
             
