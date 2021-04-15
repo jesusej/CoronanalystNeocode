@@ -4,6 +4,7 @@ import React, { useState } from "react";
 
 function Registro() {
   // Para registro
+  const [errorStatus, setErrorStatus] = useState('')
   const [usernameReg, setUsernameReg] = useState('')
   const [passwordReg, setPasswordReg] = useState('')
 
@@ -37,7 +38,10 @@ const register = () => {
         <div className="button">
         <button onClick={register}>Registrarse</button>
         </div>
+
          {/* Termina front end de Registro */}
+
+         <p className = "error">{errorStatus}</p>
       </div>
     );
   }
