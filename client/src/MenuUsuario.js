@@ -1,7 +1,5 @@
 import React, {useState } from "react";
 import {NavLink} from "react-router-dom";
-import Axios from "axios";
-
 
 function MenuUsuario () {
     return(
