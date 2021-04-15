@@ -35,10 +35,7 @@ function App() {
             <div className="header">
               <img className="logo" src={pkglobal} alt="No se pudo cargar el logo" />
               <h1>CORONANALYST</h1>
-              <ul className="header">
-                <button><NavLink exact to="/">Menu de inicio</NavLink></button>
-                
-              </ul>
+              <button><NavLink exact to="/">Menu de inicio</NavLink></button><br></br>
             </div>
 
             <div className="conexiones">
