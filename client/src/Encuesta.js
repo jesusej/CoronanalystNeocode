@@ -1,9 +1,11 @@
 import React, {useState } from "react";
-import {NavLink} from "react-router-dom";
 import Axios from "axios";
+import {useHistory} from "react-router-dom";
 
 function Encuesta () {
 
+  
+const history = useHistory();
 
 //Función prueba
 const [preguntas, setPreguntas] = useState("")
@@ -124,8 +126,7 @@ const encuesta = () => {
 
 
             {preguntas}
-
-            <button>< NavLink to="/menu_Usuario" >Terminar encuesta</NavLink></button> <br></br>
+            <button onClick={()=> history.push("/menu_Usuario")}>Terminar Encuesta</button>
           </div>
     );
 }

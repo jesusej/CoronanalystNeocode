@@ -1,8 +1,9 @@
 import React, {useState } from "react";
-import {NavLink} from "react-router-dom";
 import Axios from "axios";
+import {useHistory} from "react-router-dom";
 
 function DatosPersonales () {
+    const history = useHistory();
 
     //Datos Personales
     const [edad, setEdad] = useState("")
@@ -112,8 +113,10 @@ function DatosPersonales () {
 
             { /* Insertar IP, sistema operativo y dispositivo */ }
             <div className= "buttoncoso">
-                <button>< NavLink to="/encuesta" > Continuar encuesta</NavLink></button>
-                <button>< NavLink to="/menu_Usuario" >Regresar al menú de sesión</NavLink></button> <br></br>
+                <button onClick={()=> history.push("/encuesta")}>Continuar encuesta</button>
+            </div>
+            <div className= "buttoncoso">
+                <button onClick={()=> history.push("/menu_Usuario")}>Regresar al menú de sesión</button>
             </div>
           </div>
     );

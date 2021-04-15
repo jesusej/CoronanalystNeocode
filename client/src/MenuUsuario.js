@@ -1,18 +1,20 @@
 import React, {useState } from "react";
-import {NavLink} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import Axios from "axios";
 
 
 function MenuUsuario () {
+  const history = useHistory();
+
     return(
 
         <div>
 
           <div className="menuusuario">
-            <button><NavLink to="/datos_personales">Encuesta</NavLink></button><br></br>
-            <button><NavLink to="/datos">Visualizar Datos</NavLink></button><br></br>
-            <button><NavLink to="/cerrar_sesion">Cerrar Sesión</NavLink></button><br></br>
-            <button>< NavLink to="/login" >Regresar a Log in</NavLink></button> <br></br>
+            <button onClick={()=> history.push("/datos_personales")}>Encuesta</button>
+            <button onClick={()=> history.push("/datos")}>Visualizar Datos</button>
+            <button onClick={()=> history.push("/cerrar_sesion")}>Cerrar Sesión</button>
+            <button onClick={()=> history.push("/login")}>Regresar a Log in</button>
           </div>
        
         </div>
