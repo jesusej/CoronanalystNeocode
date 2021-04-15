@@ -1,8 +1,12 @@
-import React, {useState } from "react";
+import React, {useContext, useState } from "react";
 import {NavLink} from "react-router-dom";
 import Axios from "axios";
 
+import { idContext } from "./Helper/Context";
+
 function DatosPersonales () {
+
+    const {id, setId} = useContext(idContext);
 
     //Datos Personales
     const [edad, setEdad] = useState("")
@@ -19,7 +23,7 @@ function DatosPersonales () {
 
     const regDatPer = () => {
         Axios.post("http://localhost:3001/datos_personales", {
-            // falta el id del usuario
+            id: id,
             edad: edad,
             nivelEstudios: nivelEstudios,
             localidad: localidad,
