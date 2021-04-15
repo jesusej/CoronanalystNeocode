@@ -1,17 +1,18 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import Axios from "axios";
-import {NavLink, Redirect, useHistory} from "react-router-dom";
+import { Redirect } from "react-router-dom";
+import { LoginContext } from './Helper/Context';
 
  
 function Login() {
 
-  let history = useHistory();
   //Para login
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
 
-  const [loginStatus, setLoginStatus] = useState("")
-  const [tipoCuenta, setTipoCuenta] = useState("")
+  const {loginStatus, setLoginStatus} = useContext(LoginContext); //Manera incorrecta, cambiar este context al loggedIn
+  const [tipoCuenta, setTipoCuenta] = useState("");
+  const [loggedIn, setLoggedIn] = useState("");
 
   const login = () => {
     Axios.post("http://localhost:3001/login", {
@@ -23,26 +24,26 @@ function Login() {
   
       if(response.data.message) {
         setLoginStatus(response.data.message);
+        setLoggedIn(false);
       } else {
-          setLoginStatus("El usuario es: " + response.data[0].Usuario +
-          "  y la contraseña es: " + response.data[0].Contraseña);
-          //setTipoCuenta(response.data[0].idTipo_De_Cuenta);
-          if (response.data[0].idTipo_De_Cuenta === 1){
-            setTipoCuenta(response.data[0].idTipo_De_Cuenta);
-            setTipoCuenta("Es cuenta usuario");
-            return <Redirect to="/menu_Usuario"></Redirect> 
-          } else if (response.data[0].idTipo_De_Cuenta === 2) {
-            setTipoCuenta("Es cuenta cliente");
-          } else if (response.data[0].idTipo_De_Cuenta === 3) {
-            setTipoCuenta("Es cuenta admin");
-          }
+          setLoginStatus(response.data[0].Usuario);
+          setTipoCuenta(response.data[0].idTipo_De_Cuenta);
+          setLoggedIn(true);
         }
     });
   };
 
-  // Checa si el loginStatus es verdadero para redireccionarlo al menu de Usuario (cambiar lógica para verificar tipo de cuenta)  
-  if(loginStatus){
-    return <Redirect to="/menu_Usuario" />;
+  // Checa si el loggedIn es verdadero para redireccionarlo al menu de Usuario (cambiar lógica para verificar tipo de cuenta)  
+  if(loggedIn){
+    if (tipoCuenta == 3){
+      return <Redirect to = "/menuAdmin" />;
+    }
+    else if (tipoCuenta == 2){
+      return <Redirect to = "/menuCliente" />;
+    }
+    else {
+      return <Redirect to = "/menu_usuario" />;
+    }
   }
 
 
@@ -67,9 +68,7 @@ function Login() {
       /><br /> <br/> 
 
       <div className="button">
-          <button onClick={login}>Log in</button> <br />
-            
-                   
+          <button onClick={login}>Log in</button> <br />  
       </div>
         
     {/* Termina front end de login */}
