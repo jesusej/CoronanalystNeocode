@@ -71,7 +71,7 @@ app.post('/register', (req, res) => {
     );
 });
 
-// Método GET de login que manda los datos de un usuario registrado si es que existe
+// Método GET de login que manda los datos de un usuario registrado si es que existe y si su sesión sigue activa
 app.get("/login", (req, res)=> {
     if (req.session.user){
         res.send({ loggedIn: true, user: req.session.user })
