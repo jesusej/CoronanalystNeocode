@@ -13,6 +13,7 @@ import Datos from "./Datos";
 import CerrarSesion from "./CerrarSesion";
 import MenuAdmin from "./MenuAdmin";
 import MenuCliente from "./MenuCliente";
+import CuentasAdmin from "./CuentasAdmin";
 
 import { LoginContext, idContext } from "./Helper/Context";
 
@@ -62,7 +63,8 @@ function App() {
                 </ idContext.Provider>
 
                 <Route path="/datos" component={Datos}/>
-                <Route path="/cerrar_sesion" component={CerrarSesion}/> 
+                <Route path="/cerrar_sesion" component={CerrarSesion}/>
+                <Route path="/cuentas_admin" component={CuentasAdmin}/> 
             </div>
             </ LoginContext.Provider>
 
