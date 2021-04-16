@@ -1,10 +1,11 @@
-import React, { Component } from "react";
-import {NavLink} from "react-router-dom";
+import React from "react";
+import { useHistory} from "react-router-dom";
 
 
-class Home extends Component {
-  render() {
-    return (
+function Home() {
+  const history = useHistory();
+
+  return(
       <div>
         <div classname="content"> 
           <h2>Sección principal</h2>
@@ -14,12 +15,11 @@ class Home extends Component {
         </div>
 
         <div classname="conexion"> 
-            <li><NavLink to="/login">Iniciar sesión</NavLink></li>
-            <li><NavLink to="/registro">Crear cuenta</NavLink></li>
+          <button onClick={()=> history.push("/login")}>Login</button>
+          <button onClick={()=> history.push("/registro")}>Registro</button>
         </div>
       </div>
-    );
+  );
   }
-}
  
 export default Home;
