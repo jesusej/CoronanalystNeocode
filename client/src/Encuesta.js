@@ -2,9 +2,10 @@ import React, {useState } from "react";
 import Axios from "axios";
 import {useHistory} from "react-router-dom";
 
+import { idContext } from "./Helper/Context";
+
 function Encuesta () {
 
-  
 const history = useHistory();
 
 //Función prueba
@@ -12,104 +13,52 @@ const [preguntas, setPreguntas] = useState("")
 
 const encuesta = () => {
   Axios.post("http://localhost:3001/encuesta", {
-  }).then((response) => {
+  })
+    .then((response) => {
 
-    //Mostrar solo 1 de las 3 secciones de código a la vez
+      //Sección 3 - Muestra todo ordenado
+      var idPregPar = 0;
+      var todo = [""];
+      var type = [""];
+      var inciso = 'a';
+      const questions = [];
+      
+      todo[0] = (response.data[0].idPreguntas + ". " + response.data[0].Pregunta);
+      type[0] = (response.data[0].idPreguntas);
+      idPregPar = response.data[0].idPreguntas + 1;
 
-    //Sección uno: Este while muestra las preguntas
-    // var i = 0;
-    // var bdLength = response.data.length;
-    // var idPregPar = 0;
-    // var preg = [""]
-    //
-    //
-    //   while (i < bdLength){
-    //     if (i == 0) {
-    //       preg[0] = (response.data[i].idPreguntas + ". " + response.data[i].Pregunta);
-    //       idPregPar = response.data[i].idPreguntas + 1;
-    //       console.log(response.data[i].idPreguntas + ". " + response.data[i].Pregunta);
-
-    //     } else {
-    //         if (idPregPar == response.data[i].idPreguntas){
-    //             preg.push(response.data[i].idPreguntas + ". " + response.data[i].Pregunta);
-    //             console.log(response.data[i].idPreguntas + ". " + response.data[i].Pregunta);
-    //             idPregPar += 1;
-    //         }
-    //     }
-    //     i++;
-    //   }
-    //     setPreguntas(preg.map((number) => <li>{number}</li>));
-
-    //Sección 2: Este while muestra las opciones
-    // var i = 0;
-    // var bdLength = response.data.length;
-    // var idPregPar = 0;
-    // var opc = [""];
-    // var inciso = 'a';
-
-    // while (i < bdLength){
-    //     if (i == 0) {
-    //         opc[0] = ("Pregunta " + response.data[i].idPreguntas + " - " + inciso +  ") " + response.data[i].Opcion);
-    //         console.log("Pregunta " + response.data[i].idPreguntas + " - " + inciso +  ") " + response.data[i].Opcion);
-    //         inciso = String.fromCharCode(inciso.charCodeAt(0) + 1);
-    //         idPregPar = response.data[i].idPreguntas + 1;
-
-    //     } else {
-    //         if (idPregPar != response.data[i].idPreguntas){
-    //             opc.push("Pregunta " + response.data[i].idPreguntas + " - " + inciso +  ") " + response.data[i].Opcion);
-    //             console.log("Pregunta " + response.data[i].idPreguntas + " - " + inciso +  ") " + response.data[i].Opcion);
-    //             inciso = String.fromCharCode(inciso.charCodeAt(0) + 1);
-                
-    //         } else if (idPregPar == response.data[i].idPreguntas){
-    //             idPregPar += 1;
-    //             inciso = 'a';
-    //             continue;
-    //         }
-    //     }
-    //     i++;
-    //     }
-    //     setPreguntas(opc.map((number) => <li>{number}</li>));
-
-
-    //Sección 3 - Muestra todo ordenado
-    var i = 0;
-    var bdLength = response.data.length;
-    var idPregPar = 0;
-    var todo = [""];
-    var inciso = 'a';
-
-
-        while (i < bdLength){
-        if (i == 0) {
-          todo[0] = (response.data[i].idPreguntas + ". " + response.data[i].Pregunta);
-          idPregPar = response.data[i].idPreguntas + 1;
-          console.log(response.data[i].idPreguntas + ". " + response.data[i].Pregunta);
-
-          todo[1] = (inciso +  ") " + response.data[i].Opcion);
-          console.log(inciso +  ") " + response.data[i].Opcion);
+      for (var i = 0; i < response.data.length; i++){
+        if (idPregPar != response.data[i].idPreguntas){
+          todo.push(inciso +  ") " + response.data[i].Opcion);
+          type.push(response.data[i].idOpciones);
           inciso = String.fromCharCode(inciso.charCodeAt(0) + 1);
-          idPregPar = response.data[i].idPreguntas + 1;
-          i++;
-
-        } else {
-            if (idPregPar != response.data[i].idPreguntas){
-                todo.push(inciso +  ") " + response.data[i].Opcion);
-                console.log(inciso +  ") " + response.data[i].Opcion);
-                inciso = String.fromCharCode(inciso.charCodeAt(0) + 1);
-                
-            } else if (idPregPar == response.data[i].idPreguntas){
-                todo.push(response.data[i].idPreguntas + ". " + response.data[i].Pregunta);
-                console.log(response.data[i].idPreguntas + ". " + response.data[i].Pregunta);
-                idPregPar += 1;
-                inciso = 'a';
-                continue;
-            }
+        } else if (idPregPar == response.data[i].idPreguntas){
+          todo.push(response.data[i].idPreguntas + ". " + response.data[i].Pregunta);
+          type.push(idPregPar);
+          idPregPar += 1;
+          inciso = 'a';
+          i--;
         }
-        i++;
       }
-        setPreguntas(todo.map((number) => <li>{number}</li>));
-  });
-};
+          
+      for(i = 0; i < todo.length; i++){
+        if (type[i] < 100){
+          questions.push(<h3> {todo[i]} </h3>);
+          idPregPar = type[i];
+        } else {
+          questions.push(
+          <label>
+            <input type="radio" name={idPregPar} value={type[i]} /> {todo[i]}
+            <br />
+          </label>  );
+        }
+      }
+        
+      setPreguntas(questions);
+    });
+  };
+
+  const respuestas = () => {};
 
 
 
@@ -126,6 +75,7 @@ const encuesta = () => {
 
 
             {preguntas}
+            
             <button onClick={()=> history.push("/menu_Usuario")}>Terminar Encuesta</button>
           </div>
     );

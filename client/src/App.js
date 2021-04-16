@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import {Route, HashRouter, NavLink} from "react-router-dom";
 import Axios from "axios";
-
 import './index.css';
 import pkglobal from './images/pkglobal.png';
-
 import Home from "./Home";
 import Login from "./Login";
 import Registro from "./Registro";
@@ -15,6 +13,7 @@ import Datos from "./Datos";
 import CerrarSesion from "./CerrarSesion";
 import MenuAdmin from "./MenuAdmin";
 import MenuCliente from "./MenuCliente";
+import CuentasAdmin from "./CuentasAdmin";
 
 import { LoginContext, idContext } from "./Helper/Context";
 
@@ -39,9 +38,12 @@ function App() {
     <HashRouter>
         <div>
           <div className="header">
-            <img className="logo" src={pkglobal} alt="No se pudo cargar el logo" />
+          <NavLink exact to="/"><
+            img className="logo" src={pkglobal} alt="No se pudo cargar el logo" />
+            </NavLink>
+
             <h1>CORONANALYST</h1>
-              <NavLink exact to="/"><button type="button">Menu de Inicio</button></NavLink>
+              {/*<NavLink exact to="/"><button type="button">Menu de Inicio</button></NavLink>*/}
           
 
             <LoginContext.Provider value={{ loginStatus, setLoginStatus }} >
@@ -61,7 +63,8 @@ function App() {
                 </ idContext.Provider>
 
                 <Route path="/datos" component={Datos}/>
-                <Route path="/cerrar_sesion" component={CerrarSesion}/> 
+                <Route path="/cerrar_sesion" component={CerrarSesion}/>
+                <Route path="/cuentas_admin" component={CuentasAdmin}/> 
             </div>
             </ LoginContext.Provider>
 
@@ -85,3 +88,4 @@ function App() {
 };
 
 export default App;
+
