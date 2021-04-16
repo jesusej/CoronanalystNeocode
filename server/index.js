@@ -67,6 +67,7 @@ app.post('/register', (req, res) => {
         [username, password],
         (err, result) => {
             console.log(err);
+            console.log(result);
         }
     );
 });
@@ -133,17 +134,17 @@ app.post('/datos_personales', (req, res) => {
     const tipoComplexion= req.body.tipoComplexion;
     const factoresRiesgo = req.body.factoresRiesgo;
     const frecuenciaEjercicio = req.body.frecuenciaEjercicio;
-    //id de cuenta
+    const id = req.body.id;
 
+    
     db.query(
-        "INSERT INTO datos_personales (Edad, Nivel_estudios, Localidad, Estado_Civil, Nivel_socioeconómico, Tipo_de_complexion, Factores_de_riesgo, Frecuencia_de_ejercicio, idCuenta, IP, Dispositivo, SO) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-        [edad, nivelEstudios, localidad, estadoCivil, nivelSocioeconomico, tipoComplexion, factoresRiesgo, frecuenciaEjercicio, ip, dispositivo, so],
+        "INSERT INTO datos_personales (Edad, Nivel_estudios, Localidad, Estado_Civil, Nivel_socioeconomico, Tipo_de_complexion, Factores_de_riesgo, Frecuencia_de_ejercicio, IP, Dispositivo, SO, idCuenta) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        [edad, nivelEstudios, localidad, estadoCivil, nivelSocioeconomico, tipoComplexion, factoresRiesgo, frecuenciaEjercicio, ip, dispositivo, so, id],
         (err, result) => {
             console.log(err);
         }
     );
 });
-
 
 app.listen(3001, () => {
     db.connect(function(err){
