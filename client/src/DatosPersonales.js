@@ -60,7 +60,7 @@ function DatosPersonales () {
 
         }).then((response) => {
             console.log(response);
-            setRegistroExitoso(response.data);
+            setRegistroExitoso(true);
         });
     };
 
