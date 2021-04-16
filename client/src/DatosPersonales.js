@@ -1,13 +1,17 @@
 import React, {useContext, useState } from "react";
-import {NavLink} from "react-router-dom";
 import Axios from "axios";
 import {useHistory} from "react-router-dom";
+import { Redirect } from "react-router-dom";
+
 import { idContext } from "./Helper/Context";
 
 function DatosPersonales () {
     const history = useHistory();
 
+    const [registroExitoso, setRegistroExitoso] = useState("");
+
     const {id, setId} = useContext(idContext);
+
 
     //Datos Personales
     const [edad, setEdad] = useState("")
@@ -23,25 +27,47 @@ function DatosPersonales () {
     const [frecuenciaEjercicio, setFrecuenciaEjercicio] = useState("")
 
     const regDatPer = () => {
+        setIp("null");
+        setDispositivo("null");
+        setSo("null");
+
+        console.log(edad);
+        console.log(nivelEstudios);
+        console.log(localidad);
+        console.log(estadoCivil);
+        console.log(nivelSocioeconomico);
+        console.log(tipoComplexion);
+        console.log(factoresRiesgo);
+        console.log(frecuenciaEjercicio);
+        console.log(ip);
+        console.log(dispositivo);
+        console.log(so);
+        console.log(id);
+
         Axios.post("http://localhost:3001/datos_personales", {
-            id: id,
             edad: edad,
             nivelEstudios: nivelEstudios,
             localidad: localidad,
             estadoCivil: estadoCivil,
-            ip: ip,
-            dispositivo: dispositivo,
-            so: so,
             nivelSocioeconomico: nivelSocioeconomico,
             tipoComplexion: tipoComplexion,
             factoresRiesgo: factoresRiesgo,
             frecuenciaEjercicio: frecuenciaEjercicio,
+            ip: ip,
+            dispositivo: dispositivo,
+            so:so,
+            id:id
 
         }).then((response) => {
-
+            console.log(response);
+            setRegistroExitoso(response.data);
         });
-    }
+    };
 
+if (registroExitoso)
+    {
+        return <Redirect to = "/encuesta" />;
+    }
 
 
 
@@ -49,7 +75,7 @@ function DatosPersonales () {
         <div className="DatPer">
             <h3> Pagina de Encuesta</h3>
             <h4> Datos Personales</h4>
-            <p>Pagina donde se muestran los campos para llenar los datos personales </p>
+            {/* <p>Pagina donde se muestran los campos para llenar los datos personales </p> */}
 
             <label> Edad </label> <br />           
             <select id="age" name="age" required
@@ -196,19 +222,32 @@ function DatosPersonales () {
                 <option value="Cinco veces por semana">Cinco veces por semana</option>
                 <option value="Todos los días">Todos los días</option>
                 <option value="No realizo ejercicio físico">No realizo ejercicio físico</option>
-            </select> <br /> 
-            
+            </select> 
             
             
             <br /> <br />
 
+            {edad}
+            {nivelEstudios}
+            {localidad}
+            {estadoCivil}
+            {nivelSocioeconomico}
+            {tipoComplexion}
+            {factoresRiesgo}
+            {frecuenciaEjercicio}
+            {ip}
+            {dispositivo}
+            {so}
+            {id}
+
             { /* Insertar IP, sistema operativo y dispositivo */ }
-                    <div className= "conexiones">
-                        <button onClick={()=> history.push("/encuesta")}>Continuar encuesta</button>
-                    </div>
-                    <div className= "conexiones">
-                        <button onClick={()=> history.push("/menu_Usuario")}>Regresar al menú de sesión</button>
-                    </div>
+            <div className= "buttoncoso">
+                <button onClick={regDatPer}>Registrar Resultados</button>
+            </div>
+            <div className= "buttoncoso">
+                <button onClick={()=> history.push("/menu_Usuario")}>Regresar al menú de sesión</button>
+            </div>
+            <br />
           </div>
     );
 }
