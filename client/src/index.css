@@ -21,14 +21,14 @@ body{
 }
   
 .logo {
-  width: 15vh;
+  width: 9rem;
 }
   
 h1 {
   font-family: "titleFont";
   font-size: 5rem;
-  margin-top: -13vh;
-  margin-left: 17.5vh;
+  margin-top: -7.5rem;
+  margin-left: 12rem;
 }
   
 .forma {
@@ -150,7 +150,7 @@ footer p{
 }
 
 .DatPer {
-  margin-left: 40%;
+  margin-left: 50%;
   font-family: "textFont";
   text-align: center;
 }
