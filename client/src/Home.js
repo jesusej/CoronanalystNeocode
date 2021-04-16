@@ -14,7 +14,7 @@ function Home() {
             a todas las otras consecuentemente.</p>
         </div>
 
-        <div classname="conexion"> 
+        <div className="conexiones"> 
           <button onClick={()=> history.push("/login")}>Login</button>
           <button onClick={()=> history.push("/registro")}>Registro</button>
         </div>
