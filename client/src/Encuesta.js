@@ -92,11 +92,9 @@ const encuesta = () => {
     });
   };
 
-
-
-
-
-
+  if(!preguntas){
+    encuesta();
+  }
 
     return(
         <div className="Encuesta">
@@ -104,12 +102,11 @@ const encuesta = () => {
             <h3>Pagina de Encuesta</h3>
             <h4>Compras y estado en pandemia</h4>
             <p>Pagina donde se muestran todas las preguntas con su respuesta </p>
-            <button onClick={encuesta}>Mostrar Componente</button> <br />
 
             {preguntas}
-            {respuestasPublic}
+            
             <br /><br />
-            <button onClick={sendAnswers}>Terminar Encuesta</button>
+            <button onClick={() => history.push("/menu_usuario")}>Terminar Encuesta</button>
           </div>
     );
 }
