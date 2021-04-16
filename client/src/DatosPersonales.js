@@ -227,18 +227,18 @@ if (registroExitoso)
             
             <br /> <br />
 
-            {edad}
-            {nivelEstudios}
-            {localidad}
-            {estadoCivil}
-            {nivelSocioeconomico}
-            {tipoComplexion}
-            {factoresRiesgo}
-            {frecuenciaEjercicio}
-            {ip}
-            {dispositivo}
-            {so}
-            {id}
+            {edad} <br />
+            {nivelEstudios} <br />
+            {localidad} <br />
+            {estadoCivil} <br />
+            {nivelSocioeconomico} <br />
+            {tipoComplexion} <br />
+            {factoresRiesgo} <br />
+            {frecuenciaEjercicio} <br />
+            {ip} <br />
+            {dispositivo} <br />
+            {so} <br />
+            {id} <br />
 
             { /* Insertar IP, sistema operativo y dispositivo */ }
             <div className= "buttoncoso">
