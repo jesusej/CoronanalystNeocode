@@ -75,7 +75,7 @@ const encuesta = () => {
 
 
             {preguntas}
-            
+            <br /><br />
             <button onClick={()=> history.push("/menu_Usuario")}>Terminar Encuesta</button>
           </div>
     );
