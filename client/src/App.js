@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import {Route, HashRouter, NavLink} from "react-router-dom";
 import Axios from "axios";
-
 import './index.css';
 import pkglobal from './images/pkglobal.png';
-
 import Home from "./Home";
 import Login from "./Login";
 import Registro from "./Registro";
@@ -39,9 +37,12 @@ function App() {
     <HashRouter>
         <div>
           <div className="header">
-            <img className="logo" src={pkglobal} alt="No se pudo cargar el logo" />
+          <NavLink exact to="/"><
+            img className="logo" src={pkglobal} alt="No se pudo cargar el logo" />
+            </NavLink>
+
             <h1>CORONANALYST</h1>
-              <NavLink exact to="/"><button type="button">Menu de Inicio</button></NavLink>
+              {/*<NavLink exact to="/"><button type="button">Menu de Inicio</button></NavLink>*/}
           
 
             <LoginContext.Provider value={{ loginStatus, setLoginStatus }} >
@@ -85,3 +86,4 @@ function App() {
 };
 
 export default App;
+
