@@ -177,16 +177,18 @@ app.post('/resultados', (req, res) => {
         console.log(answers[i]);
     }
 
-    /*db.query(
-        "INSERT INTO datos_personales (Edad, Nivel_estudios, Localidad, Estado_Civil, Nivel_socioeconomico, Tipo_de_complexion, Factores_de_riesgo, Frecuencia_de_ejercicio, IP, Dispositivo, SO, idCuenta) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-        [edad, nivelEstudios, localidad, estadoCivil, nivelSocioeconomico, tipoComplexion, factoresRiesgo, frecuenciaEjercicio, ip, dispositivo, so, id],
-        (err, result) => {
-            if (err) {
-                res.send({err:err});
+    if(!answers){
+        db.query(
+            "INSERT INTO respuestas(fkCuenta, fkPreguntas, fkOpciones, Respuesta) VALUES (?, ?, ?, ?)",
+            [edad, nivelEstudios, localidad, estadoCivil, nivelSocioeconomico, tipoComplexion, factoresRiesgo, frecuenciaEjercicio, ip, dispositivo, so, id],
+            (err, result) => {
+                if (err) {
+                    res.send({err:err});
+                }
+                res.send(result);
             }
-            res.send(result);
-        }
-    )*/
+        );
+    }
 });
 
 app.post('/register_client', (req, res) => {   
