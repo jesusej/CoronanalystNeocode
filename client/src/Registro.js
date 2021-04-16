@@ -19,12 +19,8 @@ const register = () => {
     {
       if (usernameReg !== '' && passwordReg !== '')
         setRegResponse("El correo electrónico ya se encuentra registrado");
-      else if (usernameReg === '' && passwordReg === '')
-        setRegResponse("Llene los campos de correo y contraseña antes de registrarse");
-      else if (usernameReg === '' && passwordReg !== '')
-        setRegResponse("Llene el campo de correo antes de registrarse");
-      else if (usernameReg !== '' && passwordReg === '')
-        setRegResponse("Llene el campo de contraseña antes de registrarse");
+      else if (usernameReg === '' || passwordReg === '')
+        setRegResponse("Favor de llenar los campos de correo y/o contraseña completamente antes de registrarse");
     }
     else if (response.data === true)
     {

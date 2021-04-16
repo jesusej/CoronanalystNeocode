@@ -60,7 +60,7 @@ function DatosPersonales () {
 
         }).then((response) => {
             console.log(response);
-            setRegistroExitoso(response.data);
+            setRegistroExitoso(true);
         });
     };
 
@@ -75,7 +75,7 @@ if (registroExitoso)
         <div className="DatPer">
             <h3> Pagina de Encuesta</h3>
             <h4> Datos Personales</h4>
-            <p>Pagina donde se muestran los campos para llenar los datos personales </p>
+            {/* <p>Pagina donde se muestran los campos para llenar los datos personales </p> */}
 
             <label> Edad </label> <br />           
             <select id="age" name="age" required
@@ -222,32 +222,32 @@ if (registroExitoso)
                 <option value="Cinco veces por semana">Cinco veces por semana</option>
                 <option value="Todos los días">Todos los días</option>
                 <option value="No realizo ejercicio físico">No realizo ejercicio físico</option>
-            </select> <br /> 
-            
+            </select> 
             
             
             <br /> <br />
 
-            {edad}
-            {nivelEstudios}
-            {localidad}
-            {estadoCivil}
-            {nivelSocioeconomico}
-            {tipoComplexion}
-            {factoresRiesgo}
-            {frecuenciaEjercicio}
-            {ip}
-            {dispositivo}
-            {so}
-            {id}
+            {edad} <br />
+            {nivelEstudios} <br />
+            {localidad} <br />
+            {estadoCivil} <br />
+            {nivelSocioeconomico} <br />
+            {tipoComplexion} <br />
+            {factoresRiesgo} <br />
+            {frecuenciaEjercicio} <br />
+            {ip} <br />
+            {dispositivo} <br />
+            {so} <br />
+            {id} <br />
 
             { /* Insertar IP, sistema operativo y dispositivo */ }
             <div className= "buttoncoso">
-                <button onClick={regDatPer}>Registrar Resultados</button> <br /> 
+                <button onClick={regDatPer}>Registrar Resultados</button>
             </div>
             <div className= "buttoncoso">
                 <button onClick={()=> history.push("/menu_Usuario")}>Regresar al menú de sesión</button>
             </div>
+            <br />
           </div>
     );
 }
