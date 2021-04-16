@@ -1,7 +1,7 @@
-import React, {useContext, useState} from "react";
+import React, {createContext, useContext, useState} from "react";
 import Axios from "axios";
 import { Redirect } from "react-router-dom";
-import { LoginContext } from './Helper/Context';
+import {idContext, LoginContext } from './Helper/Context';
 
  
 function Login() {
@@ -29,6 +29,7 @@ function Login() {
           setLoginStatus(response.data[0].Usuario);
           setTipoCuenta(response.data[0].idTipo_De_Cuenta);
           setLoggedIn(true);
+
         }
     });
   };
