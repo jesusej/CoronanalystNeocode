@@ -12,7 +12,6 @@ function DatosPersonales () {
 
     const {id, setId} = useContext(idContext);
 
-
     //Datos Personales
     const [edad, setEdad] = useState("")
     const [nivelEstudios, setNivelEstudios] = useState("")
@@ -32,6 +31,8 @@ function DatosPersonales () {
         setSo("null");
 
         console.log(edad);
+
+        /*console.log(edad);
         console.log(nivelEstudios);
         console.log(localidad);
         console.log(estadoCivil);
@@ -42,7 +43,7 @@ function DatosPersonales () {
         console.log(ip);
         console.log(dispositivo);
         console.log(so);
-        console.log(id);
+        console.log(id);*/
 
         Axios.post("http://localhost:3001/datos_personales", {
             edad: edad,
@@ -239,6 +240,19 @@ if (registroExitoso)
             {dispositivo} <br />
             {so} <br />
             {id} <br />
+
+            {edad}
+            {nivelEstudios}
+            {localidad}
+            {estadoCivil}
+            {nivelSocioeconomico}
+            {tipoComplexion}
+            {factoresRiesgo}
+            {frecuenciaEjercicio}
+            {ip}
+            {dispositivo}
+            {so}
+            {id}
 
             { /* Insertar IP, sistema operativo y dispositivo */ }
             <div className= "buttoncoso">

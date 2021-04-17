@@ -5,11 +5,10 @@ const cors = require ("cors");
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const { response } = require("express");
 
 const app = express();
-app.use(express.json());
 
+app.use(express.json());
 // Especifica que métodos se usan, credenciales y el uso de cookies
 app.use(
     cors({
@@ -58,33 +57,19 @@ app.get('/register', (req, res) => {
     );
 });
 
-app.post('/register', (req, res) => {   
+app.post('/register', (req, res) => {
+
     const username = req.body.username;
     const password = req.body.password;
-    
+
     db.query(
-        "SELECT * FROM cuenta WHERE Usuario = ?",
-        [username],
+        "INSERT INTO cuenta (Usuario, Contraseña, idTipo_De_Cuenta) VALUES (?, ?, 1)",
+        [username, password],
         (err, result) => {
             console.log(err);
-
-            if ((result.length > 0) || (username == '') || (password == '')){
-                res.send(false);
-            } else {
-                db.query( 
-
-                    "INSERT INTO cuenta (Usuario, Contraseña, idTipo_De_Cuenta) VALUES (?, ?, 1)",
-                    [username, password],
-                    (err, result) => {
-                        console.log(err);
-                    }
-                );
-                res.send(true);
-            }
+            console.log(result);
         }
     );
-     
-    
 });
 
 // Método GET de login que manda los datos de un usuario registrado si es que existe y si su sesión sigue activa
@@ -110,7 +95,7 @@ app.post('/login', (req, res) => {
             }
             
             //console.log(result);
-            // Registra al usuario en una sesión para que pueda revisitarlo
+            // Envía los resultados como cookie
             if (result.length > 0) {
                 req.session.user = result;
                 console.log(req.session.user);
@@ -118,6 +103,20 @@ app.post('/login', (req, res) => {
             } else {
                 res.send({message: "No existe la combinación de correo y contraseña"});
             }
+        }
+    );
+});
+
+
+app.post('/encuesta', (req, res) => {
+
+    db.query(
+        "SELECT * FROM preguntas AS P JOIN opciones AS O WHERE P.idPreguntas = O.idPreguntas",
+        (err, result) => {
+            if (err) {
+                res.send({err:err})
+            }
+            res.send(result);
         }
     );
 });
@@ -143,80 +142,8 @@ app.post('/datos_personales', (req, res) => {
         [edad, nivelEstudios, localidad, estadoCivil, nivelSocioeconomico, tipoComplexion, factoresRiesgo, frecuenciaEjercicio, ip, dispositivo, so, id],
         (err, result) => {
             console.log(err);
-            if (err !== null)
-            {
-                res.send(true);
-            }
-            else{
-                res.send(false);
-            }
         }
     );
-});
-
-app.post('/encuesta', (req, res) => {
-
-    db.query(
-        "SELECT * FROM preguntas AS P JOIN opciones AS O WHERE P.idPreguntas = O.idPreguntas",
-        (err, result) => {
-            if (err) {
-                res.send({err:err})
-            }
-            res.send(result);
-        }
-    );
-});
-
-app.post('/resultados', (req, res) => {
-
-    //console.log(req.body);
-    
-    const answers = req.body.answers;
-
-    for (var i = 0; i < answers.length; i++){
-        console.log(answers[i]);
-    }
-
-    if(!answers){
-        db.query(
-            "INSERT INTO respuestas(fkCuenta, fkPreguntas, fkOpciones, Respuesta) VALUES (?, ?, ?, ?)",
-            [edad, nivelEstudios, localidad, estadoCivil, nivelSocioeconomico, tipoComplexion, factoresRiesgo, frecuenciaEjercicio, ip, dispositivo, so, id],
-            (err, result) => {
-                if (err) {
-                    res.send({err:err});
-                }
-                res.send(result);
-            }
-        );
-    }
-});
-
-app.post('/register_client', (req, res) => {   
-    const username = req.body.username;
-    const password = req.body.password;
-    
-    db.query(
-        "SELECT * FROM cuenta WHERE Usuario = ?",
-        [username],
-        (err, result) => {
-            console.log(err);
-
-            if ((result.length > 0) || (username == '') || (password == '')){
-                res.send(false);
-            } else {
-                db.query( 
-
-                    "INSERT INTO cuenta (Usuario, Contraseña, idTipo_De_Cuenta) VALUES (?, ?, 2)",
-                    [username, password],
-                    (err, result) => {
-                        console.log(err);
-                    }
-                );
-                res.send(true);
-            }
-        }
-    );
-     
 });
 
 app.listen(3001, () => {
