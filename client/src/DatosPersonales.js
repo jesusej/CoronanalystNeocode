@@ -26,6 +26,8 @@ function DatosPersonales () {
     const [factoresRiesgo, setFactoresRiesgo] = useState("")
     const [frecuenciaEjercicio, setFrecuenciaEjercicio] = useState("")
 
+    const [regResponse, setRegResponse] = useState("")
+
     const regDatPer = () => {
         setIp("null");
         setDispositivo("null");
@@ -56,21 +58,33 @@ function DatosPersonales () {
             ip: ip,
             dispositivo: dispositivo,
             so:so,
-            id:id
+            id:id,
 
         }).then((response) => {
             console.log(response);
-            setRegistroExitoso(true);
+
+            if ((response.data == false) && ((edad === '') || (nivelEstudios === '') ||
+            (localidad === '') ||  (estadoCivil === '') || (nivelSocioeconomico === '') ||
+            (tipoComplexion === '') || (factoresRiesgo === '') || (frecuenciaEjercicio === '') || (id === '')))
+            {
+                setRegResponse("Por favor llene todos los datos antes de registrarse");
+                setRegistroExitoso(false);
+                console.log(registroExitoso);
+            }
+            else if (response.data == true)
+            {
+                setRegResponse("Ha registrado los datos correctamente");
+                setRegistroExitoso(true);
+                console.log(registroExitoso);
+            }
+            
         });
-    };
 
-if (registroExitoso)
-    {
-        return <Redirect to = "/encuesta" />;
-    }
+};
 
-
-
+if (registroExitoso == true) {
+    return <Redirect to = "/encuesta" />;
+}
     return(
         <div className="DatPer">
             <h3> Pagina de Encuesta</h3>
@@ -78,11 +92,11 @@ if (registroExitoso)
             {/* <p>Pagina donde se muestran los campos para llenar los datos personales </p> */}
 
             <label> Edad </label> <br />           
-            <select id="age" name="age" required
+            <select id="age" name="age" required 
             onChange={(e) => {
                 setEdad(e.target.value)
             }}>
-              <option value="select">Select</option>  
+              <option value=""></option>  
               <option value="Menor de 15">Menor de 15</option>
               <option value="15-20">15-20</option>
               <option value="21-25">21-25</option>
@@ -103,7 +117,7 @@ if (registroExitoso)
             onChange={(e) => {
                 setNivelEstudios(e.target.value)
             }}>               
-                <option value="select">Select</option>  
+                <option value=""></option>  
                 <option value="Preescolar">Preescolar</option>
                 <option value="Primaria">Primaria</option>
                 <option value="Secundaria">Secundaria</option>
@@ -114,14 +128,12 @@ if (registroExitoso)
             </select>
             <br />
 
-
-
             <label> Localidad </label> <br />
             <select type="text"  name="locality" required
             onChange={(e) => {
                 setLocalidad(e.target.value)
             }}>
-                <option value="select">Select</option>  
+                <option value=""></option>  
                 <option value="Aguascalientes">Aguascalientes</option>
                 <option value="Baja California">Baja California</option>
                 <option value="Baja California Sur">Baja California Sur</option>
@@ -160,7 +172,7 @@ if (registroExitoso)
             onChange={(e) => {
                 setEstadoCivil(e.target.value)
             }}> 
-                <option value="select">Select</option>  
+                <option value=""></option>  
                 <option value="Soltero(a)">Soltero(a)</option>
                 <option value="Casado(a)">Casado(a)</option>
                 <option value="Divorciado(a)">Divorciado(a)</option>
@@ -173,7 +185,7 @@ if (registroExitoso)
             onChange={(e) => {
                 setNivelSocioeconomico(e.target.value)
             }}>
-                <option value="select">Select</option>  
+                <option value=""></option>  
                 <option value="Bajo">Bajo</option>
                 <option value="Medio bajo">Medio bajo</option>
                 <option value="Medio">Medio</option>
@@ -186,7 +198,7 @@ if (registroExitoso)
             onChange={(e) => {
                 setTipoComplexion(e.target.value)
             }} > 
-                <option value="select">Select</option>  
+                <option value=""></option>  
                 <option value="Delgada">Delgada</option>
                 <option value="Dentro de la media">Dentro de la media</option>
                 <option value="Robusta">Robusta</option>
@@ -197,7 +209,7 @@ if (registroExitoso)
             onChange={(e) => {
                 setFactoresRiesgo(e.target.value)
             }}>
-                <option value="select">Select</option>  
+                <option value=""></option>  
                 <option value="Enfermedades cardiovasculares">Enfermedades cardiovasculares</option>
                 <option value="Diabetes">Diabetes</option>
                 <option value="Enfermedades respiratorias crónicas">Enfermedades respiratorias crónicas</option>
@@ -216,7 +228,7 @@ if (registroExitoso)
             onChange={(e) => {
                 setFrecuenciaEjercicio(e.target.value)
             }}> 
-                <option value="select">Select</option>  
+                <option value=""></option>  
                 <option value="Una a dos veces por semana">Una a dos veces por semana</option>
                 <option value="Tres a cuatro veces por semana">Tres a cuatro veces por semana</option>
                 <option value="Cinco veces por semana">Cinco veces por semana</option>
@@ -226,6 +238,9 @@ if (registroExitoso)
             
             
             <br /> <br />
+
+            <h2>{regResponse}</h2>
+            <h2>{registroExitoso}</h2>
 
             {edad} <br />
             {nivelEstudios} <br />

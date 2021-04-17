@@ -10,7 +10,6 @@ import MenuUsuario from "./MenuUsuario";
 import DatosPersonales from "./DatosPersonales";
 import Encuesta from "./Encuesta";
 import Datos from "./Datos";
-import CerrarSesion from "./CerrarSesion";
 import MenuAdmin from "./MenuAdmin";
 import MenuCliente from "./MenuCliente";
 import CuentasAdmin from "./CuentasAdmin";
@@ -45,6 +44,8 @@ function App() {
             <h1>CORONANALYST</h1>
             
             {loginStatus + " " + id}
+
+            
           
 
             <LoginContext.Provider value={{ loginStatus, setLoginStatus }} >
@@ -56,6 +57,7 @@ function App() {
                 <Route path="/menu_usuario" component={MenuUsuario}/>
                 <Route path="/menuCliente" component={MenuCliente}/>
                 <Route path="/menuAdmin" component={MenuAdmin}/>
+                
 
                 <idContext.Provider value = {{id, setId}} >
                 <Route path="/login" component={Login}/>
@@ -65,16 +67,10 @@ function App() {
                 </ idContext.Provider>
 
                 <Route path="/datos" component={Datos}/>
-                <Route path="/cerrar_sesion" component={CerrarSesion}/>
                 <Route path="/cuentas_admin" component={CuentasAdmin}/> 
             </div>
             </ LoginContext.Provider>
-{/* 
-            <footer>
-              <h3>Aviso de privacidad</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum iaculis nisl leo, ac tincidunt nibh finibus at. Sed sit amet hendrerit lectus. Donec placerat lectus cursus risus commodo, id molestie lacus dictum. Curabitur in ex vitae massa pharetra porttitor in et mi. Nulla sit amet elementum elit. Mauris quis dignissim quam, sit amet rhoncus augue. Nulla condimentum ante in ultrices dignissim. Proin vestibulum risus non elementum tempus. Nunc velit mauris, egestas sed consequat a, rhoncus lacinia lorem. Praesent non erat a libero ornare convallis et in sem. Aliquam pellentesque, augue vitae tristique iaculis, leo risus malesuada tellus, quis interdum nibh lorem ut dolor. </p>
-            </footer>
-          */}
+
           </div>
 
           <footer>

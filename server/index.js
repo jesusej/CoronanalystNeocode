@@ -122,6 +122,28 @@ app.post('/login', (req, res) => {
     );
 });
 
+
+app.post('/checkPersonalData', (req, res) => {
+
+    const id = req.body.id;
+
+        db.query(
+            "SELECT * FROM datos_personales WHERE idCuenta = ?",
+            [id],
+            (err, result) => {
+                console.log(err);
+    
+                if ((result.length > 0) || (id == '')){
+                    //res.send({message:"Ya hay registros"});
+                    res.send(true);
+                }
+                else {
+                    res.send(false);
+                }
+            }
+    );
+});
+
 app.post('/datos_personales', (req, res) => {
 
     const edad = req.body.edad;
@@ -136,22 +158,33 @@ app.post('/datos_personales', (req, res) => {
     const factoresRiesgo = req.body.factoresRiesgo;
     const frecuenciaEjercicio = req.body.frecuenciaEjercicio;
     const id = req.body.id;
-
     
-    db.query(
-        "INSERT INTO datos_personales (Edad, Nivel_estudios, Localidad, Estado_Civil, Nivel_socioeconomico, Tipo_de_complexion, Factores_de_riesgo, Frecuencia_de_ejercicio, IP, Dispositivo, SO, idCuenta) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-        [edad, nivelEstudios, localidad, estadoCivil, nivelSocioeconomico, tipoComplexion, factoresRiesgo, frecuenciaEjercicio, ip, dispositivo, so, id],
-        (err, result) => {
-            console.log(err);
-            if (err !== null)
-            {
+            // Revisión de si hay datos registrados
+            if ((edad == '') || (nivelEstudios == '') || (localidad == '') ||  (estadoCivil == '') ||
+             (nivelSocioeconomico == '') || (tipoComplexion == '') || (factoresRiesgo == '') ||
+             (frecuenciaEjercicio == '') || (id == ''))
+             {
+                res.send(false);
+            } else {
+
+                db.query(
+                    "INSERT INTO datos_personales (Edad, Nivel_estudios, Localidad, Estado_Civil, Nivel_socioeconomico, Tipo_de_complexion, Factores_de_riesgo, Frecuencia_de_ejercicio, IP, Dispositivo, SO, idCuenta) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                    [edad, nivelEstudios, localidad, estadoCivil, nivelSocioeconomico, tipoComplexion, factoresRiesgo, frecuenciaEjercicio, ip, dispositivo, so, id],
+                    (err, result) => {
+                        console.log(err);
+                        // if (err !== null)
+                        // {
+                        //     res.send(true);
+                        // }
+                        // else{
+                        //     res.send(false);
+                        // }
+                    }
+                );
                 res.send(true);
             }
-            else{
-                res.send(false);
-            }
-        }
-    );
+        // }
+    // );
 });
 
 app.post('/encuesta', (req, res) => {
