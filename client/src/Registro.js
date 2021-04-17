@@ -7,6 +7,7 @@ function Registro() {
   const [errorStatus, setErrorStatus] = useState('')
   const [usernameReg, setUsernameReg] = useState('')
   const [passwordReg, setPasswordReg] = useState('')
+  const [regResponse, setRegResponse] = useState('')
 
 const register = () => {
   Axios.post("http://localhost:3001/register", {
@@ -14,6 +15,18 @@ const register = () => {
     password: passwordReg,
   }).then((response) => {
     console.log(response);
+    if (response.data === false)
+    {
+      if (usernameReg !== '' && passwordReg !== '')
+        setRegResponse("El correo electrónico ya se encuentra registrado");
+      else if (usernameReg === '' || passwordReg === '')
+        setRegResponse("Favor de llenar los campos de correo y/o contraseña completamente antes de registrarse");
+    }
+    else if (response.data === true)
+    {
+      console.log(response);
+      setRegResponse("Usuario registrado exitosamente");
+    }
   });
 };
 
@@ -38,8 +51,7 @@ const register = () => {
         <div className="button">
         <button onClick={register}>Registrarse</button>
         </div>
-
-         {/* Termina front end de Registro */}
+        {regResponse}
 
          <p className = "error">{errorStatus}</p>
       </div>

@@ -10,6 +10,7 @@ function MenuUsuario () {
         <div>
 
           <div className="menuusuario">
+            <h2>Menú de Usuario</h2>
             <button onClick={()=> history.push("/datos_personales")}>Encuesta</button>
             <button onClick={()=> history.push("/datos")}>Visualizar Datos</button>
             <button onClick={()=> history.push("/cerrar_sesion")}>Cerrar Sesión</button>
