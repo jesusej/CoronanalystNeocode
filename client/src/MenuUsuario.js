@@ -14,7 +14,7 @@ function MenuUsuario () {
   const history = useHistory();
   const [dataRegistered, setDataRegistered] = useState("");
 
-  const {id, setId} = useContext(idContext);
+  const {id} = useContext(idContext);
 
   const checkPersonalData = () => {
 

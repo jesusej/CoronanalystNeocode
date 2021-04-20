@@ -1,5 +1,6 @@
 import React, { useState, useContext, Component } from "react";
 import Axios from "axios";
+import { Redirect } from "react-router-dom";
 import {useHistory} from "react-router-dom";
 
 import { idContext } from "./Helper/Context";
@@ -13,6 +14,9 @@ const [preguntas, setPreguntas] = useState("");
 const [respuestasPublic, setRespuestasPublic] = useState("");
 
 const {id} = useContext(idContext);
+
+
+const [register, setRegister] = useState('');
 
 var respuestas = [];
 
@@ -84,16 +88,24 @@ const encuesta = () => {
     });
   };
 
+
   const sendAnswers = () => {
     Axios.post("http://localhost:3001/resultados", {
       answers: respuestasPublic
+
     }).then((response) => {
       console.log(response);
+      setRegister(true);
     });
   };
 
+  
 
 
+  // if (register === true)
+  // {
+  //   return <Redirect to = "/menu_usuario" />;
+  // }
 
 
 

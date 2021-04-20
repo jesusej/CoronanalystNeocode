@@ -10,7 +10,7 @@ function DatosPersonales () {
 
     const [registroExitoso, setRegistroExitoso] = useState("");
 
-    const {id, setId} = useContext(idContext);
+    const {id} = useContext(idContext);
 
 
     //Datos Personales
@@ -110,7 +110,6 @@ if (registroExitoso == true) {
               <option value="Más de 60">Más de 60</option>
             </select>
             <br />
-            
 
             <label> Nivel Estudios </label> <br />
             <select type="text"  name="studies" required
