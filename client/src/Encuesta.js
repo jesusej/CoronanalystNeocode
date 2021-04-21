@@ -68,7 +68,7 @@ const encuesta = () => {
 
     return(
         <div className="Encuesta">
-            <h3>Pagina de Encuesta</h3>
+            <h2>Pagina de Encuesta</h2>
             <h4>Compras y estado en pandemia</h4>
             <p>Pagina donde se muestran todas las preguntas con su respuesta </p>
             <button onClick={encuesta}>Mostrar Componente</button> <br />

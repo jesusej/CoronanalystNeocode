@@ -7,16 +7,14 @@ function Home() {
 
   return(
       <div>
-        <div classname="content"> 
-          <h2>Sección principal</h2>
-          <p>Esta es la pagina principal, por lo que el archivo debe de tomarse como tal
-            con el fin de evitar confusiones. Es decir, esta es la base, lo que aparece al abrir la página, y lo que llama
-            a todas las otras consecuentemente.</p>
-        </div>
-
-        <div className="conexiones"> 
-          <button onClick={()=> history.push("/login")}>Login</button>
-          <button onClick={()=> history.push("/registro")}>Registro</button>
+          <h1>Te damos la bienvenida a Coronanalyst</h1>
+          <p  className = "textoBienvenida">Gracias por formar parte de PK Global Gracias por formar parte de PK Global Gracias por formar parte de PK Global Gracias por formar parte de PK Global Gracias por formar parte de PK Global Gracias por formar parte de PK Global Gracias por formar parte de PK Global Gracias por formar parte de PK Global Gracias por formar parte de PK Global Gracias por formar parte de PK Global Gracias por formar parte de PK Global Gracias por formar parte de PK Global Gracias por formar parte de PK Global Gracias por formar parte de PK Global Gracias por formar parte de PK Global Gracias por formar parte de PK Global Gracias por formar parte de PK Global Gracias por formar parte de PK Global Gracias por formar parte de PK Global Gracias por formar parte de PK Global Gracias por formar parte de PK Global Gracias por formar parte de PK Global Gracias por formar parte de PK Global Gracias por formar parte de PK Global Gracias por formar parte de PK Global Gracias por formar parte de PK Global Gracias por formar parte de PK Global Gracias por formar parte de PK Global </p>
+        
+        <div >
+          <div className = "centeredContainer">
+            <button onClick={()=> history.push("/login")}>Login</button>
+            <button onClick={()=> history.push("/registro")}>Registro</button>
+            </div> 
         </div>
       </div>
   );
