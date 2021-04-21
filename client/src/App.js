@@ -42,17 +42,21 @@ function App() {
             <img className="logo" src={pkglobal} alt="No se pudo cargar el logo" />
             </NavLink>
 
+
             <h1 className ="coronanalysTitle">CORONANALYST</h1>
         </div>
         <div className = "centered-container">
           <div className = "centered-elements">
                       {/* ^ Back End ^ */}
+
+            
+            {loginStatus + " " + id}
+
           
                       <LoginContext.Provider value={{ loginStatus, setLoginStatus }} >
             
             <div className="conexiones">
                 <Route exact path="/" component={Home}/>
-                <Route path="/login" component={Login}/>
                 <Route path="/registro" component={Registro}/>
 
                 <Route path="/menu_usuario" component={MenuUsuario}/>
@@ -60,6 +64,8 @@ function App() {
                 <Route path="/menuAdmin" component={MenuAdmin}/>
 
                 <idContext.Provider value = {{id, setId}} >
+                <Route path="/login" component={Login}/>
+
                 <Route path="/datos_personales" component={DatosPersonales}/> 
                 <Route path="/encuesta" component={Encuesta}/>
                 </ idContext.Provider>

@@ -60,7 +60,7 @@ function DatosPersonales () {
 
         }).then((response) => {
             console.log(response);
-            setRegistroExitoso(response.data);
+            setRegistroExitoso(true);
         });
     };
 
@@ -229,18 +229,18 @@ if (registroExitoso)
             <br /> <br />
         </div>
 
-            {edad}
-            {nivelEstudios}
-            {localidad}
-            {estadoCivil}
-            {nivelSocioeconomico}
-            {tipoComplexion}
-            {factoresRiesgo}
-            {frecuenciaEjercicio}
-            {ip}
-            {dispositivo}
-            {so}
-            {id}
+            {edad} <br />
+            {nivelEstudios} <br />
+            {localidad} <br />
+            {estadoCivil} <br />
+            {nivelSocioeconomico} <br />
+            {tipoComplexion} <br />
+            {factoresRiesgo} <br />
+            {frecuenciaEjercicio} <br />
+            {ip} <br />
+            {dispositivo} <br />
+            {so} <br />
+            {id} <br />
 
             { /* Insertar IP, sistema operativo y dispositivo */ }
 

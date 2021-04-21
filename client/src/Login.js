@@ -1,7 +1,7 @@
-import React, {createContext, useContext, useState} from "react";
+import React, { useContext, useState} from "react";
 import Axios from "axios";
 import { Redirect } from "react-router-dom";
-import {idContext, LoginContext } from './Helper/Context';
+import { idContext, LoginContext } from './Helper/Context';
 
  
 function Login() {
@@ -11,6 +11,8 @@ function Login() {
   const [password, setPassword] = useState("")
 
   const {loginStatus, setLoginStatus} = useContext(LoginContext); //Manera incorrecta, cambiar este context al loggedIn
+  const { setId } = useContext(idContext);
+
   const [tipoCuenta, setTipoCuenta] = useState("");
   const [loggedIn, setLoggedIn] = useState("");
 
@@ -29,7 +31,7 @@ function Login() {
           setLoginStatus(response.data[0].Usuario);
           setTipoCuenta(response.data[0].idTipo_De_Cuenta);
           setLoggedIn(true);
-
+          setId(response.data[0].idCuenta);
         }
     });
   };
