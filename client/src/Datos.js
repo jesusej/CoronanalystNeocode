@@ -11,7 +11,7 @@ function Datos () {
             <h3> Pagina de Datos</h3>
             <p>Pagina donde se muestran los datos </p>
 
-            <button onClick={()=> history.push("/menu_Usuario")}>Regresar al menpu principal</button>
+            <button onClick={()=> history.push("/menu_Usuario")}>Regresar al menú principal</button>
           </div>
     );
 }

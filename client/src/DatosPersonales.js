@@ -72,11 +72,12 @@ if (registroExitoso)
 
 
     return(
-        <div className="DatPer">
-            <h3> Pagina de Encuesta</h3>
-            <h4> Datos Personales</h4>
+        <div>
+            <h2> Pagina de Encuesta</h2>
+            
             {/* <p>Pagina donde se muestran los campos para llenar los datos personales </p> */}
-
+        <div className ="centeredContainer">
+            <h1 className = "datosPersonales"> Datos Personales</h1>
             <label> Edad </label> <br />           
             <select id="age" name="age" required
             onChange={(e) => {
@@ -226,6 +227,7 @@ if (registroExitoso)
             
             
             <br /> <br />
+        </div>
 
             {edad} <br />
             {nivelEstudios} <br />
@@ -241,13 +243,13 @@ if (registroExitoso)
             {id} <br />
 
             { /* Insertar IP, sistema operativo y dispositivo */ }
-            <div className= "buttoncoso">
+
+            <div className= "centeredContainer">
+                
                 <button onClick={regDatPer}>Registrar Resultados</button>
-            </div>
-            <div className= "buttoncoso">
                 <button onClick={()=> history.push("/menu_Usuario")}>Regresar al menú de sesión</button>
             </div>
-            <br />
+            
           </div>
     );
 }
