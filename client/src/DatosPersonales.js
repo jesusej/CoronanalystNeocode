@@ -241,19 +241,6 @@ if (registroExitoso)
             {so} <br />
             {id} <br />
 
-            {edad}
-            {nivelEstudios}
-            {localidad}
-            {estadoCivil}
-            {nivelSocioeconomico}
-            {tipoComplexion}
-            {factoresRiesgo}
-            {frecuenciaEjercicio}
-            {ip}
-            {dispositivo}
-            {so}
-            {id}
-
             { /* Insertar IP, sistema operativo y dispositivo */ }
             <div className= "buttoncoso">
                 <button onClick={regDatPer}>Registrar Resultados</button>
