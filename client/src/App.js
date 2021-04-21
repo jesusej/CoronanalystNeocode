@@ -43,14 +43,14 @@ function App() {
             </NavLink>
 
             <h1>CORONANALYST</h1>
-              {/*<NavLink exact to="/"><button type="button">Menu de Inicio</button></NavLink>*/}
+            
+            {loginStatus + " " + id}
           
 
             <LoginContext.Provider value={{ loginStatus, setLoginStatus }} >
             
             <div className="conexiones">
                 <Route exact path="/" component={Home}/>
-                <Route path="/login" component={Login}/>
                 <Route path="/registro" component={Registro}/>
 
                 <Route path="/menu_usuario" component={MenuUsuario}/>
@@ -58,6 +58,8 @@ function App() {
                 <Route path="/menuAdmin" component={MenuAdmin}/>
 
                 <idContext.Provider value = {{id, setId}} >
+                <Route path="/login" component={Login}/>
+
                 <Route path="/datos_personales" component={DatosPersonales}/> 
                 <Route path="/encuesta" component={Encuesta}/>
                 </ idContext.Provider>

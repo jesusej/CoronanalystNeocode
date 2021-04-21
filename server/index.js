@@ -110,7 +110,7 @@ app.post('/login', (req, res) => {
             }
             
             //console.log(result);
-            // Envía los resultados como cookie
+            // Registra al usuario en una sesión para que pueda revisitarlo
             if (result.length > 0) {
                 req.session.user = result;
                 console.log(req.session.user);
@@ -118,20 +118,6 @@ app.post('/login', (req, res) => {
             } else {
                 res.send({message: "No existe la combinación de correo y contraseña"});
             }
-        }
-    );
-});
-
-
-app.post('/encuesta', (req, res) => {
-
-    db.query(
-        "SELECT * FROM preguntas AS P JOIN opciones AS O WHERE P.idPreguntas = O.idPreguntas",
-        (err, result) => {
-            if (err) {
-                res.send({err:err})
-            }
-            res.send(result);
         }
     );
 });
@@ -166,6 +152,43 @@ app.post('/datos_personales', (req, res) => {
             }
         }
     );
+});
+
+app.post('/encuesta', (req, res) => {
+
+    db.query(
+        "SELECT * FROM preguntas AS P JOIN opciones AS O WHERE P.idPreguntas = O.idPreguntas",
+        (err, result) => {
+            if (err) {
+                res.send({err:err})
+            }
+            res.send(result);
+        }
+    );
+});
+
+app.post('/resultados', (req, res) => {
+
+    //console.log(req.body);
+    
+    const answers = req.body.answers;
+
+    for (var i = 0; i < answers.length; i++){
+        console.log(answers[i]);
+    }
+
+    if(!answers){
+        db.query(
+            "INSERT INTO respuestas(fkCuenta, fkPreguntas, fkOpciones, Respuesta) VALUES (?, ?, ?, ?)",
+            [edad, nivelEstudios, localidad, estadoCivil, nivelSocioeconomico, tipoComplexion, factoresRiesgo, frecuenciaEjercicio, ip, dispositivo, so, id],
+            (err, result) => {
+                if (err) {
+                    res.send({err:err});
+                }
+                res.send(result);
+            }
+        );
+    }
 });
 
 app.post('/register_client', (req, res) => {   

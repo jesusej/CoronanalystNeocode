@@ -1,4 +1,4 @@
-import React, {useState } from "react";
+import React, { useState, useContext, Component } from "react";
 import Axios from "axios";
 import {useHistory} from "react-router-dom";
 
@@ -9,7 +9,29 @@ function Encuesta () {
 const history = useHistory();
 
 //Función prueba
-const [preguntas, setPreguntas] = useState("")
+const [preguntas, setPreguntas] = useState("");
+const [respuestasPublic, setRespuestasPublic] = useState("");
+
+const {id} = useContext(idContext);
+
+var respuestas = [];
+
+class answers extends Component {
+  constructor(props) {
+    super(props);
+    this.handleInputChange = this.handleInputChange.bind(this);
+
+  }
+
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    respuestas[name] = value;
+    setRespuestasPublic(respuestas);
+  }
+}
 
 const encuesta = () => {
   Axios.post("http://localhost:3001/encuesta", {
@@ -40,43 +62,51 @@ const encuesta = () => {
           i--;
         }
       }
-          
+      
       for(i = 0; i < todo.length; i++){
         if (type[i] < 100){
           questions.push(<h3> {todo[i]} </h3>);
           idPregPar = type[i];
+          respuestas.push('0');
         } else {
           questions.push(
           <label>
-            <input type="radio" name={idPregPar} value={type[i]} /> {todo[i]}
+            <input type="radio" name={idPregPar} value={type[i]}
+            onClick={answers.handleInputChange}/> {todo[i]}
             <br />
-          </label>  );
+          </label> 
+          );
         }
       }
-        
+      
       setPreguntas(questions);
+      setRespuestasPublic(respuestas);
     });
   };
 
-  const respuestas = () => {};
+  const sendAnswers = () => {
+    Axios.post("http://localhost:3001/resultados", {
+      answers: respuestasPublic
+    }).then((response) => {
+      console.log(response);
+    });
+  };
 
-
-
-
-
-
+  if(!preguntas){
+    encuesta();
+  }
 
     return(
         <div className="Encuesta">
+          {id}
             <h3>Pagina de Encuesta</h3>
             <h4>Compras y estado en pandemia</h4>
             <p>Pagina donde se muestran todas las preguntas con su respuesta </p>
-            <button onClick={encuesta}>Mostrar Componente</button> <br />
-
 
             {preguntas}
+            
             <br /><br />
-            <button onClick={()=> history.push("/menu_Usuario")}>Terminar Encuesta</button>
+            <button onClick={() => history.push("/menu_usuario")}>Terminar Encuesta</button>
           </div>
     );
 }
