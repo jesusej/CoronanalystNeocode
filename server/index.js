@@ -146,30 +146,29 @@ app.post('/checkPersonalData', (req, res) => {
 
 app.post('/datos_personales', (req, res) => {
 
+    const genero = req.body.genero;
     const edad = req.body.edad;
     const nivelEstudios = req.body.nivelEstudios;
-    const localidad = req.body.localidad;
     const estadoCivil = req.body.estadoCivil;
+    const ocupacion = req.body.ocupacion;
+    const ingreso = req.body.ingreso;
+    const localidad = req.body.localidad;
+
     const ip = req.body.ip;
     const dispositivo = req.body.dispositivo;
     const so= req.body.so;
-    const nivelSocioeconomico= req.body.nivelSocioeconomico;
-    const tipoComplexion= req.body.tipoComplexion;
-    const factoresRiesgo = req.body.factoresRiesgo;
-    const frecuenciaEjercicio = req.body.frecuenciaEjercicio;
     const id = req.body.id;
     
             // Revisión de si hay datos registrados
             if ((edad == '') || (nivelEstudios == '') || (localidad == '') ||  (estadoCivil == '') ||
-             (nivelSocioeconomico == '') || (tipoComplexion == '') || (factoresRiesgo == '') ||
-             (frecuenciaEjercicio == '') || (id == ''))
+             (ingreso == '') || (genero == '') || (ocupacion == '') || (id == ''))
              {
                 res.send(false);
             } else {
 
                 db.query(
-                    "INSERT INTO datos_personales (Edad, Nivel_estudios, Localidad, Estado_Civil, Nivel_socioeconomico, Tipo_de_complexion, Factores_de_riesgo, Frecuencia_de_ejercicio, IP, Dispositivo, SO, idCuenta) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                    [edad, nivelEstudios, localidad, estadoCivil, nivelSocioeconomico, tipoComplexion, factoresRiesgo, frecuenciaEjercicio, ip, dispositivo, so, id],
+                    "INSERT INTO datos_personales (idCuenta, Genero, Edad, Estado_Civil, Nivel_estudios, Ocupacion,  Ingreso_Mensual, Localidad, IP, Dispositivo, SO) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                    [id, genero, edad, estadoCivil, nivelEstudios, ocupacion, ingreso, localidad, ip, dispositivo, so],
                     (err, result) => {
                         console.log(err);
                         // if (err !== null)
@@ -211,8 +210,8 @@ app.post('/resultados', (req, res) => {
     }
 
     /*db.query(
-        "INSERT INTO datos_personales (Edad, Nivel_estudios, Localidad, Estado_Civil, Nivel_socioeconomico, Tipo_de_complexion, Factores_de_riesgo, Frecuencia_de_ejercicio, IP, Dispositivo, SO, idCuenta) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-        [edad, nivelEstudios, localidad, estadoCivil, nivelSocioeconomico, tipoComplexion, factoresRiesgo, frecuenciaEjercicio, ip, dispositivo, so, id],
+        "INSERT INTO datos_personales (idCuenta, Genero, Edad, Estado_Civil, Nivel_estudios, Ocupacion,  Ingreso_Mensual, Localidad, IP, Dispositivo, SO) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        [id, genero, edad, estadoCivil, nivelEstudios, ocupacion, ingreso, localidad, ip, dispositivo, so],
         (err, result) => {
             if (err) {
                 res.send({err:err});
