@@ -102,7 +102,8 @@ if (registroExitoso == true) {
                 <option value="Mujer">Mujer</option>
                 <option value="Otro">Otro</option>
             </select> 
-
+            <br />
+            
             <label> Edad </label> <br />           
             <select id="age" name="age" required 
             onChange={(e) => {
@@ -136,8 +137,9 @@ if (registroExitoso == true) {
                 <option value="Divorciado(a)">Divorciado(a)</option>
                 <option value="Unión libre">Unión libre</option>
                 <option value="Viudo(a)">Viudo(a)</option>
-            </select><br/>
-
+            </select>
+            <br/>
+            
             <label> Nivel máximo de estudios </label> <br />
             <select type="text"  name="studies" required
             onChange={(e) => {
@@ -177,11 +179,8 @@ if (registroExitoso == true) {
                 <option value="Hogar">Hogar</option>
                 <option value="Estudiante">Estudiante</option>
                 <option value="Otro">Otro</option>
-
-
-
-                </select><br />
-
+                </select>
+            <br />
 
             <label> Ingreso Económico Mensual </label> <br />
             <select type="text"  name="ingreso" required
@@ -195,8 +194,8 @@ if (registroExitoso == true) {
                 <option value="$10,000 - $30,000">$10,000 - $30,000</option>
                 <option value="$30,000 - $50,000">$30,000 - $50,000</option>
                 <option value="+$50,000">+$50,000</option>
-            </select><br />
-
+            </select>
+            <br />
 
             <label> Estado </label> <br />
             <select type="text"  name="locality" required
@@ -237,11 +236,6 @@ if (registroExitoso == true) {
             </select>
             <br />
 
-
-            
-            
-        
-            
             
             <br /> <br />
 
