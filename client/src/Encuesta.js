@@ -1,3 +1,4 @@
+// Código mal hecho, se necesita mejorar. Intentar implementar clases y hacer un array de esos
 import React, { useState, useContext, Component } from "react";
 import Axios from "axios";
 import {useHistory} from "react-router-dom";
@@ -11,27 +12,12 @@ const history = useHistory();
 //Función prueba
 const [preguntas, setPreguntas] = useState("");
 const [respuestasPublic, setRespuestasPublic] = useState("");
+const [optionsPublic, setOptionsPublic] = useState("");
 
 const {id} = useContext(idContext);
 
 var respuestas = [];
-
-class answers extends Component {
-  constructor(props) {
-    super(props);
-    this.handleInputChange = this.handleInputChange.bind(this);
-
-  }
-
-  handleInputChange(event) {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
-
-    respuestas[name] = value;
-    setRespuestasPublic(respuestas);
-  }
-}
+var options = [];
 
 const encuesta = () => {
   Axios.post("http://localhost:3001/encuesta", {
@@ -68,25 +54,40 @@ const encuesta = () => {
           questions.push(<h3> {todo[i]} </h3>);
           idPregPar = type[i];
           respuestas.push('0');
+          options.push('0');
         } else {
           questions.push(
           <label>
-            <input type="radio" name={idPregPar} value={type[i]}
-            onClick={answers.handleInputChange}/> {todo[i]}
+            <input type="radio" name={idPregPar} id={type[i]} value={todo[i]}
+            onClick={(e) => {
+              const index = e.target.name - 1;
+
+              options[index] = e.target.id;
+              setOptionsPublic(options);
+              
+              respuestas[index] = e.target.value;
+              setRespuestasPublic(respuestas);
+
+            }}/> {todo[i]}
             <br />
           </label> 
           );
         }
       }
       
+      console.log(options);
+      console.log(respuestas);
       setPreguntas(questions);
       setRespuestasPublic(respuestas);
+      setOptionsPublic(options);
     });
   };
 
   const sendAnswers = () => {
     Axios.post("http://localhost:3001/resultados", {
-      answers: respuestasPublic
+      id: id,
+      options: optionsPublic,
+      answers: respuestasPublic,
     }).then((response) => {
       console.log(response);
     });
@@ -104,7 +105,11 @@ const encuesta = () => {
             <h4>Compras y estado en pandemia</h4>
             <p>Pagina donde se muestran todas las preguntas con su respuesta </p>
 
-            {preguntas}
+      }            <ul>
+              {preguntas}
+              {optionsPublic}
+            </ul>
+      }
             
             <br /><br />
             <button onClick={() => history.push("/menu_usuario")}>Terminar Encuesta</button>

@@ -10,80 +10,109 @@ function DatosPersonales () {
 
     const [registroExitoso, setRegistroExitoso] = useState("");
 
-    const {id, setId} = useContext(idContext);
+    const {id} = useContext(idContext);
 
 
     //Datos Personales
+    const [genero, setGenero] = useState("")
     const [edad, setEdad] = useState("")
-    const [nivelEstudios, setNivelEstudios] = useState("")
-    const [localidad, setLocalidad] = useState("")
     const [estadoCivil, setEstadoCivil] = useState("")
+    const [nivelEstudios, setNivelEstudios] = useState("")
+    const [ocupacion, setOcupacion] = useState("")
+    const [ingreso, setIngreso] = useState("")
+    const [localidad, setLocalidad] = useState("")
+    
     const [ip, setIp] = useState("")
     const [dispositivo, setDispositivo] = useState("")
     const [so, setSo] = useState("")
-    const [nivelSocioeconomico, setNivelSocioeconomico] = useState("")
-    const [tipoComplexion, setTipoComplexion] = useState("")
-    const [factoresRiesgo, setFactoresRiesgo] = useState("")
-    const [frecuenciaEjercicio, setFrecuenciaEjercicio] = useState("")
+    
+    
+
+    const [regResponse, setRegResponse] = useState("")
 
     const regDatPer = () => {
         setIp("null");
         setDispositivo("null");
         setSo("null");
 
+        console.log(genero);
         console.log(edad);
-        console.log(nivelEstudios);
-        console.log(localidad);
         console.log(estadoCivil);
-        console.log(nivelSocioeconomico);
-        console.log(tipoComplexion);
-        console.log(factoresRiesgo);
-        console.log(frecuenciaEjercicio);
+        console.log(nivelEstudios);
+        console.log(ocupacion);
+        console.log(ingreso);
+        console.log(localidad);
+        console.log(id);
+
         console.log(ip);
         console.log(dispositivo);
         console.log(so);
-        console.log(id);
 
         Axios.post("http://localhost:3001/datos_personales", {
+            genero, genero,
             edad: edad,
-            nivelEstudios: nivelEstudios,
-            localidad: localidad,
             estadoCivil: estadoCivil,
-            nivelSocioeconomico: nivelSocioeconomico,
-            tipoComplexion: tipoComplexion,
-            factoresRiesgo: factoresRiesgo,
-            frecuenciaEjercicio: frecuenciaEjercicio,
+            nivelEstudios: nivelEstudios,
+            ocupacion: ocupacion,
+            ingreso: ingreso,
+            localidad: localidad,   
             ip: ip,
             dispositivo: dispositivo,
             so:so,
-            id:id
+            id:id,
 
         }).then((response) => {
             console.log(response);
-            setRegistroExitoso(true);
+
+            if ((response.data == false) && ((genero === '') || (edad === '') || (nivelEstudios === '') ||
+            (localidad === '') ||  (estadoCivil === '') || (ingreso === '') ||
+            (ocupacion === '') || (id === '')))
+            {
+                setRegResponse("Por favor llene todos los datos antes de registrarse");
+                setRegistroExitoso(false);
+                console.log(registroExitoso);
+            }
+            else if (response.data == true)
+            {
+                setRegResponse("Ha registrado los datos correctamente");
+                setRegistroExitoso(true);
+                console.log(registroExitoso);
+            }
+            
         });
-    };
 
-if (registroExitoso)
-    {
-        return <Redirect to = "/encuesta" />;
-    }
+};
 
-
-
+if (registroExitoso == true) {
+    return <Redirect to = "/encuesta" />;
+} 
     return(
         <div>
             <h2> Pagina de Encuesta</h2>
             
             {/* <p>Pagina donde se muestran los campos para llenar los datos personales </p> */}
-        <div className ="centeredContainer">
+      
+            <div className ="centeredContainer">
             <h1 className = "datosPersonales"> Datos Personales</h1>
+
+            <label> Género </label> <br />
+            <select type="text"  name="gender" required
+            onChange={(e) => {
+                setGenero(e.target.value)
+            }}> 
+                <option value=""></option>  
+                <option value="Hombre">Hombre</option>
+                <option value="Mujer">Mujer</option>
+                <option value="Otro">Otro</option>
+            </select> 
+            <br />
+            
             <label> Edad </label> <br />           
-            <select id="age" name="age" required
+            <select id="age" name="age" required 
             onChange={(e) => {
                 setEdad(e.target.value)
             }}>
-              <option value="select">Select</option>  
+              <option value=""></option>  
               <option value="Menor de 15">Menor de 15</option>
               <option value="15-20">15-20</option>
               <option value="21-25">21-25</option>
@@ -94,35 +123,89 @@ if (registroExitoso)
               <option value="46-50">46-50</option>
               <option value="51-55">51-55</option>
               <option value="56-60">56-60</option>
-              <option value="Más de 60">Más de 60</option>
+              <option value="60-61">61-65</option>
+              <option value="66-70">66-70</option>
+              <option value="70+">Más de 70</option>-
             </select>
             <br />
-            
 
-            <label> Nivel Estudios </label> <br />
+            <label> Estado Civil </label> <br />
+            <select type="text"  name="civilStatus" required
+            onChange={(e) => {
+                setEstadoCivil(e.target.value)
+            }}> 
+                <option value=""></option>  
+                <option value="Soltero(a)">Soltero(a)</option>
+                <option value="Casado(a)">Casado(a)</option>
+                <option value="Divorciado(a)">Divorciado(a)</option>
+                <option value="Unión libre">Unión libre</option>
+                <option value="Viudo(a)">Viudo(a)</option>
+            </select>
+            <br/>
+            
+            <label> Nivel máximo de estudios </label> <br />
             <select type="text"  name="studies" required
             onChange={(e) => {
                 setNivelEstudios(e.target.value)
             }}>               
-                <option value="select">Select</option>  
-                <option value="Preescolar">Preescolar</option>
+                <option value=""></option>  
                 <option value="Primaria">Primaria</option>
                 <option value="Secundaria">Secundaria</option>
-                <option value="Medio Superior">Medio Superior</option>
-                <option value="Superior">Superior</option>
-                <option value="Posgrado">Posgrado</option>
-                <option value="Ninguno de los anteriores">Ninguno de los anteriores</option>
+                <option value="Preparatoria">Preparatoria</option>
+                <option value="Universidad">Universidad</option>
+                <option value="Maestría">Maestría</option>
+                <option value="Doctorado">Doctorado</option>
             </select>
             <br />
 
+            <label> Ocupación </label> <br />
+            <select type="text"  name="ocupation" required
+            onChange={(e) => {
+                setOcupacion(e.target.value)
+            }}>
+                <option value=""></option>  
+                <option value="Sector Industrial">Sector Industrial</option>
+                <option value="Sector Educativo">Sector Educativo</option>
+                <option value="Sector Gubernamental">Sector Gubernamental</option>
+                <option value="Sector de Comercio">Sector Comercio</option>
+                <option value="Sector de Transporte">Sector de Transporte</option>
+                <option value="Sector Alimenticio">Sector Alimenticio</option>
+                <option value="Sector de Alojamiento">Sector de Alojamiento</option>
+                <option value="Sector de Construcción">Sector de Construcción</option>
+                <option value="Sector de Suministro de Energía">Sector de Suministro de Energía</option>
+                <option value="Sector de Actividades Inmobiliarias">Sector de Actividades Inmobiliarias</option>
+                <option value="Sector Artístico">Sector Artístico</option>
+                <option value="Sector de Pesca y Agricultura">Sector de Pesca y Agricultura</option>
+                <option value="Sector de Informática">Sector de Informática</option>
+                <option value="Sector de Servicios Financieros">Sector de Servicios Financieros</option>
+                <option value="Sector Judicial">Sector Judicial</option>
+                <option value="Hogar">Hogar</option>
+                <option value="Estudiante">Estudiante</option>
+                <option value="Otro">Otro</option>
+                </select>
+            <br />
 
+            <label> Ingreso Económico Mensual </label> <br />
+            <select type="text"  name="ingreso" required
+            onChange={(e) => {
+                setIngreso(e.target.value)
+            }}>
+                <option value=""></option>  
+                <option value="No percibo ningún ingreso">No percibo ningún ingreso</option>
+                <option value="Menos de $1,000">Menos de $1,000</option>
+                <option value="$1,000 - $10,000">$1,000 - $10,000</option>
+                <option value="$10,000 - $30,000">$10,000 - $30,000</option>
+                <option value="$30,000 - $50,000">$30,000 - $50,000</option>
+                <option value="+$50,000">+$50,000</option>
+            </select>
+            <br />
 
-            <label> Localidad </label> <br />
+            <label> Estado </label> <br />
             <select type="text"  name="locality" required
             onChange={(e) => {
                 setLocalidad(e.target.value)
             }}>
-                <option value="select">Select</option>  
+                <option value=""></option>  
                 <option value="Aguascalientes">Aguascalientes</option>
                 <option value="Baja California">Baja California</option>
                 <option value="Baja California Sur">Baja California Sur</option>
@@ -156,87 +239,20 @@ if (registroExitoso)
             </select>
             <br />
 
-            <label> Estado Civil </label> <br />
-            <select type="text"  name="civilStatus" required
-            onChange={(e) => {
-                setEstadoCivil(e.target.value)
-            }}> 
-                <option value="select">Select</option>  
-                <option value="Soltero(a)">Soltero(a)</option>
-                <option value="Casado(a)">Casado(a)</option>
-                <option value="Divorciado(a)">Divorciado(a)</option>
-                <option value="Viudo(a)">Viudo(a)</option>
-                <option value="Concubinato">Concubinato</option>
-            </select><br/>
-
-            <label> Nivel Socioeconómico </label> <br />
-            <select type="text"  name="socioeconomic" required
-            onChange={(e) => {
-                setNivelSocioeconomico(e.target.value)
-            }}>
-                <option value="select">Select</option>  
-                <option value="Bajo">Bajo</option>
-                <option value="Medio bajo">Medio bajo</option>
-                <option value="Medio">Medio</option>
-                <option value="Medio alto">Medio alto</option>
-                <option value="Alto">Alto</option>
-            </select><br />
-
-            <label> Tipo de complexión </label> <br />
-            <select type="text"  name="bodyType" required
-            onChange={(e) => {
-                setTipoComplexion(e.target.value)
-            }} > 
-                <option value="select">Select</option>  
-                <option value="Delgada">Delgada</option>
-                <option value="Dentro de la media">Dentro de la media</option>
-                <option value="Robusta">Robusta</option>
-            </select><br />
-            
-            <label> Factores de riesgo </label> <br />
-            <select type="text"  name="factors" required
-            onChange={(e) => {
-                setFactoresRiesgo(e.target.value)
-            }}>
-                <option value="select">Select</option>  
-                <option value="Enfermedades cardiovasculares">Enfermedades cardiovasculares</option>
-                <option value="Diabetes">Diabetes</option>
-                <option value="Enfermedades respiratorias crónicas">Enfermedades respiratorias crónicas</option>
-                <option value="Enfermedades renales">Enfermedades renales</option>
-                <option value="Cáncer">Cáncer</option>
-                <option value="Inmunosupresión">Inmunosupresión</option>
-                <option value="Enfermedades neurológicas">Enfermedades neurológicas</option>
-                <option value="Sobrepeso/Obesidad">Sobrepeso/Obesidad</option>
-                <option value="Tabaquismo">Tabaquismo</option>
-                <option value="No padezco ninguno anteriores">No padezco ninguno anteriores</option>
-                <option value="Desconozco si padezco alguno">Desconozco si padezco alguno</option>
-                </select><br />
-            
-            <label> Frecuencia de ejercicio </label> <br />
-            <select type="text"  name="exerciseFrecuency" required
-            onChange={(e) => {
-                setFrecuenciaEjercicio(e.target.value)
-            }}> 
-                <option value="select">Select</option>  
-                <option value="Una a dos veces por semana">Una a dos veces por semana</option>
-                <option value="Tres a cuatro veces por semana">Tres a cuatro veces por semana</option>
-                <option value="Cinco veces por semana">Cinco veces por semana</option>
-                <option value="Todos los días">Todos los días</option>
-                <option value="No realizo ejercicio físico">No realizo ejercicio físico</option>
-            </select> 
-            
             
             <br /> <br />
         </div>
 
+            <h2>{regResponse}</h2>
+            <h2>{registroExitoso}</h2>
+
+            {genero} <br />
             {edad} <br />
-            {nivelEstudios} <br />
-            {localidad} <br />
             {estadoCivil} <br />
-            {nivelSocioeconomico} <br />
-            {tipoComplexion} <br />
-            {factoresRiesgo} <br />
-            {frecuenciaEjercicio} <br />
+            {nivelEstudios} <br />
+            {ocupacion} <br />
+            {ingreso} <br />
+            {localidad} <br />
             {ip} <br />
             {dispositivo} <br />
             {so} <br />
