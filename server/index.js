@@ -186,6 +186,27 @@ app.post('/datos_personales', (req, res) => {
     // );
 });
 
+app.post('/checkAnswers', (req, res) => {
+
+    const id = req.body.id;
+
+        db.query(
+            "SELECT * FROM respuestas WHERE fkCuenta = ?",
+            [id],
+            (err, result) => {
+                console.log(err);
+    
+                if ((result.length > 0) || (id == '')){
+                    //res.send({message:"Ya hay registros"});
+                    res.send(true);
+                }
+                else {
+                    res.send(false);
+                }
+            }
+    );
+});
+
 app.post('/encuesta', (req, res) => {
 
     db.query(
@@ -201,28 +222,26 @@ app.post('/encuesta', (req, res) => {
 
 app.post('/resultados', (req, res) => {
 
-    //console.log(req.body);
-    
+    const id = req.body.id;
+    const options = req.body.options;
     const answers = req.body.answers;
 
-    for (var i = 0; i < answers.length; i++){
-        console.log(answers[i]);
-    }
-
-
-    if(!answers){
+    
+    for(var i = 0; i < options.length; i++){
         db.query(
             "INSERT INTO respuestas(fkCuenta, fkPreguntas, fkOpciones, Respuesta) VALUES (?, ?, ?, ?)",
-            [edad, nivelEstudios, localidad, estadoCivil, nivelSocioeconomico, tipoComplexion, factoresRiesgo, frecuenciaEjercicio, ip, dispositivo, so, id],
+            [id, i+1, options[i], answers[i]],
             (err, result) => {
-                if (err) {
-                    res.send({err:err});
-                }
-                res.send(result);
-
+                console.log(err);
             }
         );
     }
+
+    console.log("Opciones:");
+    console.log(options);
+    console.log("Respuestas:");
+    console.log(answers);
+    console.log('');
 });
 
 app.post('/register_client', (req, res) => {   

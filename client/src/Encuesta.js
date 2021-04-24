@@ -105,14 +105,16 @@ const encuesta = () => {
             <h4>Compras y estado en pandemia</h4>
             <p>Pagina donde se muestran todas las preguntas con su respuesta </p>
 
-      }            <ul>
+           <ul>
               {preguntas}
               {optionsPublic}
             </ul>
-      }
             
             <br /><br />
-            <button onClick={() => history.push("/menu_usuario")}>Terminar Encuesta</button>
+            <div className= "centeredContainer">
+              <button onClick={sendAnswers}>Terminar Encuesta</button>
+              <button onClick={()=> history.push("/menu_Usuario")}>Regresar al menú de sesión</button>
+            </div>
           </div>
     );
 }
