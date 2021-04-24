@@ -189,12 +189,10 @@ app.post('/encuesta', (req, res) => {
 app.post('/resultados', (req, res) => {
 
     const id = req.body.id;
-    const options = req.body.options;
     const answers = req.body.answers;
 
-
     
-    for(var i = 0; i < options.length; i++){
+    /*for(var i = 0; i < options.length; i++){
 
         db.query(
             "INSERT INTO respuestas(fkCuenta, fkPreguntas, fkOpciones, Respuesta) VALUES (?, ?, ?, ?)",
@@ -209,10 +207,8 @@ app.post('/resultados', (req, res) => {
 
             }
         );
-    }
+    }*/
 
-    console.log("Opciones:");
-    console.log(options);
     console.log("Respuestas:");
     console.log(answers);
     console.log('');
