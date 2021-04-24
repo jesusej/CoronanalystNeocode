@@ -107,6 +107,70 @@ app.post('/login', (req, res) => {
     );
 });
 
+app.post('/checkPersonalData', (req, res) => {
+
+    const id = req.body.id;
+
+        db.query(
+            "SELECT * FROM datos_personales WHERE idCuenta = ?",
+            [id],
+            (err, result) => {
+                console.log(err);
+    
+                if ((result.length > 0) || (id == '')){
+                    //res.send({message:"Ya hay registros"});
+                    res.send(true);
+                }
+                else {
+                    res.send(false);
+                }
+            }
+
+    );
+});
+
+app.post('/datos_personales', (req, res) => {
+
+    const genero = req.body.genero;
+    const edad = req.body.edad;
+    const nivelEstudios = req.body.nivelEstudios;
+    const estadoCivil = req.body.estadoCivil;
+    const ocupacion = req.body.ocupacion;
+    const ingreso = req.body.ingreso;
+    const localidad = req.body.localidad;
+
+    const ip = req.body.ip;
+    const dispositivo = req.body.dispositivo;
+    const so= req.body.so;
+    const id = req.body.id;
+    
+
+            // Revisión de si hay datos registrados
+            if ((edad == '') || (nivelEstudios == '') || (localidad == '') ||  (estadoCivil == '') ||
+             (ingreso == '') || (genero == '') || (ocupacion == '') || (id == ''))
+             {
+                res.send(false);
+            } else {
+
+                db.query(
+                    "INSERT INTO datos_personales (idCuenta, Genero, Edad, Estado_Civil, Nivel_estudios, Ocupacion,  Ingreso_Mensual, Localidad, IP, Dispositivo, SO) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                    [id, genero, edad, estadoCivil, nivelEstudios, ocupacion, ingreso, localidad, ip, dispositivo, so],
+                    (err, result) => {
+                        console.log(err);
+                        // if (err !== null)
+                        // {
+                        //     res.send(true);
+                        // }
+                        // else{
+                        //     res.send(false);
+                        // }
+                    }
+                );
+                res.send(true);
+            }
+        // }
+    // );
+});
 
 app.post('/encuesta', (req, res) => {
 
@@ -117,31 +181,7 @@ app.post('/encuesta', (req, res) => {
                 res.send({err:err})
             }
             res.send(result);
-        }
-    );
-});
 
-app.post('/datos_personales', (req, res) => {
-
-    const edad = req.body.edad;
-    const nivelEstudios = req.body.nivelEstudios;
-    const localidad = req.body.localidad;
-    const estadoCivil = req.body.estadoCivil;
-    const ip = req.body.ip;
-    const dispositivo = req.body.dispositivo;
-    const so= req.body.so;
-    const nivelSocioeconomico= req.body.nivelSocioeconomico;
-    const tipoComplexion= req.body.tipoComplexion;
-    const factoresRiesgo = req.body.factoresRiesgo;
-    const frecuenciaEjercicio = req.body.frecuenciaEjercicio;
-    const id = req.body.id;
-
-    
-    db.query(
-        "INSERT INTO datos_personales (Edad, Nivel_estudios, Localidad, Estado_Civil, Nivel_socioeconomico, Tipo_de_complexion, Factores_de_riesgo, Frecuencia_de_ejercicio, IP, Dispositivo, SO, idCuenta) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-        [edad, nivelEstudios, localidad, estadoCivil, nivelSocioeconomico, tipoComplexion, factoresRiesgo, frecuenciaEjercicio, ip, dispositivo, so, id],
-        (err, result) => {
-            console.log(err);
         }
     );
 });
@@ -152,13 +192,21 @@ app.post('/resultados', (req, res) => {
     const options = req.body.options;
     const answers = req.body.answers;
 
+
     
     for(var i = 0; i < options.length; i++){
+
         db.query(
             "INSERT INTO respuestas(fkCuenta, fkPreguntas, fkOpciones, Respuesta) VALUES (?, ?, ?, ?)",
             [id, i+1, options[i], answers[i]],
             (err, result) => {
-                console.log(err);
+
+                if (err) {
+                    res.send({err:err});
+                }
+                res.send(result);
+
+
             }
         );
     }

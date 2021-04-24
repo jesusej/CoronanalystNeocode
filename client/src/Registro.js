@@ -15,6 +15,7 @@ const register = () => {
     password: passwordReg,
   }).then((response) => {
     console.log(response);
+    
     if (response.data === false)
     {
       if (usernameReg !== '' && passwordReg !== '')

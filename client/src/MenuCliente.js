@@ -9,7 +9,7 @@ function MenuCliente () {
     return(
 
         <div className="menuCliente">
-          <h2>Menú de Cliente</h2>
+          <h1>Menú de Cliente</h1>
           <button onClick={()=> history.push("/")}>Visualizar Datos</button>
           <button onClick={()=> history.push("/")}>Visualizar Datos Vista de Usuario</button>
           <button onClick={()=> history.push("/cerrar_sesion")}>Cerrar Sesión</button>

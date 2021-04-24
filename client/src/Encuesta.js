@@ -99,15 +99,17 @@ const encuesta = () => {
 
     return(
         <div className="Encuesta">
-          {id}
-            <h3>Pagina de Encuesta</h3>
+            <h2>Pagina de Encuesta</h2>
+
+
             <h4>Compras y estado en pandemia</h4>
             <p>Pagina donde se muestran todas las preguntas con su respuesta </p>
 
+
             <ul>
               {preguntas}
-              {optionsPublic}
             </ul>
+
             
             <br /><br />
             <button onClick={sendAnswers}>Terminar Encuesta</button>
