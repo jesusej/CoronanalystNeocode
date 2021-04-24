@@ -1,95 +1,159 @@
 import Axios from "axios";
 import {useHistory} from "react-router-dom";
 import React, { useState } from "react";
+import Popup from "reactjs-popup";
+import './PopUp.css';
+import CrearCliente from "./CrearCliente";
 
+function CuentasAdmnin() {
 
-function RegistroCliente() {
-    const history = useHistory();
+  const history = useHistory();
+  const [cuentas, setCuentas] = useState("");
+  const [borrarCuentaCliente, setBorrarCuentaCliente] = useState("");
+  const [borrarCuentaUsuario, setBorrarCuentaUsuario] = useState("");
+  const [eraseResponse, setEraseResponse] = useState("");
 
-  const [errorStatus, setErrorStatus] = useState('')
-  const [usernameReg, setUsernameReg] = useState('')
-  const [passwordReg, setPasswordReg] = useState('')
-  const [regResponse, setRegResponse] = useState('')
-  const [delResponse, setDelResponse] = useState('')
+  const registroCuentas = () => {
 
-const registerClient = () => {
-  Axios.post("http://localhost:3001/register_client", {
-    username: usernameReg,
-    password: passwordReg,
-  }).then((response) => {
-    console.log(response);
-    if (response.data == false)
-    {
-        if (usernameReg !== '' && passwordReg !== '')
-          setRegResponse("El correo electrónico ya se encuentra registrado");
-        else if (usernameReg === '' || passwordReg === '')
-          setRegResponse("Llene los campos de correo y/o contraseña completamente antes de registrarse");
+    Axios.post("http://localhost:3001/cuentas_admin", {
+  })
+    .then((response) => {
+
+      console.log(response.data);
+      var cuentasCliente = [];
+      var cuentasUser = [];
+      var todas = [];
+      var accounts = [];
+      var id = [];
+      var idTipo = [];
+      
+      for (var i = 0; i < response.data.length; i++){
+        if (response.data[i].idTipo_De_Cuenta === 2)
+        {
+          cuentasCliente.push(response.data[i].Usuario);
+        }
+        else if (response.data[i].idTipo_De_Cuenta === 1)
+        {
+          cuentasUser.push(response.data[i].Usuario);
+        }
+        todas.push(response.data[i].Usuario);
+        id.push(response.data[i].idCuenta);
+        idTipo.push(response.data[i].idTipo_De_Cuenta);
+
+        //console.log(todas[i]);
+        //console.log(id[i]); 
+        
       }
-      else if (response.data === true)
+
+      console.log(todas.length);
+      console.log(cuentasCliente.length);
+      console.log(cuentasUser.length);
+
+      for(var j = 0; j < 2;j++){
+
+        if (j === 0)
+        {
+          accounts.push(<h3> Cuentas de tipo Cliente: </h3>);
+          for(i = 0; i < todas.length; i++){
+            if (idTipo[i] === 2)
+             {
+              accounts.push(
+                <label>
+                  <input type="Radio" name="2" id={id[i]} value={todas[i]}
+                  onClick={(e) => {
+
+                    setBorrarCuentaCliente(e.target.value);
+                    
+                  }}/> {todas[i]}
+                  <br />
+                </label> 
+                );
+            }
+          }
+        }
+        else if (j === 1)
+        {
+          accounts.push(<h3> Cuentas de tipo Usuario: </h3>);
+          for(i = 0; i < todas.length; i++){
+            if (idTipo[i] === 1)
+              {
+              accounts.push(
+                <label>
+                  <input type="Radio" name="1" id={id[i]} value={todas[i]}
+                  onClick={(e) => {
+            
+                    setBorrarCuentaUsuario(e.target.value);
+                    
+                  }}/> {todas[i]}
+                  <br />
+                </label> 
+                );
+              }
+            }
+          } 
+        }
+      setCuentas(accounts);
+    });
+  };
+
+  const eliminarCliente = () => {
+    Axios.post("http://localhost:3001/eliminar_cuenta", {
+      cuenta: borrarCuentaCliente,
+  })
+    .then((response) => {
+      console.log(response.data);
+      if (response.data === true)
       {
-        console.log(response);
-        setRegResponse("Cliente registrado exitosamente");
+        setEraseResponse("La cuenta correspondiente al nombre de usuario " + borrarCuentaCliente + " ha sido elimanda exitosamente");
       }
-  });
-};
+      else {
+        setEraseResponse("La cuenta no ha sido eliminada");
+      }
+      
 
-    return (
-      <div className="CrearCliente">
-        <h2>Crear cuenta Cliente</h2>
+    }
+  )};
 
-        <label>Correo electrónico: </label> <br />
-        <input type = "text" name="username" required
-        onChange={(e) => {
-          setUsernameReg(e.target.value);
-        }}
-        /> <br/> <br/>
-
-        <label>Contraseña: </label> <br/>
-        <input type = "password" name="password" required
-        onChange={(e) => {
-          setPasswordReg(e.target.value);
-        }}
-        /> <br/> <br/> 
-        <div className="button">
-        <button onClick={registerClient}>Crear cuenta cliente</button>
-        <button onClick={()=> history.push("/menuAdmin")}>Regresar al menú de sesión</button>
-        </div>
-        {regResponse}
-        
+  const eliminarUsuario = () => {
+    Axios.post("http://localhost:3001/eliminar_cuenta", {
+      cuenta: borrarCuentaUsuario,
+  })
+    .then((response) => {
+      console.log(response.data);
+      if (response.data === true)
+      {
+        setEraseResponse("La cuenta correspondiente al nombre de usuario " + borrarCuentaUsuario + " ha sido elimanda exitosamente");
+      }
+      else {
+        setEraseResponse("La cuenta no ha sido eliminada");
+    }
+    });
+  };
 
 
-        {/* <div className="BorrarCliente">
-        <h2>Borrar cuenta Cliente</h2>
-
-        <label>Correo electrónico: </label> <br />
-        <input type = "text" name="username" required
-        onChange={(e) => {
-          setUsernameReg(e.target.value);
-        }}
-        /> <br/> <br/>
-
-        <label>Contraseña: </label> <br/>
-        <input type = "password" name="password" required
-        onChange={(e) => {
-          setPasswordReg(e.target.value);
-        }}
-        /> <br/> <br/> 
-        <div className="button">
-        <button onClick={registerClient}>Crear cuenta cliente</button>
-        <button onClick={()=> history.push("/menuAdmin")}>Regresar al menú de sesión</button>
-        {delResponse}
-        </div>
-         
-        </div>
-        */}
-
-
-
-
-        
-         <p className = "error">{errorStatus}</p>
-      </div>
-    );
+  if(!cuentas){
+    registroCuentas();
   }
- 
-export default RegistroCliente;
+
+  return(
+    <div className="cuentasAdmin">
+    <button onClick={()=> history.push("/menuAdmin")}>Regresar al menú de sesión</button>
+      <Popup trigger={<button> Crear cuenta cliente</button>}>
+          {CrearCliente()}
+      </Popup>
+      <br></br><br></br>
+          
+      <ul>
+        {cuentas}
+      </ul>
+      {borrarCuentaCliente}<br></br>
+      {borrarCuentaUsuario}<br></br>
+      {eraseResponse}
+
+      <button onClick={eliminarCliente}>Eliminar cuenta Cliente</button>
+      <button onClick={eliminarUsuario}>Eliminar cuenta Usuario</button>
+    </div>
+  );
+}
+
+export default CuentasAdmnin;

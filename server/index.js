@@ -244,6 +244,19 @@ app.post('/resultados', (req, res) => {
     console.log('');
 });
 
+app.post('/cuentas_admin', (req, res) => {
+
+    db.query(
+        "SELECT * FROM cuenta WHERE idTipo_De_Cuenta = 1 OR idTipo_De_Cuenta = 2",
+        (err, result) => {
+            if (err) {
+                res.send({err:err})
+            }
+            res.send(result);
+        }
+    );
+});
+
 app.post('/register_client', (req, res) => {   
     const username = req.body.username;
     const password = req.body.password;
@@ -269,6 +282,25 @@ app.post('/register_client', (req, res) => {
             }
         }
     );
+     
+});
+
+app.post('/eliminar_cuenta', (req, res) => {   
+    const cuenta = req.body.cuenta;
+    
+    if (cuenta == ''){
+        res.send(false);
+    } else {
+        db.query( 
+
+            "DELETE FROM cuenta WHERE Usuario = ?",
+            [cuenta],
+            (err, result) => {
+                console.log(err);
+            }
+        );
+        res.send(true);
+    }
      
 });
 

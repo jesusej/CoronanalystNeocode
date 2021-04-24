@@ -63,7 +63,7 @@ function MenuUsuario () {
 
   if ((dataRegistered === false) && (answersRegistered === false))
   {
-    return <Redirect to = "/datos_personales" />;
+    //return <Redirect to = "/datos_personales" />;
   }
   else if ((dataRegistered === true) && (answersRegistered === false))
   {
@@ -71,7 +71,8 @@ function MenuUsuario () {
   }
   else if ((dataRegistered === true) && (answersRegistered === true))
   {
-    console.log("El usuario tiene datos personales y respuestas registradas");
+    return <Redirect to = "/encuesta" />;//Borrar
+    //console.log("El usuario tiene datos personales y respuestas registradas");
   }
 
 
@@ -87,10 +88,8 @@ function MenuUsuario () {
             <div className="centeredContainer">
               <button onClick={checkPersonalData}> Encuesta</button>
               <button onClick={()=> history.push("/datos")}>Visualizar Datos</button>
-              <Popup trigger={<button> Trigger Cerrar sesión</button>} position="center">
-                <div>
+              <Popup trigger={<button> Trigger Cerrar sesión</button>}>
                   {CerrarSesion()}
-                </div>
               </Popup>
               <button onClick={()=> history.push("/login")}>Regresar a Log in</button>
              </div>
