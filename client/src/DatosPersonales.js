@@ -12,7 +12,6 @@ function DatosPersonales () {
 
     const {id} = useContext(idContext);
 
-
     //Datos Personales
     const [genero, setGenero] = useState("")
     const [edad, setEdad] = useState("")
@@ -37,16 +36,7 @@ function DatosPersonales () {
 
         console.log(genero);
         console.log(edad);
-        console.log(estadoCivil);
-        console.log(nivelEstudios);
-        console.log(ocupacion);
-        console.log(ingreso);
-        console.log(localidad);
-        console.log(id);
 
-        console.log(ip);
-        console.log(dispositivo);
-        console.log(so);
 
         Axios.post("http://localhost:3001/datos_personales", {
             genero, genero,

@@ -1,7 +1,7 @@
 import React, { useContext, useState} from "react";
 import Axios from "axios";
 import { Redirect } from "react-router-dom";
-import { idContext, LoginContext } from './Helper/Context';
+import { LoginContext, idContext } from './Helper/Context';
 
  
 function Login() {
@@ -30,6 +30,7 @@ function Login() {
       } else {
           setLoginStatus(response.data[0].Usuario);
           setTipoCuenta(response.data[0].idTipo_De_Cuenta);
+          setId(response.data[0].idCuenta);
           setLoggedIn(true);
           setId(response.data[0].idCuenta);
         }
