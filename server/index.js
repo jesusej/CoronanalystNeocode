@@ -209,16 +209,20 @@ app.post('/resultados', (req, res) => {
         console.log(answers[i]);
     }
 
-    /*db.query(
-        "INSERT INTO datos_personales (idCuenta, Genero, Edad, Estado_Civil, Nivel_estudios, Ocupacion,  Ingreso_Mensual, Localidad, IP, Dispositivo, SO) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-        [id, genero, edad, estadoCivil, nivelEstudios, ocupacion, ingreso, localidad, ip, dispositivo, so],
-        (err, result) => {
-            if (err) {
-                res.send({err:err});
+
+    if(!answers){
+        db.query(
+            "INSERT INTO respuestas(fkCuenta, fkPreguntas, fkOpciones, Respuesta) VALUES (?, ?, ?, ?)",
+            [edad, nivelEstudios, localidad, estadoCivil, nivelSocioeconomico, tipoComplexion, factoresRiesgo, frecuenciaEjercicio, ip, dispositivo, so, id],
+            (err, result) => {
+                if (err) {
+                    res.send({err:err});
+                }
+                res.send(result);
+
             }
-            res.send(result);
-        }
-    )*/
+        );
+    }
 });
 
 app.post('/register_client', (req, res) => {   

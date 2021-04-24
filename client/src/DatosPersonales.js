@@ -87,10 +87,13 @@ if (registroExitoso == true) {
     return <Redirect to = "/encuesta" />;
 } 
     return(
-        <div className="DatPer">
-            <h3> Pagina de Encuesta</h3>
-            <h4> Datos Personales</h4>
+        <div>
+            <h2> Pagina de Encuesta</h2>
+            
             {/* <p>Pagina donde se muestran los campos para llenar los datos personales </p> */}
+      
+            <div className ="centeredContainer">
+            <h1 className = "datosPersonales"> Datos Personales</h1>
 
             <label> Género </label> <br />
             <select type="text"  name="gender" required
@@ -238,6 +241,7 @@ if (registroExitoso == true) {
 
             
             <br /> <br />
+        </div>
 
             <h2>{regResponse}</h2>
             <h2>{registroExitoso}</h2>
@@ -255,13 +259,13 @@ if (registroExitoso == true) {
             {id} <br />
 
             { /* Insertar IP, sistema operativo y dispositivo */ }
-            <div className= "buttoncoso">
+
+            <div className= "centeredContainer">
+                
                 <button onClick={regDatPer}>Registrar Resultados</button>
-            </div>
-            <div className= "buttoncoso">
                 <button onClick={()=> history.push("/menu_Usuario")}>Regresar al menú de sesión</button>
             </div>
-            <br />
+            
           </div>
     );
 }
