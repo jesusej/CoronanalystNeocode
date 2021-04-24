@@ -5,11 +5,10 @@ const cors = require ("cors");
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const { response } = require("express");
 
 const app = express();
-app.use(express.json());
 
+app.use(express.json());
 // Especifica que métodos se usan, credenciales y el uso de cookies
 app.use(
     cors({
@@ -58,33 +57,19 @@ app.get('/register', (req, res) => {
     );
 });
 
-app.post('/register', (req, res) => {   
+app.post('/register', (req, res) => {
+
     const username = req.body.username;
     const password = req.body.password;
-    
+
     db.query(
-        "SELECT * FROM cuenta WHERE Usuario = ?",
-        [username],
+        "INSERT INTO cuenta (Usuario, Contraseña, idTipo_De_Cuenta) VALUES (?, ?, 1)",
+        [username, password],
         (err, result) => {
             console.log(err);
-
-            if ((result.length > 0) || (username == '') || (password == '')){
-                res.send(false);
-            } else {
-                db.query( 
-
-                    "INSERT INTO cuenta (Usuario, Contraseña, idTipo_De_Cuenta) VALUES (?, ?, 1)",
-                    [username, password],
-                    (err, result) => {
-                        console.log(err);
-                    }
-                );
-                res.send(true);
-            }
+            console.log(result);
         }
     );
-     
-    
 });
 
 // Método GET de login que manda los datos de un usuario registrado si es que existe y si su sesión sigue activa
@@ -110,7 +95,7 @@ app.post('/login', (req, res) => {
             }
             
             //console.log(result);
-            // Registra al usuario en una sesión para que pueda revisitarlo
+            // Envía los resultados como cookie
             if (result.length > 0) {
                 req.session.user = result;
                 console.log(req.session.user);
@@ -122,36 +107,69 @@ app.post('/login', (req, res) => {
     );
 });
 
+app.post('/checkPersonalData', (req, res) => {
+
+    const id = req.body.id;
+
+        db.query(
+            "SELECT * FROM datos_personales WHERE idCuenta = ?",
+            [id],
+            (err, result) => {
+                console.log(err);
+    
+                if ((result.length > 0) || (id == '')){
+                    //res.send({message:"Ya hay registros"});
+                    res.send(true);
+                }
+                else {
+                    res.send(false);
+                }
+            }
+
+    );
+});
+
 app.post('/datos_personales', (req, res) => {
 
+    const genero = req.body.genero;
     const edad = req.body.edad;
     const nivelEstudios = req.body.nivelEstudios;
-    const localidad = req.body.localidad;
     const estadoCivil = req.body.estadoCivil;
+    const ocupacion = req.body.ocupacion;
+    const ingreso = req.body.ingreso;
+    const localidad = req.body.localidad;
+
     const ip = req.body.ip;
     const dispositivo = req.body.dispositivo;
     const so= req.body.so;
-    const nivelSocioeconomico= req.body.nivelSocioeconomico;
-    const tipoComplexion= req.body.tipoComplexion;
-    const factoresRiesgo = req.body.factoresRiesgo;
-    const frecuenciaEjercicio = req.body.frecuenciaEjercicio;
     const id = req.body.id;
-
     
-    db.query(
-        "INSERT INTO datos_personales (Edad, Nivel_estudios, Localidad, Estado_Civil, Nivel_socioeconomico, Tipo_de_complexion, Factores_de_riesgo, Frecuencia_de_ejercicio, IP, Dispositivo, SO, idCuenta) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-        [edad, nivelEstudios, localidad, estadoCivil, nivelSocioeconomico, tipoComplexion, factoresRiesgo, frecuenciaEjercicio, ip, dispositivo, so, id],
-        (err, result) => {
-            console.log(err);
-            if (err !== null)
-            {
+
+            // Revisión de si hay datos registrados
+            if ((edad == '') || (nivelEstudios == '') || (localidad == '') ||  (estadoCivil == '') ||
+             (ingreso == '') || (genero == '') || (ocupacion == '') || (id == ''))
+             {
+                res.send(false);
+            } else {
+
+                db.query(
+                    "INSERT INTO datos_personales (idCuenta, Genero, Edad, Estado_Civil, Nivel_estudios, Ocupacion,  Ingreso_Mensual, Localidad, IP, Dispositivo, SO) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                    [id, genero, edad, estadoCivil, nivelEstudios, ocupacion, ingreso, localidad, ip, dispositivo, so],
+                    (err, result) => {
+                        console.log(err);
+                        // if (err !== null)
+                        // {
+                        //     res.send(true);
+                        // }
+                        // else{
+                        //     res.send(false);
+                        // }
+                    }
+                );
                 res.send(true);
             }
-            else{
-                res.send(false);
-            }
-        }
-    );
+        // }
+    // );
 });
 
 app.post('/encuesta', (req, res) => {
@@ -163,60 +181,41 @@ app.post('/encuesta', (req, res) => {
                 res.send({err:err})
             }
             res.send(result);
+
         }
     );
 });
 
 app.post('/resultados', (req, res) => {
 
-    //console.log(req.body);
-    
+    const id = req.body.id;
+    const options = req.body.options;
     const answers = req.body.answers;
 
-    for (var i = 0; i < answers.length; i++){
-        console.log(answers[i]);
-    }
 
-    if(!answers){
+    
+    for(var i = 0; i < options.length; i++){
+
         db.query(
             "INSERT INTO respuestas(fkCuenta, fkPreguntas, fkOpciones, Respuesta) VALUES (?, ?, ?, ?)",
-            [edad, nivelEstudios, localidad, estadoCivil, nivelSocioeconomico, tipoComplexion, factoresRiesgo, frecuenciaEjercicio, ip, dispositivo, so, id],
+            [id, i+1, options[i], answers[i]],
             (err, result) => {
+
                 if (err) {
                     res.send({err:err});
                 }
                 res.send(result);
+
+
             }
         );
     }
-});
 
-app.post('/register_client', (req, res) => {   
-    const username = req.body.username;
-    const password = req.body.password;
-    
-    db.query(
-        "SELECT * FROM cuenta WHERE Usuario = ?",
-        [username],
-        (err, result) => {
-            console.log(err);
-
-            if ((result.length > 0) || (username == '') || (password == '')){
-                res.send(false);
-            } else {
-                db.query( 
-
-                    "INSERT INTO cuenta (Usuario, Contraseña, idTipo_De_Cuenta) VALUES (?, ?, 2)",
-                    [username, password],
-                    (err, result) => {
-                        console.log(err);
-                    }
-                );
-                res.send(true);
-            }
-        }
-    );
-     
+    console.log("Opciones:");
+    console.log(options);
+    console.log("Respuestas:");
+    console.log(answers);
+    console.log('');
 });
 
 app.listen(3001, () => {
