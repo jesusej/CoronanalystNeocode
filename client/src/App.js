@@ -43,7 +43,7 @@ function App() {
 
             <h1>CORONANALYST</h1>
             
-            {loginStatus + " " + id}
+            <h3>{loginStatus + " " + id}</h3>
 
             
           
