@@ -1,7 +1,6 @@
-// Código mal hecho, se necesita mejorar. Intentar implementar clases y hacer un array de esos
-import React, { useState, useContext, Component } from "react";
+import React, { useState, useContext } from "react";
 import Axios from "axios";
-import {useHistory} from "react-router-dom";
+import {Redirect, useHistory} from "react-router-dom";
 
 import { idContext } from "./Helper/Context";
 
@@ -9,14 +8,13 @@ function Encuesta () {
 
 const history = useHistory();
 
-//Función prueba
 const [preguntas, setPreguntas] = useState("");
 const [respuestasPublic, setRespuestasPublic] = useState("");
+const [registroExitoso, setRegistroExitoso] = useState("");
 
 const {id} = useContext(idContext);
 
 var respuestas = [/*Guarda una clase respuesta*/];
-var options = [];
 var isChecked = []
 
 class Answer {
@@ -42,7 +40,6 @@ function itExists(id) {
 function isFromTheSame(id) {
   for (var i = 0; i < respuestas.length; i++){
     if (respuestas[i].sameQuestion(id)){
-      console.log("Found in: " + i);
       return i;
     }
   }
@@ -138,18 +135,23 @@ const encuesta = () => {
   const sendAnswers = () => {
     console.log(respuestasPublic);
 
-    /*Axios.post("http://localhost:3001/resultados", {
+    Axios.post("http://localhost:3001/resultados", {
       id: id,
       answers: respuestasPublic,
     }).then((response) => {
       console.log(response);
-    });*/
+      setRegistroExitoso(true);
+    });
   };
 
   if(!preguntas){
     encuesta();
   }
+  
 
+  if(registroExitoso == true){
+    return <Redirect to ="/menu_usuario" />
+  }
     return(
         <div className="Encuesta">
             <h2>Pagina de Encuesta</h2>

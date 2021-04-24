@@ -192,26 +192,23 @@ app.post('/resultados', (req, res) => {
     const answers = req.body.answers;
 
     
-    /*for(var i = 0; i < options.length; i++){
+    for(var i = 0; i < answers.length; i++){
 
         db.query(
             "INSERT INTO respuestas(fkCuenta, fkPreguntas, fkOpciones, Respuesta) VALUES (?, ?, ?, ?)",
-            [id, i+1, options[i], answers[i]],
+            [id, answers[i].idPreg, answers[i].idOpcion, answers[i].value],
             (err, result) => {
-
-                if (err) {
-                    res.send({err:err});
-                }
+                
                 res.send(result);
 
 
             }
         );
-    }*/
+    }
 
-    console.log("Respuestas:");
+    /*console.log("Respuestas:");
     console.log(answers);
-    console.log('');
+    console.log('');*/
 });
 
 app.listen(3001, () => {
