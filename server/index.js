@@ -146,6 +146,30 @@ app.post('/datos_personales', (req, res) => {
     );
 });
 
+app.post('/resultados', (req, res) => {
+
+    const id = req.body.id;
+    const options = req.body.options;
+    const answers = req.body.answers;
+
+    
+    for(var i = 0; i < options.length; i++){
+        db.query(
+            "INSERT INTO respuestas(fkCuenta, fkPreguntas, fkOpciones, Respuesta) VALUES (?, ?, ?, ?)",
+            [id, i+1, options[i], answers[i]],
+            (err, result) => {
+                console.log(err);
+            }
+        );
+    }
+
+    console.log("Opciones:");
+    console.log(options);
+    console.log("Respuestas:");
+    console.log(answers);
+    console.log('');
+});
+
 app.listen(3001, () => {
     db.connect(function(err){
         if (err) throw err;
