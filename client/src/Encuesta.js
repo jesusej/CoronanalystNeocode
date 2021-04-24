@@ -16,7 +16,7 @@ const [optionsPublic, setOptionsPublic] = useState("");
 
 const {id} = useContext(idContext);
 
-var respuestas = [];
+var respuestas = [/*Guarda una clase respuesta*/];
 var options = [];
 
 const encuesta = () => {
@@ -27,22 +27,25 @@ const encuesta = () => {
       //Sección 3 - Muestra todo ordenado
       var idPregPar = 0;
       var todo = [""];
+      var id = [""];
       var type = [""];
       var inciso = 'a';
       const questions = [];
       
       todo[0] = (response.data[0].idPreguntas + ". " + response.data[0].Pregunta);
-      type[0] = (response.data[0].idPreguntas);
+      id[0] = (response.data[0].idPreguntas);
+      type[0] = (response.data[0].Tipo);
       idPregPar = response.data[0].idPreguntas + 1;
 
       for (var i = 0; i < response.data.length; i++){
         if (idPregPar != response.data[i].idPreguntas){
           todo.push(inciso +  ") " + response.data[i].Opcion);
-          type.push(response.data[i].idOpciones);
+          id.push(response.data[i].idOpciones);
           inciso = String.fromCharCode(inciso.charCodeAt(0) + 1);
         } else if (idPregPar == response.data[i].idPreguntas){
           todo.push(response.data[i].idPreguntas + ". " + response.data[i].Pregunta);
-          type.push(idPregPar);
+          id.push(idPregPar);
+          type.push(response.data[i].Tipo);
           idPregPar += 1;
           inciso = 'a';
           i--;
@@ -50,15 +53,15 @@ const encuesta = () => {
       }
       
       for(i = 0; i < todo.length; i++){
-        if (type[i] < 100){
+        if (id[i] < 100){
           questions.push(<h3> {todo[i]} </h3>);
-          idPregPar = type[i];
+          idPregPar = id[i];
           respuestas.push('0');
           options.push('0');
         } else {
           questions.push(
           <label>
-            <input type="radio" name={idPregPar} id={type[i]} value={todo[i]}
+            <input type={type[idPregPar-1]} name={idPregPar} id={id[i]} value={todo[i]}
             onClick={(e) => {
               const index = e.target.name - 1;
 
