@@ -12,7 +12,7 @@ function MenuAdmin () {
           <h2>Menú de Admin</h2>
           <button onClick={()=> history.push("/cuentas_admin")}>Administrar Cuentas</button>
           <button onClick={()=> history.push("/")}>Visualizar Datos</button>
-          <button onClick={()=> history.push("/")}>Visualizar Datos Vista de Usuario</button>
+          <button onClick={()=> history.push("/datos")}>Visualizar Datos Vista de Usuario</button>
           <button onClick={()=> history.push("/cerrar_sesion")}>Cerrar Sesión</button>
           <button onClick={()=> history.push("/login")}>Regresar a Log in</button>
         </div>

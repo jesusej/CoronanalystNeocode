@@ -35,7 +35,7 @@ const registerClient = () => {
     return (
       <div className="CrearCliente">
         <div className="buttons">
-        <button onClick={()=> history.push("/menuAdmin")}>Regresar al menú de sesión</button>
+        <button onClick={()=> history.push("/menu_admin")}>Regresar al menú de sesión</button>
         <button onClick={registerClient}>Crear cuenta cliente</button>
         </div>
         {regResponse}

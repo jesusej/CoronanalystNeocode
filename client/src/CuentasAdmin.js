@@ -1,3 +1,150 @@
+// import Axios from "axios";
+// import {useHistory} from "react-router-dom";
+// import React, { useState } from "react";
+// import Popup from "reactjs-popup";
+// import './PopUp.css';
+// import CrearCliente from "./CrearCliente";
+
+// function CuentasAdmnin() {
+
+//   const history = useHistory();
+//   const [cuentas, setCuentas] = useState("");
+//   const [borrarCuenta, setBorrarCuenta] = useState("");
+//   const [eraseResponse, setEraseResponse] = useState("");
+
+//   const registroCuentas = () => {
+
+//     Axios.post("http://localhost:3001/cuentas_admin", {
+//   })
+//     .then((response) => {
+
+//       console.log(response.data);
+//       var cuentasCliente = [];
+//       var cuentasUser = [];
+//       var todas = [];
+//       var accounts = [];
+//       var id = [];
+//       var idTipo = [];
+      
+//       for (var i = 0; i < response.data.length; i++){
+//         if (response.data[i].idTipo_De_Cuenta === 2)
+//         {
+//           cuentasCliente.push(response.data[i].Usuario);
+//         }
+//         else if (response.data[i].idTipo_De_Cuenta === 1)
+//         {
+//           cuentasUser.push(response.data[i].Usuario);
+//         }
+//         todas.push(response.data[i].Usuario);
+//         id.push(response.data[i].idCuenta);
+//         idTipo.push(response.data[i].idTipo_De_Cuenta);
+
+//         //console.log(todas[i]);
+//         //console.log(id[i]); 
+        
+//       }
+
+//       console.log(todas.length);
+//       console.log(cuentasCliente.length);
+//       console.log(cuentasUser.length);
+
+//       for(var j = 0; j < 2;j++){
+
+//         if (j === 0)
+//         {
+//           accounts.push(<h3> Cuentas de tipo Cliente: </h3>);
+//           for(i = 0; i < todas.length; i++){
+//             if (idTipo[i] === 2)
+//              {
+//               accounts.push(
+//                 <label>
+//                   <button name="2" id={id[i]} value={todas[i]}
+//                   onClick={(e) => {
+            
+//                     setBorrarCuenta(e.currentTarget.value);
+//                     console.log(borrarCuenta);
+//                     eliminarCuenta();
+                    
+//                   }}> X
+//                   </button> {todas[i]}
+//                   <br />
+//                 </label> 
+//                 );
+//             }
+//           }
+//         }
+//         else if (j === 1)
+//         {
+//           accounts.push(<h3> Cuentas de tipo Usuario: </h3>);
+//           for(i = 0; i < todas.length; i++){
+//             if (idTipo[i] === 1)
+//               {
+//               accounts.push(
+//                 <label>
+//                   <button name="1" id={id[i]} value={todas[i]}
+//                   onClick={(e) => {
+            
+//                     setBorrarCuenta(e.target.value);
+//                     eliminarCuenta();
+                    
+//                   }}> X
+//                   </button> {todas[i]}
+//                   <br />
+//                 </label> 
+//                 );
+//               }
+//             }
+//           } 
+//         }
+//       setCuentas(accounts);
+//     });
+//   };
+
+//   const eliminarCuenta = () => {
+//     Axios.post("http://localhost:3001/eliminar_cuenta", {
+//       cuenta: borrarCuenta,
+//   })
+//     .then((response) => {
+//       console.log(response.data);
+//       if (response.data === true)
+//       {
+//         setEraseResponse("La cuenta correspondiente al nombre de usuario " + borrarCuenta + " ha sido elimanda exitosamente");
+//       }
+//       else {
+//         setEraseResponse("La cuenta no ha sido eliminada");
+//       }
+      
+
+//     }
+//   )};
+
+
+
+
+//   if(!cuentas){
+//     registroCuentas();
+//   }
+
+//   return(
+//     <div className="cuentasAdmin">
+//     <button onClick={()=> history.push("/menuAdmin")}>Regresar al menú de sesión</button>
+//       <Popup trigger={<button> Crear cuenta cliente</button>}>
+//           {CrearCliente()}
+//       </Popup>
+//       <br></br><br></br>
+          
+//       <ul>
+//         {cuentas}
+//       </ul>
+
+//       {eraseResponse}
+
+
+//     </div>
+//   );
+// }
+
+// export default CuentasAdmnin;
 import Axios from "axios";
 import {useHistory} from "react-router-dom";
 import React, { useState } from "react";
@@ -137,7 +284,7 @@ function CuentasAdmnin() {
 
   return(
     <div className="cuentasAdmin">
-    <button onClick={()=> history.push("/menuAdmin")}>Regresar al menú de sesión</button>
+    <button onClick={()=> history.push("/menu_admin")}>Regresar al menú de sesión</button>
       <Popup trigger={<button> Crear cuenta cliente</button>}>
           {CrearCliente()}
       </Popup>
