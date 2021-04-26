@@ -205,11 +205,15 @@ app.post('/resultados', (req, res) => {
             }
         );
     }
-
-    /*console.log("Respuestas:");
-    console.log(answers);
-    console.log('');*/
 });
+
+// Método GET de logoff que manda los datos de un usuario registrado si es que existe y si su sesión sigue activa
+app.get("/logoff", (req, res)=> {
+    console.log(req.session.user);
+    delete req.session.user;
+    console.log(req.session.user);
+    res.send({message: "ok"});
+})
 
 app.listen(3001, () => {
     db.connect(function(err){
