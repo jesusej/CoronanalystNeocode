@@ -4,6 +4,7 @@ import {Redirect, useHistory} from "react-router-dom";
 
 import { idContext } from "./Helper/Context";
 
+
 function Encuesta () {
 
 const history = useHistory();
@@ -11,11 +12,13 @@ const history = useHistory();
 const [preguntas, setPreguntas] = useState("");
 const [respuestasPublic, setRespuestasPublic] = useState("");
 const [registroExitoso, setRegistroExitoso] = useState("");
+const [isCheckedPublic, setIsCheckedPublic] = useState("");
 
 const {id} = useContext(idContext);
 
 var respuestas = [/*Guarda una clase respuesta*/];
-var isChecked = []
+var isChecked = [];
+
 
 class Answer {
   constructor(idOpcion, value, idPreg){
@@ -46,7 +49,9 @@ function isFromTheSame(id) {
   return -1;
 }
 
+
 const encuesta = () => {
+  
   Axios.post("http://localhost:3001/encuesta", {
   })
     .then((response) => {
@@ -120,6 +125,7 @@ const encuesta = () => {
               }
 
               setRespuestasPublic(respuestas);
+              setIsCheckedPublic(isChecked);
 
             }}/> {todo[i]}
             <br />
@@ -127,21 +133,64 @@ const encuesta = () => {
           );
         }
       }
-      
+
       setPreguntas(questions);
     });
   };
 
-  const sendAnswers = () => {
-    console.log(respuestasPublic);
 
-    Axios.post("http://localhost:3001/resultados", {
-      id: id,
-      answers: respuestasPublic,
-    }).then((response) => {
-      console.log(response);
-      setRegistroExitoso(true);
-    });
+  
+  const sendAnswers = () => {
+    console.log("respuestasPublic");
+    console.log(respuestasPublic);
+    console.log("isCheckedPublic");
+    console.log(isCheckedPublic);
+    
+    var callDatabase = true;
+
+    if (respuestasPublic){
+
+      for (var i = 0; i < isCheckedPublic.length; i++)
+      {
+        if (isCheckedPublic[i] == false)
+        {
+          callDatabase = false;
+        }
+      }
+
+
+      if (callDatabase == true)
+      {
+        Axios.post("http://localhost:3001/resultados", {
+          id: id,
+          answers: respuestasPublic,
+        }).then((response) => {
+
+          console.log("response de axios");
+          console.log(response);
+
+          if (response.data == true)
+          {
+            setRegistroExitoso(true);
+          }
+          else if (response.data == false)
+          {
+            setRegistroExitoso(false);
+            alert("Por favor inicie sesión");
+          }
+          
+        });
+      }
+      else if (callDatabase == false)
+      {
+        alert("Por favor responda a todas las preguntas antes de terminar la encuesta")
+      }
+    }
+      else 
+      {
+        alert("Por favor responda a todas las preguntas antes de terminar la encuesta");
+      }
+    
   };
 
   if(!preguntas){

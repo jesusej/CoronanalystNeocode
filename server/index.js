@@ -77,6 +77,7 @@ app.post('/register', (req, res) => {
                     [username, password],
                     (err, result) => {
                         console.log(err);
+                        console.log(result);
                     }
                 );
                 res.send(true);
@@ -223,25 +224,30 @@ app.post('/encuesta', (req, res) => {
 app.post('/resultados', (req, res) => {
 
     const id = req.body.id;
-    const options = req.body.options;
     const answers = req.body.answers;
 
-    
-    for(var i = 0; i < options.length; i++){
-        db.query(
-            "INSERT INTO respuestas(fkCuenta, fkPreguntas, fkOpciones, Respuesta) VALUES (?, ?, ?, ?)",
-            [id, i+1, options[i], answers[i]],
-            (err, result) => {
-                console.log(err);
-            }
-        );
+    // Revisión de si hay cuenta activa
+    if (id == '')
+    {
+        res.send(false);
+    }
+    else 
+    {
+        for(var i = 0; i < answers.length; i++){
+            db.query(
+                "INSERT INTO respuestas(fkCuenta, fkPreguntas, fkOpciones, Respuesta) VALUES (?, ?, ?, ?)",
+                [id, answers[i].idPreg, answers[i].idOpcion, answers[i].value],
+                (err, result) => {
+                    console.log(err);
+                }
+            );
+            res.send(true);
+        }
     }
 
-    console.log("Opciones:");
-    console.log(options);
-    console.log("Respuestas:");
-    console.log(answers);
-    console.log('');
+    //console.log("Respuestas:");
+    //console.log(answers);
+    //console.log('');
 });
 
 app.post('/cuentas_admin', (req, res) => {
