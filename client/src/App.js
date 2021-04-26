@@ -51,29 +51,27 @@ function App() {
             
             <h3>{loginStatus + " " + id}</h3>
 
-
-          
-                      <LoginContext.Provider value={{ loginStatus, setLoginStatus }} >
+            <LoginContext.Provider value={{ loginStatus, setLoginStatus }} >
             
-            <div className="conexiones">
+              <div className="conexiones">
                 <Route exact path="/" component={Home}/>
                 <Route path="/registro" component={Registro}/>
-                
+                  
 
                 <idContext.Provider value = {{id, setId}} >
-                <Route path="/login" component={Login}/>
+                  <Route path="/login" component={Login}/>
 
-                <Route path="/menu_usuario" component={MenuUsuario}/>
-                <Route path="/menuCliente" component={MenuCliente}/>
-                <Route path="/menuAdmin" component={MenuAdmin}/>
-                
-                <Route path="/datos_personales" component={DatosPersonales}/> 
-                <Route path="/encuesta" component={Encuesta}/>
+                  <Route path="/menu_usuario" component={MenuUsuario}/>
+                  <Route path="/menuCliente" component={MenuCliente}/>
+                  <Route path="/menuAdmin" component={MenuAdmin}/>
+                  
+                  <Route path="/datos_personales" component={DatosPersonales}/> 
+                  <Route path="/encuesta" component={Encuesta}/>
                 </ idContext.Provider>
 
                 <Route path="/datos" component={Datos}/>
                 <Route path="/cuentas_admin" component={CuentasAdmin}/> 
-            </div>
+              </div>
             </ LoginContext.Provider>
 
           </div>
