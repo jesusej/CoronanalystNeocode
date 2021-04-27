@@ -28,7 +28,7 @@ function MenuUsuario () {
 
     if(response.data === false) {
       setAnswersRegistered(false);
-      console.log("El usuario no respuestas registradas");
+      console.log("El usuario no tiene respuestas registradas");
 
     } else if (response.data === true) {
         setAnswersRegistered(true);
@@ -51,6 +51,7 @@ function MenuUsuario () {
       if(response.data === false) {
         setDataRegistered(false);
         console.log("El usuario no tiene datos personales registrados");
+        setAnswersRegistered(false);
 
       } else if (response.data === true) {
           setDataRegistered(true);
@@ -63,7 +64,7 @@ function MenuUsuario () {
 
   if ((dataRegistered === false) && (answersRegistered === false))
   {
-    //return <Redirect to = "/datos_personales" />;
+    return <Redirect to = "/datos_personales" />;
   }
   else if ((dataRegistered === true) && (answersRegistered === false))
   {

@@ -164,6 +164,7 @@ const encuesta = () => {
         Axios.post("http://localhost:3001/resultados", {
           id: id,
           answers: respuestasPublic,
+
         }).then((response) => {
 
           console.log("response de axios");

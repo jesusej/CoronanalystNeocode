@@ -238,11 +238,11 @@ app.post('/resultados', (req, res) => {
                 "INSERT INTO respuestas(fkCuenta, fkPreguntas, fkOpciones, Respuesta) VALUES (?, ?, ?, ?)",
                 [id, answers[i].idPreg, answers[i].idOpcion, answers[i].value],
                 (err, result) => {
-                    console.log(err);
+                    //console.log(err);
                 }
             );
-            res.send(true);
         }
+        res.send(true);
     }
 
     //console.log("Respuestas:");

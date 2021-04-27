@@ -32,11 +32,27 @@ const registerClient = () => {
   });
 };
 
+
+function validarEmail() {
+  var valor = usernameReg;
+  var emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+  console.log(valor);
+  if (emailRegex.test(valor)){
+   //alert("La dirección de email " + valor + " es correcta.");
+   console.log("La dirección de email " + valor + " es correcta.");
+   registerClient();
+  } else {
+   //alert("La dirección de email es incorrecta.");
+   console.log("La dirección de email " + valor + " es incorrecta.");
+   setRegResponse("Por favor ingrese una dirección de correo electrónico válida");
+  }
+}
+
     return (
       <div className="CrearCliente">
         <div className="buttons">
         <button onClick={()=> history.push("/menu_admin")}>Regresar al menú de sesión</button>
-        <button onClick={registerClient}>Crear cuenta cliente</button>
+        <button onClick={validarEmail}>Crear cuenta cliente</button>
         </div>
         {regResponse}
 
