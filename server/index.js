@@ -11,6 +11,7 @@ const session = require('express-session');
 
 const app = express();
 
+
 app.use(express.json());
 // Especifica que métodos se usan, credenciales y el uso de cookies
 app.use(
@@ -106,12 +107,14 @@ app.post('/login', (req, res) => {
                 res.send({err:err})
             }
             
-            //console.log(result);
             // Envía los resultados como cookie
             if (result.length > 0) {
                 bcrypt.compare(password, result[0].Contraseña, (error, response) => {
-                    console.log(response);
-                    if (response) {
+                    if (error) {
+                        res.send(error);
+                    }
+                    else if (response) {
+                        delete result[0].Contraseña;
                         req.session.user = result;
                         console.log(req.session.user);
                         res.send(result);
@@ -228,9 +231,7 @@ app.post('/resultados', (req, res) => {
 
 // Método GET de logoff que manda los datos de un usuario registrado si es que existe y si su sesión sigue activa
 app.get("/logoff", (req, res)=> {
-    console.log(req.session.user);
     delete req.session.user;
-    console.log(req.session.user);
     res.send({message: "ok"});
 })
 
