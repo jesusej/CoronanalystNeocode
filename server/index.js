@@ -11,7 +11,6 @@ const session = require('express-session');
 
 const app = express();
 
-
 app.use(express.json());
 // Especifica que métodos se usan, credenciales y el uso de cookies
 app.use(
@@ -36,9 +35,9 @@ app.use(session({
 }));
 
 const db = mysql.createConnection({
-    user: "root",
-    host: "localhost",
-    password: "",
+    user: "coronanalyst",
+    host: "den1.mysql4.gear.host",
+    password: "	redGl0bal!",
     database: "coronanalyst",
 });
 
