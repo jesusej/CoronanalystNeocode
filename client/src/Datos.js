@@ -1,4 +1,4 @@
-import React, {useState } from "react";
+import React, {useState, useEffect } from "react";
 import {useHistory} from "react-router-dom";
 import Axios from "axios";
 import { Chart } from "react-google-charts";
@@ -108,7 +108,7 @@ function Datos () {
             ]}
             options={{
 //            colors: ['', ''], //cambia color, pero no se me ocurre a que color ponerlo ahorita
-            title: response.data[80].Pregunta,
+            title: response.data[79].Pregunta,
             chartArea: { width: '50%' },
             hAxis: {
                 title: 'Opciones',
@@ -183,14 +183,15 @@ function Datos () {
 
             setGrafica1Public(graph1);
             setGrafica2Public(graph2);
-             setGrafica3Public(graph3);
-             setGrafica4Public(graph4);
-             setGrafica5Public(graph5);
+            setGrafica3Public(graph3);
+            setGrafica4Public(graph4);
+            setGrafica5Public(graph5);
         });
       };
-
-    datos()
-    return(
+      useEffect(() => {
+        datos()
+      }, []);
+      return(
         <div className="Datos">
             <h3> Pagina de Datos</h3>
             <p>Pagina donde se muestran los datos </p>
