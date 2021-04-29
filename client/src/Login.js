@@ -4,7 +4,9 @@ import { Redirect } from "react-router-dom";
 import { LoginContext, idContext } from './Helper/Context';
 import {useHistory} from "react-router-dom";
 
- 
+
+import { idContext, LoginContext, idTipoCuentaContext } from './Helper/Context';
+
 function Login() {
 
   const history = useHistory();
@@ -15,6 +17,7 @@ function Login() {
 
   const {loginStatus, setLoginStatus} = useContext(LoginContext); //Manera incorrecta, cambiar este context al loggedIn
   const { setId } = useContext(idContext);
+  const {setIdTipoCuenta} = useContext(idTipoCuentaContext);
 
   const [tipoCuenta, setTipoCuenta] = useState("");
   const [loggedIn, setLoggedIn] = useState("");
@@ -33,7 +36,10 @@ function Login() {
       } else {
           setLoginStatus(response.data[0].Usuario);
           setTipoCuenta(response.data[0].idTipo_De_Cuenta);
-          setId(response.data[0].idCuenta);
+
+          setIdTipoCuenta(response.data[0].idTipo_De_Cuenta);
+          console.log(idTipoCuentaContext);
+
           setLoggedIn(true);
           setId(response.data[0].idCuenta);
         }
@@ -43,10 +49,10 @@ function Login() {
   // Checa si el loggedIn es verdadero para redireccionarlo al menu de Usuario (cambiar lógica para verificar tipo de cuenta)  
   if(loggedIn){
     if (tipoCuenta == 3){
-      return <Redirect to = "/menuAdmin" />;
+      return <Redirect to = "/menu_admin" />;
     }
     else if (tipoCuenta == 2){
-      return <Redirect to = "/menuCliente" />;
+      return <Redirect to = "/menu_cliente" />;
     }
     else {
       return <Redirect to = "/menu_usuario" />;
