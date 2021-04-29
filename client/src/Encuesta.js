@@ -221,8 +221,9 @@ const encuesta = () => {
               {preguntas}
             </ul>
 
-            <button onClick={sendAnswers}>Terminar Encuesta</button>
-            
+            <div className="centeredContainer">
+              <button onClick={sendAnswers}>Terminar Encuesta</button>
+            </div>
             <br /><br />
           </div>
     );

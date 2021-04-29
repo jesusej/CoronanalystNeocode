@@ -240,8 +240,8 @@ if (registroExitoso == true) {
 
             <div className= "selectReg">
                 
-                <button onClick={regDatPer}>Registrar Resultados</button>
                 <button onClick={()=> history.push("/menu_usuario")}>Regresar al menú</button>
+                <button onClick={regDatPer}>Registrar Resultados</button>
             </div>
             
           </div>

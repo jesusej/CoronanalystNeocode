@@ -247,7 +247,7 @@ function Datos () {
             <h3>{"id cuenta " + idTipoCuenta}</h3>
 
             <div className="centeredContainer">
-            <button onClick={()=> history.push("/menu_Usuario")}>Regresar al menú principal</button>
+                <button onClick={()=> history.push("/menu_Usuario")}>Regresar al menú principal</button>
             </div>
             <br></br><br></br><br></br>
             {/* <button onClick={checkIdTipoCuenta}> Regresar al menú de cuenta</button> */}
