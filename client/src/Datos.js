@@ -61,8 +61,6 @@ function Datos () {
 
         //grafica 1 de pregunta 1 y 6
         graph1 = <Chart
-            width={400}
-            height={300}
             chartType="ColumnChart"
             loader={<div>Loading Chart</div>}
             data={[
@@ -77,7 +75,9 @@ function Datos () {
             backgroundColor: "#f5f5f5",
 //            colors: ['', ''], //cambia color, pero no se me ocurre a que color ponerlo ahorita
             title: response.data[40].Pregunta,
-            chartArea: { width: '40%' },
+            width: 600,
+            height: 500,
+            chartArea: { width: '43%' },
             hAxis: {
                 title: 'Opciones',
                 minValue: 0,
@@ -89,8 +89,6 @@ function Datos () {
 
             //grafica 2 de pregunta 4 y 9
             graph2 = <Chart
-            width={500}
-            height={300}
             chartType="ColumnChart"
             loader={<div>Loading Chart</div>}
             data={[
@@ -116,7 +114,9 @@ function Datos () {
             backgroundColor: "#f5f5f5",
 //            colors: ['', ''], //cambia color, pero no se me ocurre a que color ponerlo ahorita
             title: response.data[22].Pregunta,
-            chartArea: { width: '40%' },
+            width: 1100,
+            height: 500,
+            // chartArea: { width: '43%' },
             hAxis: {
                 title: 'Opciones',
                 minValue: 0,
@@ -124,12 +124,11 @@ function Datos () {
             vAxis: {
                 title: 'Número de Respuestas',
             },
+            legend: "none",
             }}/>
 
             //grafica 3 de pregunta 11
             graph3 = <Chart
-            width={400}
-            height={300}
             chartType="PieChart"
             loader={<div>Loading Chart</div>}
             data={[
@@ -145,8 +144,9 @@ function Datos () {
             backgroundColor: "#f5f5f5",
 //            colors: ['', ''], //cambia color, pero no se me ocurre a que color ponerlo ahorita
             title: response.data[79].Pregunta,
-            // chartArea: { width: '50%' },
-            hAxis: {
+            width: 600,
+            height: 500,
+           hAxis: {
                 title: 'Opciones',
                 minValue: 0,
             },
@@ -157,26 +157,25 @@ function Datos () {
 
             //grafica 4 de pregunta 2 y 7
             graph4 = <Chart
-            width={400}
-            height={300}
             chartType="ColumnChart"
             loader={<div>Loading Chart</div>}
             data={[
             ['Respuesta', 'Antes de Pandemia', 'Despues de Pandemia'],
-            [response.data[6].Opcion, response.data[6].total, response.data[42].total],
-            [response.data[7].Opcion, response.data[7].total, response.data[43].total],
-            [response.data[8].Opcion, response.data[8].total, response.data[44].total],
-            [response.data[9].Opcion, response.data[9].total, response.data[45].total],
-            [response.data[10].Opcion, response.data[10].total, response.data[46].total],
-            [response.data[11].Opcion, response.data[11].total, response.data[47].total],
-            [response.data[12].Opcion, response.data[12].total, response.data[48].total],
-            [response.data[13].Opcion, response.data[13].total, response.data[49].total]
+            [response.data[5].Opcion, response.data[5].total, response.data[43].total],
+            [response.data[6].Opcion, response.data[6].total, response.data[44].total],
+            [response.data[7].Opcion, response.data[7].total, response.data[45].total],
+            [response.data[8].Opcion, response.data[8].total, response.data[46].total],
+            [response.data[9].Opcion, response.data[9].total, response.data[47].total],
+            [response.data[10].Opcion, response.data[10].total, response.data[48].total],
+            [response.data[11].Opcion, response.data[11].total, response.data[49].total],
+            [response.data[12].Opcion, response.data[12].total, response.data[50].total]
             ]}
             options={{
             backgroundColor: "#f5f5f5",
 //            colors: ['', ''], //cambia color, pero no se me ocurre a que color ponerlo ahorita
             title: response.data[6].Pregunta,
-            chartArea: { width: '40%' },
+            width: 600,
+            height: 500,
             hAxis: {
                 title: 'Opciones',
                 minValue: 0,
@@ -184,31 +183,31 @@ function Datos () {
             vAxis: {
                 title: 'Número de Respuestas',
             },
+            legend: "none",
             }}/>
 
             //grafica 5 de pregunta 3 y 8
             graph5 = <Chart
-            width={400}
-            height={300}
             chartType="ColumnChart"
             loader={<div>Loading Chart</div>}
             data={[
             ['Respuesta', 'Antes de Pandemia', 'Despues de Pandemia'],
-            [response.data[14].Opcion, response.data[14].total, response.data[50].total],
-            [response.data[15].Opcion, response.data[15].total, response.data[51].total],
-            [response.data[16].Opcion, response.data[16].total, response.data[52].total],
-            [response.data[17].Opcion, response.data[17].total, response.data[53].total],
-            [response.data[18].Opcion, response.data[18].total, response.data[54].total],
-            [response.data[19].Opcion, response.data[19].total, response.data[55].total],
-            [response.data[20].Opcion, response.data[20].total, response.data[56].total],
-            [response.data[21].Opcion, response.data[21].total, response.data[57].total],
-            [response.data[22].Opcion, response.data[22].total, response.data[58].total]
+            [response.data[13].Opcion, response.data[13].total, response.data[50].total],
+            [response.data[14].Opcion, response.data[14].total, response.data[51].total],
+            [response.data[15].Opcion, response.data[15].total, response.data[52].total],
+            [response.data[16].Opcion, response.data[16].total, response.data[53].total],
+            [response.data[17].Opcion, response.data[17].total, response.data[54].total],
+            [response.data[18].Opcion, response.data[18].total, response.data[55].total],
+            [response.data[19].Opcion, response.data[19].total, response.data[56].total],
+            [response.data[20].Opcion, response.data[20].total, response.data[57].total],
+            [response.data[21].Opcion, response.data[21].total, response.data[58].total]
             ]}
             options={{
                 backgroundColor: "#f5f5f5",
 //            colors: ['', ''], //cambia color, pero no se me ocurre a que color ponerlo ahorita
-            title: response.data[0].Pregunta,
-            chartArea: { width: '40%' },
+            title: response.data[13].Pregunta,
+            width: 600,
+            height: 500,
             hAxis: {
                 title: 'Opciones',
                 minValue: 0,
@@ -216,6 +215,7 @@ function Datos () {
             vAxis: {
                 title: 'Número de Respuestas',
             },
+            legend: "none",
             }}/>
 
 
@@ -234,18 +234,24 @@ function Datos () {
             <h3> Pagina de Datos</h3>
             <div className="Graficas">
                 {grafica1}
-                {grafica2}
+            </div>
+            <div className="Graficas">
+                {grafica5}
             </div>
             <div className="Graficas">
                 {grafica3}
             </div>
             <div className="Graficas">
                 {grafica4}
-                {grafica5}
+            </div>
+            <div className="Graficas">
+                {grafica2}
             </div>
             <h3>{"id cuenta " + idTipoCuenta}</h3>
 
+            <div className="centeredContainer">
             <button onClick={()=> history.push("/menu_Usuario")}>Regresar al menú principal</button>
+            </div>
             <br></br><br></br><br></br>
             {/* <button onClick={checkIdTipoCuenta}> Regresar al menú de cuenta</button> */}
           </div>

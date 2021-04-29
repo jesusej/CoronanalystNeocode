@@ -78,10 +78,12 @@ function App() {
 
           <footer className="footer">
             <div>Aviso de privacidad</div>
+            <p>
             Espacio para temas de privacidad conforme PK Global 
             Espacio para temas de privacidad conforme PK Global
             Espacio para temas de privacidad conforme PK Global
             Espacio para temas de privacidad conforme PK Global
+            </p>
           </footer>
           
 
