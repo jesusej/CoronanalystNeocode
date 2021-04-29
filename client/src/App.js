@@ -28,7 +28,7 @@ function App() {
   useEffect(()=> {
     Axios.get("http://localhost:3001/login").then((response) => {
       if (response.data.loggedIn){
-        setLoginStatus(response.data.user[0].Usuario); // Cambiar por true en cueanto esté listo el log off
+        setLoginStatus(response.data.user[0].Usuario);
         setId(response.data.user[0].idCuenta);
       }
     });
@@ -48,10 +48,6 @@ function App() {
         </div>
         <div className = "centered-container">
           <div className = "centered-elements">
-                      
-
-            
-            <h3>{loginStatus + " " + id + " " + idTipoCuenta}</h3>
 
             <LoginContext.Provider value={{ loginStatus, setLoginStatus }} >
             
@@ -107,10 +103,11 @@ function App() {
             <NavLink exact to="/">
               <img className="logo" src={pkglobal} alt="No se pudo cargar el logo"/></NavLink>
               <div className ="coronanalysTitle">CORONANALYST</div>
-            </div>
+          </div>
 
 
           <article className="main">
+            {loginStatus && <h3>Bienvenido {loginStatus} </h3>}
             <LoginContext.Provider value={{ loginStatus, setLoginStatus }} >
               
               <div className="conexiones">

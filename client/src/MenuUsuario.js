@@ -89,18 +89,14 @@ function MenuUsuario () {
             <div className="centeredContainer">
               <button onClick={checkPersonalData}> Encuesta</button>
               <button onClick={()=> history.push("/datos")}>Visualizar Datos</button>
-
-              <Popup trigger={<button> Trigger Cerrar sesión</button>} position="center">
-                <div>
+              <Popup trigger={<button>Cerrar sesión</button>} position="center">
                   <LoginContext.Provider value = {{loginStatus, setLoginStatus}} >
                     <idContext-Provider value = {{id, setId}} >
                       {CerrarSesion()}
                     </idContext-Provider>
                   </LoginContext.Provider>
-                </div>
               </Popup>
              </div>
-            {id}
           </div>
 
        

@@ -92,12 +92,12 @@ const encuesta = () => {
       
       for(i = 0; i < todo.length; i++){
         if (id[i] < 100){
-          questions.push(<h3> {todo[i]} </h3>);
+          questions.push(<h3 key = {"q" + idPregPar}> {todo[i]} </h3>);
           idPregPar = id[i];
         } else {
           questions.push(
-          <label>
-            <input type={ type[idPregPar-1] } name={ idPregPar } id= {id[i] } value={ todo[i] }
+          <label key = {"answ" + id[i]}>
+            <input type={ type[idPregPar-1] } name={ idPregPar } id= {id[i] } value={ todo[i] } readOnly
             onClick={(e) => {
               const index = e.target.name - 1;
 
