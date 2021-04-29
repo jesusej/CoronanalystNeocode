@@ -124,7 +124,6 @@ function Datos () {
             vAxis: {
                 title: 'Número de Respuestas',
             },
-            legend: "none",
             }}/>
 
             //grafica 3 de pregunta 11
@@ -183,7 +182,6 @@ function Datos () {
             vAxis: {
                 title: 'Número de Respuestas',
             },
-            legend: "none",
             }}/>
 
             //grafica 5 de pregunta 3 y 8
@@ -215,7 +213,6 @@ function Datos () {
             vAxis: {
                 title: 'Número de Respuestas',
             },
-            legend: "none",
             }}/>
 
 
