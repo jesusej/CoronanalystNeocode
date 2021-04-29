@@ -7,8 +7,8 @@ import { LoginContext, idContext } from "./Helper/Context";
 function CerrarSesion () {
     const history = useHistory();
 
-    const {loginStatus, setLoginStatus} = useContext(LoginContext);
-    const {id, setId} = useContext(idContext);
+    const { setLoginStatus } = useContext(LoginContext);
+    const { setId } = useContext(idContext);
 
     const [loggedOff, setLoggedOff] = useState("");
 
@@ -27,7 +27,6 @@ function CerrarSesion () {
 
     return(
         <div className="cerrarsesion">
-            {id + " " + loginStatus}
             <p> ¿Realmente desea cerrar sesión? </p>
 
             <button onClick={logOff}>Estoy seguro</button>
