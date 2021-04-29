@@ -35,6 +35,7 @@ function App() {
 
   return (
     <HashRouter>
+      {/* 
         <div>
           <div className="header">
           <NavLink exact to="/">
@@ -46,7 +47,7 @@ function App() {
         </div>
         <div className = "centered-container">
           <div className = "centered-elements">
-                      {/* ^ Back End ^ */}
+                      
 
             
             <h3>{loginStatus + " " + id}</h3>
@@ -76,7 +77,7 @@ function App() {
 
           </div>
 
-          {/* ^ Back End ^ */}
+          
           </div>
         </div>
           
@@ -86,8 +87,56 @@ function App() {
             <h3 className = "AvisoPrivacidad">Aviso de privacidad</h3>
             <p className = "descripcionAvisoPriv">ESPACIO PARA COLOCAR EL AVISO DE PRIVACIDAD SUGERIDO POR PK GLOBAL </p>
           </footer>
-        
-        
+        */}
+        {/* ^ Back End ^ */}
+
+
+        <div className="content">
+          <div className="header">
+            <NavLink exact to="/">
+              <img className="logo" src={pkglobal} alt="No se pudo cargar el logo"/></NavLink>
+              <div className ="coronanalysTitle">CORONANALYST</div>
+            </div>
+
+
+          <article className="main">
+            <LoginContext.Provider value={{ loginStatus, setLoginStatus }} >
+              
+              <div className="conexiones">
+                <Route exact path="/" component={Home}/>
+                <Route path="/registro" component={Registro}/>
+                  
+
+                <idContext.Provider value = {{id, setId}} >
+                  <Route path="/login" component={Login}/>
+
+                  <Route path="/menu_usuario" component={MenuUsuario}/>
+                  <Route path="/menuCliente" component={MenuCliente}/>
+                  <Route path="/menuAdmin" component={MenuAdmin}/>
+                  
+                  <Route path="/datos_personales" component={DatosPersonales}/> 
+                  <Route path="/encuesta" component={Encuesta}/>
+                </ idContext.Provider>
+
+                <Route path="/datos" component={Datos}/>
+                <Route path="/cuentas_admin" component={CuentasAdmin}/> 
+              </div>
+
+            </ LoginContext.Provider>
+          </article>
+
+          <footer className="footer">
+            <div>Aviso de privacidad</div>
+            Espacio para temas de privacidad conforme PK Global 
+            Espacio para temas de privacidad conforme PK Global
+            Espacio para temas de privacidad conforme PK Global
+            Espacio para temas de privacidad conforme PK Global
+          </footer>
+          
+
+    </div> 
+
+
     </HashRouter>
 
 

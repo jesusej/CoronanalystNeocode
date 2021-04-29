@@ -2,9 +2,12 @@ import React, { useContext, useState} from "react";
 import Axios from "axios";
 import { Redirect } from "react-router-dom";
 import { LoginContext, idContext } from './Helper/Context';
+import {useHistory} from "react-router-dom";
 
  
 function Login() {
+
+  const history = useHistory();
 
   //Para login
   const [username, setUsername] = useState("")
@@ -53,25 +56,41 @@ function Login() {
 
   return (
     
-    <div>
-      <h2>Login</h2>
+    <div className = "main">
       
-      <div className="centeredContainer">
-        <label className="login">Correo electrónico</label> <br />
+      <div className = "titulo"><h1>Login</h1></div>
+      <h2>Un gusto tenerte con nosotros {tipoCuenta}</h2>
+      <h2>{loginStatus}</h2>
+      <div className="centered-container__login">
+        Correo electrónico
+        </div>
+      <div className="centered-container__login">
         <input type="text" placeholder="micorreo@ejemplo.com" name="user" required
+
         onChange={(e) => {
           setUsername(e.target.value);
         }}
-        /> <br/> <br/>
 
-        <label className = "login">Contraseña</label> <br/> 
-        <input type="password" placeholder="*******" name="pass" required
+        /> 
+      </div> 
+
+      <div className="centered-container__login">
+        Contraseña
+        </div>
+      <div className="centered-container__login">
+        <input type="password" placeholder="*****" name="pass" required
+
           onChange={(e) => {
             setPassword(e.target.value);
-        }}
-        /><br /> <br/> 
 
-      <button onClick={login}>Log in</button> <br />  
+        }}
+        />
+      
+      <div className = "centered-container">
+        <button onClick={()=> history.push("/")}>Home</button>
+        <button onClick={login}>Log in</button>
+      </div> 
+      
     </div>  
         
         
@@ -81,6 +100,8 @@ function Login() {
 
           
     </div>
+
+    
   );
 }
  
