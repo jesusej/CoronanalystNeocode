@@ -324,6 +324,20 @@ app.get('/getUnityData', (req, res) => {
     );
 });
 
+app.post('/datos', (req, res) => {
+
+    db.query(
+        "SELECT O.idOpciones, P.idPreguntas, P.Pregunta, O.Opcion, count(R.fkOpciones) AS total FROM opciones AS O JOIN preguntas AS P left JOIN respuestas AS R on O.idOpciones = R.fkOpciones WHERE P.idPreguntas = O.idPreguntas AND (P.idPreguntas = 1 or P.idPreguntas = 6 or P.idPreguntas = 4 or P.idPreguntas = 9 or P.idPreguntas = 11 or P.idPreguntas = 2 or P.idPreguntas = 7 or P.idPreguntas = 3 or P.idPreguntas = 8) GROUP BY O.idOpciones",
+        (err, result) => {
+            if (err) {
+                res.send({err:err})
+            }
+            res.send(result);
+
+        }
+    );
+});
+
 app.listen(3001, () => {
     db.connect(function(err){
         if (err) throw err;

@@ -225,6 +225,7 @@ html {
 }
 
 body {
+  font-family: "textFont";
   margin: 0 0 100px;
   padding: 25px;
 }
@@ -239,6 +240,30 @@ footer {
   height: 100px;
   width: 100%;
   overflow: hidden;
+}
+  
+footer h3{
+  font-size: 24px;
+  line-height: 8px;
+  align-items: center;
+  text-align: center;
+  
+  font-style: normal;
+  font-weight: normal;
+  color: whitesmoke;
+  padding: 0%;
+}
+  
+footer p{
+  font-size: 14px;
+  line-height: 14px;
+  align-items: center;
+  text-align: center;
+  
+  font-style: normal;
+  font-weight: normal;
+  color: whitesmoke;
+  padding: 0%;
 }
 
 button {
@@ -279,7 +304,7 @@ input{
 
 label{
   font-family: "textFont";
-  font-size: 24px;
+  font-size: 20px;
 }
 
 select {
@@ -295,6 +320,9 @@ select {
 
 
 
+
+/*Clases personalizadas*/
+ 
 
 
 .logo {
@@ -344,7 +372,6 @@ select {
   font-style: normal;
 }
 
-*/
 
 @font-face {
   font-family: "titleFont";
@@ -490,8 +517,16 @@ button:hover{
 }
 
 
+/*Encueta h3*/
+.Encuesta h3{
+  margin-left: 10%;
+}
 
 
+.Graficas {
+  display: flex;
+  margin-bottom: 10%;
+}
 
 
 /* RESPONSIVE */
@@ -518,17 +553,6 @@ button:hover{
   }
 
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
