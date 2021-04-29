@@ -529,8 +529,11 @@ button:hover{
 }
 
 /*Encueta h3*/
-.Encuesta h3{
+.Encuesta {
   margin-left: 10%;
+}
+.Encuesta h3{
+  margin-left: 0%;
 }
 
 .datosPersonales {

@@ -132,6 +132,7 @@ const encuesta = () => {
               setIsCheckedPublic(isChecked);
 
             }}/> {todo[i]}
+            <br />
           </label> 
           );
         }
