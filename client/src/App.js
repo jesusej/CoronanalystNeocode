@@ -37,65 +37,6 @@ function App() {
 
   return (
     <HashRouter>
-      {/* 
-        <div>
-          <div className="header">
-          <NavLink exact to="/">
-            <img className="logo" src={pkglobal} alt="No se pudo cargar el logo" />
-            </NavLink>
-
-
-            <h1 className ="coronanalysTitle">CORONANALYST</h1>
-        </div>
-        <div className = "centered-container">
-          <div className = "centered-elements">
-
-            <LoginContext.Provider value={{ loginStatus, setLoginStatus }} >
-            
-
-            <div className="paginas">
-                <Route exact path="/" component={Home}/>
-                <Route path="/registro" component={Registro}/>
-                
-                <idTipoCuentaContext.Provider value = {{idTipoCuenta, setIdTipoCuenta}} >
-                <idContext.Provider value = {{id, setId}} >
-                
-
-                <Route path="/login" component={Login}/>
-
-                <Route path="/menu_usuario" component={MenuUsuario}/>
-                <Route path="/menu_cliente" component={MenuCliente}/>
-                <Route path="/menu_admin" component={MenuAdmin}/>
-                
-                <Route path="/datos_personales" component={DatosPersonales}/> 
-                <Route path="/encuesta" component={Encuesta}/>
-                <Route exact path="/datos" component={Datos}/>
-
-
-                <Route path="/cuentas_admin" component={CuentasAdmin}/> 
-            
-                </idContext.Provider>                
-                </idTipoCuentaContext.Provider>
-              
-                
-                
-            </div>
-
-            </ LoginContext.Provider>
-
-          </div>
-
-          
-          </div>
-        </div>
-          
-
-
-          <footer>
-            <h3 className = "AvisoPrivacidad">Aviso de privacidad</h3>
-            <p className = "descripcionAvisoPriv">ESPACIO PARA COLOCAR EL AVISO DE PRIVACIDAD SUGERIDO POR PK GLOBAL </p>
-          </footer>
-        */}
         {/* ^ Back End ^ */}
 
 

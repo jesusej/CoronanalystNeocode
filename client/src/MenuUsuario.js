@@ -62,23 +62,18 @@ function MenuUsuario () {
     });
   };
 
-  if ((dataRegistered === false) && (answersRegistered === false))
-  {
-    return <Redirect to = "/datos_personales" />;
-  }
-  else if ((dataRegistered === true) && (answersRegistered === false))
-  {
-    return <Redirect to = "/encuesta" />;
-  }
-  else if ((dataRegistered === true) && (answersRegistered === true))
-  {
-    return <Redirect to = "/encuesta" />;//Borrar
-    //console.log("El usuario tiene datos personales y respuestas registradas");
-  }
-
-
-
-
+    if ((dataRegistered == false) && (answersRegistered == false))
+    {
+      return <Redirect to = "/datos_personales" />;
+    }
+    else if ((dataRegistered == true) && (answersRegistered == false))
+    {
+      return <Redirect to = "/encuesta" />;
+    }
+    else if ((dataRegistered == true) && (answersRegistered == true))
+    {
+      alert("El usuario tiene datos personales y respuestas registradas");
+    }
 
 
     return(

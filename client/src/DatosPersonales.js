@@ -82,7 +82,7 @@ if (registroExitoso == true) {
             
             {/* <p>Pagina donde se muestran los campos para llenar los datos personales </p> */}
       
-            <div className ="centeredContainer">
+            <div className ="selectReg">
             <h2 className = "datosPersonales"> Datos Personales</h2>
 
             <label> Género </label> <br />
@@ -238,10 +238,10 @@ if (registroExitoso == true) {
 
             { /* Insertar IP, sistema operativo y dispositivo */ }
 
-            <div className= "centeredContainer">
+            <div className= "selectReg">
                 
                 <button onClick={regDatPer}>Registrar Resultados</button>
-                <button onClick={()=> history.push("/menu_Usuario")}>Regresar al menú de sesión</button>
+                <button onClick={()=> history.push("/menu_usuario")}>Regresar al menú</button>
             </div>
             
           </div>

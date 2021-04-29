@@ -527,11 +527,29 @@ button:hover{
   margin-left: 10%;
 }
 
+.datosPersonales {
+  margin-left: 0vw;
+}
 
 .Graficas {
   padding: 1rem;
   display: flex;
   margin-bottom: 10%;
+}
+
+select {
+  font-family: "textFont";
+  font-style: bold;
+  background: #28333E;
+  font-size: 1.2em;
+  color: white;
+  width: 18.5rem;
+
+}
+.selectReg{
+  margin: auto;
+  padding: 10px;
+  text-align: center;
 }
 
 
