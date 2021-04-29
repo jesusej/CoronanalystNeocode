@@ -35,9 +35,9 @@ app.use(session({
 }));
 
 const db = mysql.createConnection({
-    user: "coronanalyst",
-    host: "den1.mysql4.gear.host",
-    password: "	redGl0bal!",
+    user: "root",
+    host: "localhost",
+    password: "",
     database: "coronanalyst",
 });
 
@@ -115,7 +115,6 @@ app.post('/login', (req, res) => {
                     else if (response) {
                         delete result[0].Contraseña;
                         req.session.user = result;
-                        console.log(req.session.user);
                         res.send(result);
                     } else {
                         res.send({message: "No existe la combinación de correo y contraseña"});
