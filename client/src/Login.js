@@ -10,11 +10,12 @@ function Login() {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
 
-  const {loginStatus, setLoginStatus} = useContext(LoginContext); //Manera incorrecta, cambiar este context al loggedIn
+  const { setLoginStatus} = useContext(LoginContext); //Manera incorrecta, cambiar este context al loggedIn
   const { setId } = useContext(idContext);
 
   const [tipoCuenta, setTipoCuenta] = useState("");
   const [loggedIn, setLoggedIn] = useState("");
+  const [errorStatus, setErrorStatus] = useState("");
 
   const login = () => {
     Axios.post("http://localhost:3001/login", {
@@ -25,7 +26,7 @@ function Login() {
       console.log(response.data);
   
       if(response.data.message) {
-        setLoginStatus(response.data.message);
+        setErrorStatus(response.data.message);
         setLoggedIn(false);
       } else {
           setLoginStatus(response.data[0].Usuario);
@@ -37,7 +38,7 @@ function Login() {
     });
   };
 
-  // Checa si el loggedIn es verdadero para redireccionarlo al menu de Usuario (cambiar lógica para verificar tipo de cuenta)  
+  // Checa si el loggedIn es verdadero para redireccionarlo al menu de Usuario  
   if(loggedIn){
     if (tipoCuenta == 3){
       return <Redirect to = "/menuAdmin" />;
@@ -71,13 +72,12 @@ function Login() {
         }}
         /><br /> <br/> 
 
-      <button onClick={login}>Log in</button> <br />  
+      <button onClick={login }>Log in</button> <br />  
     </div>  
         
         
     {/* Termina front end de login */}
-    <h2>{loginStatus}</h2>
-    <h2>{tipoCuenta}</h2>
+    <h2>{errorStatus}</h2>
 
           
     </div>
