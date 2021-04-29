@@ -231,15 +231,18 @@ function Datos () {
             <div className="Graficas">
                 {grafica1}
                 {grafica2}
+            </div>
+            <div className="Graficas">
                 {grafica3}
+            </div>
+            <div className="Graficas">
                 {grafica4}
                 {grafica5}
             </div>
-
             <h3>{"id cuenta " + idTipoCuenta}</h3>
 
-            {/* <button onClick={()=> history.push("/menu_Usuario")}>Regresar al menú principal</button> */}
-            <button onClick={checkIdTipoCuenta}> Regresar al menú de cuenta</button>
+            <button onClick={()=> history.push("/menu_Usuario")}>Regresar al menú principal</button>
+            {/* <button onClick={checkIdTipoCuenta}> Regresar al menú de cuenta</button> */}
           </div>
     );
 }
