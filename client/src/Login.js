@@ -1,7 +1,6 @@
 import React, { useContext, useState} from "react";
 import Axios from "axios";
 import { Redirect } from "react-router-dom";
-import { LoginContext, idContext } from './Helper/Context';
 import {useHistory} from "react-router-dom";
 
 
@@ -15,7 +14,7 @@ function Login() {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
 
-  const { setLoginStatus} = useContext(LoginContext); //Manera incorrecta, cambiar este context al loggedIn
+  const {loginStatus, setLoginStatus} = useContext(LoginContext);
   const { setId } = useContext(idContext);
   const {setIdTipoCuenta} = useContext(idTipoCuentaContext);
 

@@ -16,8 +16,7 @@ function MenuCliente () {
             <button className="button__cliente" onClick={()=> history.push("/login")}>Regresar a Log in</button>
           </div>
           </div>
-          
-
-
+    );
+} 
 
 export default MenuCliente;

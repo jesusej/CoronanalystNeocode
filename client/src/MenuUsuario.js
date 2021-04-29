@@ -27,12 +27,12 @@ function MenuUsuario () {
     console.log(response);
 
     if(response.data === false) {
-      setAnswersRegistered(false);
       console.log("El usuario no tiene respuestas registradas");
+      setAnswersRegistered(false);
 
     } else if (response.data === true) {
-        setAnswersRegistered(true);
-        console.log("El usuario si tiene respuestas registradas");
+      console.log("El usuario si tiene respuestas registradas");
+      setAnswersRegistered(true);
     }
 
   });
@@ -49,8 +49,8 @@ function MenuUsuario () {
       console.log(response);
 
       if(response.data === false) {
-        setDataRegistered(false);
         console.log("El usuario no tiene datos personales registrados");
+        setDataRegistered(false);
         setAnswersRegistered(false);
 
       } else if (response.data === true) {

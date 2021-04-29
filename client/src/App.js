@@ -30,6 +30,7 @@ function App() {
       if (response.data.loggedIn){
         setLoginStatus(response.data.user[0].Usuario);
         setId(response.data.user[0].idCuenta);
+        setIdTipoCuenta(response.data.user[0].idTipoCuenta);
       }
     });
   }, []);
@@ -115,6 +116,7 @@ function App() {
                 <Route path="/registro" component={Registro}/>
                   
 
+                <idTipoCuentaContext.Provider value = {{idTipoCuenta, setIdTipoCuenta}} >
                 <idContext.Provider value = {{id, setId}} >
                   <Route path="/login" component={Login}/>
 
@@ -125,6 +127,7 @@ function App() {
                   <Route path="/datos_personales" component={DatosPersonales}/> 
                   <Route path="/encuesta" component={Encuesta}/>
                 </ idContext.Provider>
+                </ idTipoCuentaContext.Provider>
 
                 <Route path="/datos" component={Datos}/>
                 <Route path="/cuentas_admin" component={CuentasAdmin}/> 
