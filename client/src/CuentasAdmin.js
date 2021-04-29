@@ -19,7 +19,13 @@ function CuentasAdmnin() {
 
   const registroCuentas = () => {
 
-    Axios.post("http://localhost:3001/cuentas_admin", {
+    if (id != 3)
+    {
+      alert("Solo el administrador puede modificar las cuentas");
+    }
+    else
+    {
+      Axios.post("http://localhost:3001/cuentas_admin", {
       id: id,
   })
     .then((response) => {
@@ -100,6 +106,8 @@ function CuentasAdmnin() {
             }
           setCuentas(accounts);
     });
+    }
+    
   };
 
   const eliminarCliente = () => {
@@ -136,6 +144,16 @@ function CuentasAdmnin() {
     });
   };
 
+  const checkId = () => {
+    if (id != 3)
+    {
+      alert("No es posible acceder a este apartado");
+    }
+    else{
+
+    }
+  }
+
 
   if(!cuentas){
     registroCuentas();
@@ -145,7 +163,7 @@ function CuentasAdmnin() {
     <div className="cuentasAdmin">
     <button onClick={()=> history.push("/menu_admin")}>Regresar al menú de sesión</button>
       <Popup trigger={<button> Crear cuenta cliente</button>}>
-          {CrearCliente()}
+          {checkId}
       </Popup>
       <br></br><br></br>
           
