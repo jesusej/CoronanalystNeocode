@@ -193,7 +193,7 @@ select {
 
 /*********************************/
 
-/*Tipografía*/
+/*
 @font-face {
   font-family: "titleFont";
   src: url("fonts/AzoSans-Bold.ttf");
@@ -203,8 +203,6 @@ select {
   font-family: "textFont";
   src: url("fonts/Roadgeek_2005_Series_D.ttf")
 }
-
-/*Clases predeterminadas*/
 
 h1{
     width:800px;
@@ -227,6 +225,7 @@ html {
 }
 
 body {
+  font-family: "textFont";
   margin: 0 0 100px;
   padding: 25px;
 }
@@ -241,6 +240,30 @@ footer {
   height: 100px;
   width: 100%;
   overflow: hidden;
+}
+  
+footer h3{
+  font-size: 24px;
+  line-height: 8px;
+  align-items: center;
+  text-align: center;
+  
+  font-style: normal;
+  font-weight: normal;
+  color: whitesmoke;
+  padding: 0%;
+}
+  
+footer p{
+  font-size: 14px;
+  line-height: 14px;
+  align-items: center;
+  text-align: center;
+  
+  font-style: normal;
+  font-weight: normal;
+  color: whitesmoke;
+  padding: 0%;
 }
 
 button {
@@ -281,7 +304,7 @@ input{
 
 label{
   font-family: "textFont";
-  font-size: 24px;
+  font-size: 20px;
 }
 
 select {
@@ -297,7 +320,10 @@ select {
 
 
 
+
 /*Clases personalizadas*/
+ 
+
 
 .logo {
   width: 9rem;
@@ -344,6 +370,188 @@ select {
 
 .datosPersonales{
   font-style: normal;
+}
+
+
+@font-face {
+  font-family: "titleFont";
+  src: url("fonts/AzoSans-Bold.ttf");
+}
+  
+@font-face {
+  font-family: "textFont";
+  src: url("fonts/Roadgeek_2005_Series_D.ttf")
+}
+
+* {
+  font-family: "textFont";
+  font-size: 3vh;
+  margin: 0;
+  padding: 0;
+}
+
+.content{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+
+
+}
+
+.header{
+  background-color: whitesmoke;
+  flex-basis: 100px;
+  display: inline-flex;
+  margin: 0;
+
+}
+.logo {
+  height: 10vmax;
+  margin: 0;
+}
+
+.coronanalysTitle{
+  font-family: "titleFont";
+  font-size: 8vw;
+  margin-top: 1vh;
+}
+
+.main{
+  background-color:whitesmoke;
+  flex-basis: 300px;
+  flex-grow: 2;
+  flex-shrink: 1;
+  overflow: scroll;
+
+}
+
+h1{
+  font-family: "titleFont";
+  font-size: 8vh;
+  padding: 0;
+  margin-left: 1vw;
+}
+
+h2{
+  font-family: "titleFont";
+  font-size: 3vh;
+  padding: 0;
+  margin-left: 1vw;
+  text-transform: uppercase;
+}
+
+.main__text{
+  padding: 1vw 2vw 2vw 2vw;
+  padding-bottom: 0;
+  align-content: center;
+  justify-content: center;
+  overflow: scroll;
+}
+
+  
+button {
+  width: 30vmin;
+  height: 12vh;
+  background-color: #c70000;
+  border-color: #c70000;
+  border-style: solid;
+  border-width: 4px;
+  color: whitesmoke;
+  margin: 3vh 0 0 1vh;
+  transition: all .3s linear;
+  transition-property: all;
+  transition-duration: .3s;
+
+  overflow-x: hidden;
+  
+}
+
+button:hover{
+  background-color: whitesmoke;
+  color: red;
+}
+
+.button__cliente{
+  width: 35vh;
+  height: 20vh;
+  background-color: #c70000;
+  border-color: #c70000;
+  border-style: solid;
+  border-width: 8px;
+  color: whitesmoke;
+  transition: all .3s linear;
+  transition-property: all;
+  transition-duration: .3s;
+
+  overflow-x: hidden;
+ 
+}
+
+.centered-container{
+  text-align: center;
+  
+}
+
+.centered-container__login{
+  font-family: "titleFont";
+  font-size: 5vh;
+  text-align: center;
+  margin: 1vh;
+}
+
+.centered-container__cliente{
+  flex-wrap: wrap;
+  font-family: "titleFont";
+  font-size: 5vh;
+  margin: 1vh;
+  text-align: center;
+}
+
+.footer{
+  background-color: rgb(31, 38, 46);
+  flex-grow: 2;
+  text-align: center;
+  flex-shrink: 10;
+  color: whitesmoke;
+
+}
+
+
+/*Encueta h3*/
+.Encuesta h3{
+  margin-left: 10%;
+}
+
+
+.Graficas {
+  display: flex;
+  margin-bottom: 10%;
+}
+
+
+/* RESPONSIVE */
+@media screen and (min-width: 700px) {
+  .content{
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: 20vh 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  }
+
+  .header{
+      grid-row: 1 / 2;
+      grid-column: 1 / span 4;
+  }
+
+  .main{
+      grid-row: 2 / 9;
+      grid-column: 1 / span 4;
+  }
+
+  .footer{
+      grid-row: 9 / 10;
+      grid-column: 1 / span 4;
+  }
+
 }
 
 

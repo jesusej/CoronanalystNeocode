@@ -14,20 +14,21 @@ import MenuAdmin from "./MenuAdmin";
 import MenuCliente from "./MenuCliente";
 import CuentasAdmin from "./CuentasAdmin";
 
-import { LoginContext, idContext } from "./Helper/Context";
+import { LoginContext, idContext, idTipoCuentaContext } from "./Helper/Context";
 
 function App() {
 
   // Constante loginStatus para definir estado del login dependiente del cookie (se necesita mejorar, ver variables globales)
   const [loginStatus, setLoginStatus] = useState("")
   const [id, setId] = useState("")
+  const [idTipoCuenta, setIdTipoCuenta] = useState("");
 
   Axios.defaults.withCredentials = true;
   
   useEffect(()=> {
     Axios.get("http://localhost:3001/login").then((response) => {
       if (response.data.loggedIn){
-        setLoginStatus(response.data.user[0].Usuario); // Cambiar por true en cueanto esté listo el log off
+        setLoginStatus(response.data.user[0].Usuario);
         setId(response.data.user[0].idCuenta);
       }
     });
@@ -35,6 +36,7 @@ function App() {
 
   return (
     <HashRouter>
+      {/* 
         <div>
           <div className="header">
           <NavLink exact to="/">
@@ -46,13 +48,68 @@ function App() {
         </div>
         <div className = "centered-container">
           <div className = "centered-elements">
-                      {/* ^ Back End ^ */}
-
-            
-            {loginStatus && <h3>Bienvenido {loginStatus} </h3>}
 
             <LoginContext.Provider value={{ loginStatus, setLoginStatus }} >
             
+
+            <div className="paginas">
+                <Route exact path="/" component={Home}/>
+                <Route path="/registro" component={Registro}/>
+                
+                <idTipoCuentaContext.Provider value = {{idTipoCuenta, setIdTipoCuenta}} >
+                <idContext.Provider value = {{id, setId}} >
+                
+
+                <Route path="/login" component={Login}/>
+
+                <Route path="/menu_usuario" component={MenuUsuario}/>
+                <Route path="/menu_cliente" component={MenuCliente}/>
+                <Route path="/menu_admin" component={MenuAdmin}/>
+                
+                <Route path="/datos_personales" component={DatosPersonales}/> 
+                <Route path="/encuesta" component={Encuesta}/>
+                <Route exact path="/datos" component={Datos}/>
+
+
+                <Route path="/cuentas_admin" component={CuentasAdmin}/> 
+            
+                </idContext.Provider>                
+                </idTipoCuentaContext.Provider>
+              
+                
+                
+            </div>
+
+            </ LoginContext.Provider>
+
+          </div>
+
+          
+          </div>
+        </div>
+          
+
+
+          <footer>
+            <h3 className = "AvisoPrivacidad">Aviso de privacidad</h3>
+            <p className = "descripcionAvisoPriv">ESPACIO PARA COLOCAR EL AVISO DE PRIVACIDAD SUGERIDO POR PK GLOBAL </p>
+          </footer>
+        */}
+        {/* ^ Back End ^ */}
+
+
+        <div className="content">
+          <div className="header">
+            <NavLink exact to="/">
+              <img className="logo" src={pkglobal} alt="No se pudo cargar el logo"/></NavLink>
+              <div className ="coronanalysTitle">CORONANALYST</div>
+          </div>
+
+
+          <article className="main">
+            {loginStatus && <h3>Bienvenido {loginStatus} </h3>}
+            <LoginContext.Provider value={{ loginStatus, setLoginStatus }} >
+              
               <div className="conexiones">
                 <Route exact path="/" component={Home}/>
                 <Route path="/registro" component={Registro}/>
@@ -72,22 +129,22 @@ function App() {
                 <Route path="/datos" component={Datos}/>
                 <Route path="/cuentas_admin" component={CuentasAdmin}/> 
               </div>
+
             </ LoginContext.Provider>
+          </article>
 
-          </div>
-
-          {/* ^ Back End ^ */}
-          </div>
-        </div>
+          <footer className="footer">
+            <div>Aviso de privacidad</div>
+            Espacio para temas de privacidad conforme PK Global 
+            Espacio para temas de privacidad conforme PK Global
+            Espacio para temas de privacidad conforme PK Global
+            Espacio para temas de privacidad conforme PK Global
+          </footer>
           
 
+    </div> 
 
-          <footer>
-            <h3 className = "AvisoPrivacidad">Aviso de privacidad</h3>
-            <p className = "descripcionAvisoPriv">ESPACIO PARA COLOCAR EL AVISO DE PRIVACIDAD SUGERIDO POR PK GLOBAL </p>
-          </footer>
-        
-        
+
     </HashRouter>
 
 

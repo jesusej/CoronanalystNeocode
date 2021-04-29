@@ -9,6 +9,10 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
+const { response } = require("express");
+const { json } = require("body-parser");
+
+
 const app = express();
 
 app.use(express.json());
@@ -65,22 +69,25 @@ app.post('/register', (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
 
-    
+    if ((result.length > 0) || (username == '') || (password == '')){
+        res.send(false);
+    } else {
+  
     bcrypt.hash(password, saltRounds, (err, hash) => {
-
+      
         if(err) {
             console.log(err);
         }
-        console.log(hash);
 
-        db.query(
-            "INSERT INTO cuenta (Usuario, Contraseña, idTipo_De_Cuenta) VALUES (?, ?, 1)",
-            [username, hash],
-            (err, result) => {
-                console.log(err);
-                console.log(result);
-            }
-        );
+                db.query( 
+                    "INSERT INTO cuenta (Usuario, Contraseña, idTipo_De_Cuenta) VALUES (?, ?, 1)",
+                    [username, hash],
+                    (err, result) => {
+                        console.log(err);
+                        console.log(result);
+                    }
+                );
+                res.send(true);
     })
 });
 
@@ -192,6 +199,27 @@ app.post('/datos_personales', (req, res) => {
     // );
 });
 
+app.post('/checkAnswers', (req, res) => {
+
+    const id = req.body.id;
+
+        db.query(
+            "SELECT * FROM respuestas WHERE fkCuenta = ?",
+            [id],
+            (err, result) => {
+                console.log(err);
+    
+                if ((result.length > 0) || (id == '')){
+                    //res.send({message:"Ya hay registros"});
+                    res.send(true);
+                }
+                else {
+                    res.send(false);
+                }
+            }
+    );
+});
+
 app.post('/encuesta', (req, res) => {
 
     db.query(
@@ -211,20 +239,49 @@ app.post('/resultados', (req, res) => {
     const id = req.body.id;
     const answers = req.body.answers;
 
-    
-    for(var i = 0; i < answers.length; i++){
 
-        db.query(
-            "INSERT INTO respuestas(fkCuenta, fkPreguntas, fkOpciones, Respuesta) VALUES (?, ?, ?, ?)",
-            [id, answers[i].idPreg, answers[i].idOpcion, answers[i].value],
-            (err, result) => {
-                
-                res.send(result);
-
-
-            }
-        );
+    // Revisión de si hay cuenta activa
+    if (id == '')
+    {
+        res.send(false);
     }
+    else 
+    {
+        for(var i = 0; i < answers.length; i++){
+            db.query(
+                "INSERT INTO respuestas(fkCuenta, fkPreguntas, fkOpciones, Respuesta) VALUES (?, ?, ?, ?)",
+                [id, answers[i].idPreg, answers[i].idOpcion, answers[i].value],
+                (err, result) => {
+                    //console.log(err);
+                }
+            );
+        }
+        res.send(true);
+    }
+
+    //console.log("Respuestas:");
+    //console.log(answers);
+    //console.log('');
+});
+
+app.post('/cuentas_admin', (req, res) => {
+
+    const id = req.body.id;
+
+    // if (id != 3)
+    // {
+    //     res.send(false);
+    // }
+
+    db.query(
+        "SELECT * FROM cuenta WHERE idTipo_De_Cuenta = 1 OR idTipo_De_Cuenta = 2",
+        (err, result) => {
+            if (err) {
+                res.send({err:err})
+            }
+            res.send(result);
+        }
+    );
 });
 
 // Método GET de logoff que manda los datos de un usuario registrado si es que existe y si su sesión sigue activa
@@ -232,6 +289,59 @@ app.get("/logoff", (req, res)=> {
     delete req.session.user;
     res.send({message: "ok"});
 })
+
+app.post('/eliminar_cuenta', (req, res) => {   
+    const cuenta = req.body.cuenta;
+    
+    if (cuenta == ''){
+        res.send(false);
+    } else {
+        db.query( 
+
+            "DELETE FROM cuenta WHERE Usuario = ?",
+            [cuenta],
+            (err, result) => {
+                console.log(err);
+            }
+        );
+        res.send(true);
+    }
+     
+});
+
+app.get('/getUnityData', (req, res) => {   
+
+    const sqlQuery = "SELECT COUNT(cuenta.idTipo_De_Cuenta) AS usuariosRegistrados, " +
+    "COUNT(DISTINCT dp.idCuenta) AS datosRegistrados, " +
+    "COUNT(DISTINCT r.fkCuenta) AS respuestasEncuesta FROM cuenta " +
+    "LEFT JOIN datos_personales AS dp on dp.idCuenta = cuenta.idCuenta " +
+    "LEFT JOIN (SELECT DISTINCTROW fkCuenta from respuestas) AS r on r.fkCuenta = cuenta.idCuenta " +
+    "WHERE idTipo_De_Cuenta = 1 GROUP BY cuenta.idTipo_De_Cuenta";
+
+    db.query( 
+        sqlQuery,
+
+        (err, result) => {
+            //console.log(err);
+            console.log(result[0]);
+            res.send(result[0]);
+        }
+    );
+});
+
+app.post('/datos', (req, res) => {
+
+    db.query(
+        "SELECT O.idOpciones, P.idPreguntas, P.Pregunta, O.Opcion, count(R.fkOpciones) AS total FROM opciones AS O JOIN preguntas AS P left JOIN respuestas AS R on O.idOpciones = R.fkOpciones WHERE P.idPreguntas = O.idPreguntas AND (P.idPreguntas = 1 or P.idPreguntas = 6 or P.idPreguntas = 4 or P.idPreguntas = 9 or P.idPreguntas = 11 or P.idPreguntas = 2 or P.idPreguntas = 7 or P.idPreguntas = 3 or P.idPreguntas = 8) GROUP BY O.idOpciones",
+        (err, result) => {
+            if (err) {
+                res.send({err:err})
+            }
+            res.send(result);
+
+        }
+    );
+});
 
 app.listen(3001, () => {
     db.connect(function(err){
