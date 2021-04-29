@@ -121,8 +121,8 @@ function App() {
                   <Route path="/login" component={Login}/>
 
                   <Route path="/menu_usuario" component={MenuUsuario}/>
-                  <Route path="/menuCliente" component={MenuCliente}/>
-                  <Route path="/menuAdmin" component={MenuAdmin}/>
+                  <Route path="/menu_cliente" component={MenuCliente}/>
+                  <Route path="/menu_admin" component={MenuAdmin}/>
                   
                   <Route path="/datos_personales" component={DatosPersonales}/> 
                   <Route path="/encuesta" component={Encuesta}/>
