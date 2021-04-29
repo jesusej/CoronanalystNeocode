@@ -67,9 +67,9 @@ function Datos () {
             loader={<div>Loading Chart</div>}
             data={[
             ['Respuesta', 'Antes de Pandemia', 'Despues de Pandemia'],
-            [response.data[0].Opcion, response.data[0].total, response.data[39].total],
+            [response.data[0].Opcion, response.data[0].total, response.data[37].total],
             [response.data[1].Opcion, response.data[1].total, response.data[38].total],
-            [response.data[2].Opcion, response.data[2].total, response.data[37].total],
+            [response.data[2].Opcion, response.data[2].total, response.data[39].total],
             [response.data[3].Opcion, response.data[3].total, response.data[40].total],
             [response.data[4].Opcion, response.data[4].total, response.data[41].total]
             ]}
