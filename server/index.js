@@ -69,7 +69,7 @@ app.post('/register', (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
 
-    if ((result.length > 0) || (username == '') || (password == '')){
+    if ( (username == '') || (password == '')){
         res.send(false);
     } else {
   
