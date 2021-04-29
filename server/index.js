@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const { response } = require("express");
+const { json } = require("body-parser");
 
 const app = express();
 app.use(express.json());
@@ -122,7 +123,6 @@ app.post('/login', (req, res) => {
         }
     );
 });
-
 
 app.post('/checkPersonalData', (req, res) => {
 
@@ -252,6 +252,13 @@ app.post('/resultados', (req, res) => {
 
 app.post('/cuentas_admin', (req, res) => {
 
+    const id = req.body.id;
+
+    // if (id != 3)
+    // {
+    //     res.send(false);
+    // }
+
     db.query(
         "SELECT * FROM cuenta WHERE idTipo_De_Cuenta = 1 OR idTipo_De_Cuenta = 2",
         (err, result) => {
@@ -308,6 +315,26 @@ app.post('/eliminar_cuenta', (req, res) => {
         res.send(true);
     }
      
+});
+
+app.get('/getUnityData', (req, res) => {   
+
+    const sqlQuery = "SELECT COUNT(cuenta.idTipo_De_Cuenta) AS usuariosRegistrados, " +
+    "COUNT(DISTINCT dp.idCuenta) AS datosRegistrados, " +
+    "COUNT(DISTINCT r.fkCuenta) AS respuestasEncuesta FROM cuenta " +
+    "LEFT JOIN datos_personales AS dp on dp.idCuenta = cuenta.idCuenta " +
+    "LEFT JOIN (SELECT DISTINCTROW fkCuenta from respuestas) AS r on r.fkCuenta = cuenta.idCuenta " +
+    "WHERE idTipo_De_Cuenta = 1 GROUP BY cuenta.idTipo_De_Cuenta";
+
+    db.query( 
+        sqlQuery,
+
+        (err, result) => {
+            //console.log(err);
+            console.log(result[0]);
+            res.send(result[0]);
+        }
+    );
 });
 
 app.listen(3001, () => {
