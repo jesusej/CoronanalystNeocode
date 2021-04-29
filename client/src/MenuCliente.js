@@ -1,19 +1,32 @@
 // Archivo de menú de cliente (sólo para propósitos de presentación)
 
-import React, {useState } from "react";
+import React, { useContext } from "react";
 import {useHistory} from "react-router-dom";
-//import {NavLink} from "react-router-dom";
+
+import { LoginContext, idContext } from "./Helper/Context";
+import CerrarSesion from "./CerrarSesion";
+
+import Popup from "reactjs-popup";
+import './PopUp.css';
 
 function MenuCliente () {
   const history = useHistory();
+
+  const {loginStatus, setLoginStatus} = useContext(LoginContext);
+  const {id, setId} = useContext(idContext);
+
     return(
         <div className="main">
           <div className = "titulo"><h1>Menú de Cliente</h1></div>
           <div className = "centered-container__cliente">
             <button className="button__cliente" onClick={()=> history.push("/")}>Visualizar Datos</button>
-            <button className="button__cliente" onClick={()=> history.push("/")}>Visualizar Datos v/Usuario</button>
-            <button className="button__cliente" onClick={()=> history.push("/cerrar_sesion")}>Cerrar Sesión</button>
-            <button className="button__cliente" onClick={()=> history.push("/login")}>Regresar a Log in</button>
+            <Popup trigger={<button>Cerrar sesión</button>} position="center">
+                  <LoginContext.Provider value = {{loginStatus, setLoginStatus}} >
+                    <idContext-Provider value = {{id, setId}} >
+                      {CerrarSesion()}
+                    </idContext-Provider>
+                  </LoginContext.Provider>
+              </Popup>
           </div>
           </div>
     );

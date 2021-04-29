@@ -20,14 +20,14 @@ const registerClient = () => {
     if (response.data == false)
     {
         if (usernameReg !== '' && passwordReg !== '')
-          setRegResponse("El correo electrónico ya se encuentra registrado");
+          alert("El correo electrónico ya se encuentra registrado");
         else if (usernameReg === '' || passwordReg === '')
-          setRegResponse("Llene los campos de correo y/o contraseña completamente antes de registrarse");
+          alert("Llene los campos de correo y/o contraseña completamente antes de registrarse");
       }
       else if (response.data === true)
       {
         console.log(response);
-        setRegResponse("Cliente registrado exitosamente");
+        alert("Cliente registrado exitosamente");
       }
   });
 };
@@ -44,7 +44,7 @@ function validarEmail() {
   } else {
    //alert("La dirección de email es incorrecta.");
    console.log("La dirección de email " + valor + " es incorrecta.");
-   setRegResponse("Por favor ingrese una dirección de correo electrónico válida");
+   alert("Por favor ingrese una dirección de correo electrónico válida");
   }
 }
 
@@ -59,14 +59,14 @@ function validarEmail() {
         <h2>Crear cuenta Cliente</h2>
 
         <label>Correo electrónico: </label> <br />
-        <input type = "text" name="username" required
+        <input type = "text" name="username" placeholder="micorreo@ejemplo.com" required
         onChange={(e) => {
           setUsernameReg(e.target.value);
         }}
         /> <br/> <br/>
 
         <label>Contraseña: </label> <br/>
-        <input type = "password" name="password" required
+        <input type = "password" name="password" placeholder="*****" required
         onChange={(e) => {
           setPasswordReg(e.target.value);
         }}
