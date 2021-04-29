@@ -52,10 +52,9 @@ function App() {
             
             <h3>{loginStatus + " " + id + " " + idTipoCuenta}</h3>
 
-
-          
-                      <LoginContext.Provider value={{ loginStatus, setLoginStatus }} >
+            <LoginContext.Provider value={{ loginStatus, setLoginStatus }} >
             
+
             <div className="paginas">
                 <Route exact path="/" component={Home}/>
                 <Route path="/registro" component={Registro}/>
@@ -74,14 +73,16 @@ function App() {
                 <Route path="/encuesta" component={Encuesta}/>
                 <Route exact path="/datos" component={Datos}/>
 
+
                 <Route path="/cuentas_admin" component={CuentasAdmin}/> 
-                
+            
                 </idContext.Provider>                
                 </idTipoCuentaContext.Provider>
               
                 
                 
             </div>
+
             </ LoginContext.Provider>
 
           </div>

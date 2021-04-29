@@ -12,12 +12,16 @@ const history = useHistory();
 const [preguntas, setPreguntas] = useState("");
 const [respuestasPublic, setRespuestasPublic] = useState("");
 const [registroExitoso, setRegistroExitoso] = useState("");
+
 const [isCheckedPublic, setIsCheckedPublic] = useState("");
+
 
 const {id} = useContext(idContext);
 
 var respuestas = [/*Guarda una clase respuesta*/];
+
 var isChecked = [];
+
 
 
 class Answer {
@@ -141,6 +145,7 @@ const encuesta = () => {
 
   
   const sendAnswers = () => {
+
     console.log("respuestasPublic");
     console.log(respuestasPublic);
     console.log("isCheckedPublic");

@@ -5,12 +5,14 @@ const cors = require ("cors");
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+
 const { response } = require("express");
 const { json } = require("body-parser");
 
-const app = express();
-app.use(express.json());
 
+const app = express();
+
+app.use(express.json());
 // Especifica que métodos se usan, credenciales y el uso de cookies
 app.use(
     cors({
@@ -59,15 +61,17 @@ app.get('/register', (req, res) => {
     );
 });
 
-app.post('/register', (req, res) => {   
+app.post('/register', (req, res) => {
+
     const username = req.body.username;
     const password = req.body.password;
-    
+
     db.query(
-        "SELECT * FROM cuenta WHERE Usuario = ?",
-        [username],
+        "INSERT INTO cuenta (Usuario, Contraseña, idTipo_De_Cuenta) VALUES (?, ?, 1)",
+        [username, password],
         (err, result) => {
             console.log(err);
+
 
             if ((result.length > 0) || (username == '') || (password == '')){
                 res.send(false);
@@ -83,10 +87,9 @@ app.post('/register', (req, res) => {
                 );
                 res.send(true);
             }
+
         }
     );
-     
-    
 });
 
 // Método GET de login que manda los datos de un usuario registrado si es que existe y si su sesión sigue activa
@@ -112,7 +115,7 @@ app.post('/login', (req, res) => {
             }
             
             //console.log(result);
-            // Registra al usuario en una sesión para que pueda revisitarlo
+            // Envía los resultados como cookie
             if (result.length > 0) {
                 req.session.user = result;
                 console.log(req.session.user);
@@ -142,6 +145,7 @@ app.post('/checkPersonalData', (req, res) => {
                     res.send(false);
                 }
             }
+
     );
 });
 
@@ -160,6 +164,7 @@ app.post('/datos_personales', (req, res) => {
     const so= req.body.so;
     const id = req.body.id;
     
+
             // Revisión de si hay datos registrados
             if ((edad == '') || (nivelEstudios == '') || (localidad == '') ||  (estadoCivil == '') ||
              (ingreso == '') || (genero == '') || (ocupacion == '') || (id == ''))
@@ -217,6 +222,7 @@ app.post('/encuesta', (req, res) => {
                 res.send({err:err})
             }
             res.send(result);
+
         }
     );
 });
@@ -225,6 +231,7 @@ app.post('/resultados', (req, res) => {
 
     const id = req.body.id;
     const answers = req.body.answers;
+
 
     // Revisión de si hay cuenta activa
     if (id == '')
@@ -270,33 +277,13 @@ app.post('/cuentas_admin', (req, res) => {
     );
 });
 
-app.post('/register_client', (req, res) => {   
-    const username = req.body.username;
-    const password = req.body.password;
-    
-    db.query(
-        "SELECT * FROM cuenta WHERE Usuario = ?",
-        [username],
-        (err, result) => {
-            console.log(err);
-
-            if ((result.length > 0) || (username == '') || (password == '')){
-                res.send(false);
-            } else {
-                db.query( 
-
-                    "INSERT INTO cuenta (Usuario, Contraseña, idTipo_De_Cuenta) VALUES (?, ?, 2)",
-                    [username, password],
-                    (err, result) => {
-                        console.log(err);
-                    }
-                );
-                res.send(true);
-            }
-        }
-    );
-     
-});
+// Método GET de logoff que manda los datos de un usuario registrado si es que existe y si su sesión sigue activa
+app.get("/logoff", (req, res)=> {
+    console.log(req.session.user);
+    delete req.session.user;
+    console.log(req.session.user);
+    res.send({message: "ok"});
+})
 
 app.post('/eliminar_cuenta', (req, res) => {   
     const cuenta = req.body.cuenta;

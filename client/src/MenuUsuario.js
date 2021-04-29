@@ -3,11 +3,10 @@ import {useHistory} from "react-router-dom";
 import Axios from "axios";
 import Popup from "reactjs-popup";
 import './PopUp.css';
-import ReactDom from 'react-dom';
 import CerrarSesion from "./CerrarSesion";
 import { Redirect } from "react-router-dom";
 
-import { idContext } from "./Helper/Context";
+import { LoginContext, idContext } from "./Helper/Context";
 
 function MenuUsuario () {
 
@@ -15,7 +14,8 @@ function MenuUsuario () {
   const [dataRegistered, setDataRegistered] = useState("");
   const [answersRegistered, setAnswersRegistered] = useState("");
 
-  const {id} = useContext(idContext);
+  const {loginStatus, setLoginStatus} = useContext(LoginContext);
+  const {id, setId} = useContext(idContext);
 
   const checkAnswers = () => {
     console.log("El id es igual a ",id);
@@ -89,10 +89,16 @@ function MenuUsuario () {
             <div className="centeredContainer">
               <button onClick={checkPersonalData}> Encuesta</button>
               <button onClick={()=> history.push("/datos")}>Visualizar Datos</button>
-              <Popup trigger={<button> Trigger Cerrar sesión</button>}>
-                  {CerrarSesion()}
+
+              <Popup trigger={<button> Trigger Cerrar sesión</button>} position="center">
+                <div>
+                  <LoginContext.Provider value = {{loginStatus, setLoginStatus}} >
+                    <idContext-Provider value = {{id, setId}} >
+                      {CerrarSesion()}
+                    </idContext-Provider>
+                  </LoginContext.Provider>
+                </div>
               </Popup>
-              <button onClick={()=> history.push("/login")}>Regresar a Log in</button>
              </div>
             {id}
           </div>
