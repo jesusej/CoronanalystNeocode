@@ -84,7 +84,7 @@ function Login() {
         Contraseña
         </div>
       <div className="centered-container__login">
-        <input type="password" placeholder="*****" name="pass" required
+        <input type="password" placeholder="********" name="pass" required
 
           onChange={(e) => {
             setPassword(e.target.value);

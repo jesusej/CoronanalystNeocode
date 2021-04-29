@@ -205,6 +205,7 @@ const encuesta = () => {
   
 
   if(registroExitoso == true){
+    alert("Ha registrado las respuestas correctamente");
     return <Redirect to ="/menu_usuario" />
   }
     return(

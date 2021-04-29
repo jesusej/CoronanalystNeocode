@@ -1,9 +1,11 @@
 import Axios from "axios";
 import React, { useState } from "react";
+import {useHistory} from "react-router-dom";
 
 
 function Registro() {
   // Para registro
+  const history = useHistory();
   const [errorStatus, setErrorStatus] = useState('')
   const [usernameReg, setUsernameReg] = useState('')
   const [passwordReg, setPasswordReg] = useState('')
@@ -26,7 +28,8 @@ const register = () => {
     else if (response.data === true)
     {
       console.log(response);
-      setRegResponse("Usuario registrado exitosamente");
+      alert("Se ha registrado exitosamente");
+      //history.push("/menu_usuario");
     }
   });
 };
@@ -42,7 +45,7 @@ function validarEmail() {
   } else {
    //alert("La dirección de email es incorrecta.");
    console.log("La dirección de email " + valor + " es incorrecta.");
-   setRegResponse("Por favor ingrese una dirección de correo electrónico válida");
+   alert("Por favor ingrese una dirección de correo electrónico válida");
   }
 }
 
@@ -52,14 +55,14 @@ function validarEmail() {
         <h2>Registro</h2>
 
         <label>Correo electrónico: </label> <br />
-        <input type = "text" name="username" required
+        <input type = "text" name="username" placeholder="micorreo@ejemplo.com" required
         onChange={(e) => {
           setUsernameReg(e.target.value);
         }}
         /> <br/> <br/>
 
         <label>Contraseña: </label> <br/>
-        <input type = "password" name="password" required
+        <input type = "password" name="password" placeholder="********" required
         onChange={(e) => {
           setPasswordReg(e.target.value);
         }}
@@ -67,7 +70,6 @@ function validarEmail() {
         <div className="button">
         <button onClick={validarEmail}>Registrarse</button>
         </div>
-        {regResponse}
 
          <p className = "error">{errorStatus}</p>
       </div>

@@ -58,13 +58,13 @@ function DatosPersonales () {
             (localidad === '') ||  (estadoCivil === '') || (ingreso === '') ||
             (ocupacion === '') || (id === '')))
             {
-                setRegResponse("Por favor llene todos los datos antes de registrarse");
+                alert("Por favor llene todos los datos antes de registrarse");
                 setRegistroExitoso(false);
                 console.log(registroExitoso);
             }
             else if (response.data == true)
             {
-                setRegResponse("Ha registrado los datos correctamente");
+                alert("Ha registrado los datos correctamente");
                 setRegistroExitoso(true);
                 console.log(registroExitoso);
             }

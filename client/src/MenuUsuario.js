@@ -29,10 +29,12 @@ function MenuUsuario () {
     if(response.data === false) {
       console.log("El usuario no tiene respuestas registradas");
       setAnswersRegistered(false);
+      history.push("/encuesta")
 
     } else if (response.data === true) {
       console.log("El usuario si tiene respuestas registradas");
       setAnswersRegistered(true);
+      alert("Ya cuenta con datos personales y respuestas registradas");
     }
 
   });
@@ -52,28 +54,37 @@ function MenuUsuario () {
         console.log("El usuario no tiene datos personales registrados");
         setDataRegistered(false);
         setAnswersRegistered(false);
+        history.push("/datos_personales");
 
       } else if (response.data === true) {
-          setDataRegistered(true);
-          console.log("El usuario si tiene datos personales registrados");
-          checkAnswers();
+        setDataRegistered(true);
+        console.log("El usuario si tiene datos personales registrados");
+        checkAnswers();
       }
         
     });
   };
 
-    if ((dataRegistered == false) && (answersRegistered == false))
-    {
-      return <Redirect to = "/datos_personales" />;
+  const checkVisualize = () => {
+    console.log("El id es igual a ",id);
+
+      Axios.post("http://localhost:3001/checkAnswers", {
+        id: id,
+
+  }).then((response) => {
+    console.log(response);
+
+    if(response.data === false) {
+      console.log("El usuario no tiene respuestas registradas");
+      alert("Es necesario que conteste la encuesta para poder ver los datos globales");
+
+    } else if (response.data === true) {
+      console.log("El usuario si tiene respuestas registradas");
+      history.push("/datos");
     }
-    else if ((dataRegistered == true) && (answersRegistered == false))
-    {
-      return <Redirect to = "/encuesta" />;
-    }
-    else if ((dataRegistered == true) && (answersRegistered == true))
-    {
-      alert("El usuario tiene datos personales y respuestas registradas");
-    }
+
+  });
+  };
 
 
     return(
@@ -83,7 +94,7 @@ function MenuUsuario () {
             
             <div className="centeredContainer">
               <button onClick={checkPersonalData}> Encuesta</button>
-              <button onClick={()=> history.push("/datos")}>Visualizar Datos</button>
+              <button onClick={checkVisualize}>Visualizar Datos</button>
               <Popup trigger={<button>Cerrar sesión</button>} position="center">
                   <LoginContext.Provider value = {{loginStatus, setLoginStatus}} >
                     <idContext-Provider value = {{id, setId}} >
