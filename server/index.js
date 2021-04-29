@@ -73,22 +73,23 @@ app.post('/register', (req, res) => {
         res.send(false);
     } else {
   
-    bcrypt.hash(password, saltRounds, (err, hash) => {
-      
-        if(err) {
-            console.log(err);
-        }
+        bcrypt.hash(password, saltRounds, (err, hash) => {
+        
+            if(err) {
+                console.log(err);
+            }
 
-                db.query( 
-                    "INSERT INTO cuenta (Usuario, Contraseña, idTipo_De_Cuenta) VALUES (?, ?, 1)",
-                    [username, hash],
-                    (err, result) => {
-                        console.log(err);
-                        console.log(result);
-                    }
-                );
-                res.send(true);
-    })
+                    db.query( 
+                        "INSERT INTO cuenta (Usuario, Contraseña, idTipo_De_Cuenta) VALUES (?, ?, 1)",
+                        [username, hash],
+                        (err, result) => {
+                            console.log(err);
+                            console.log(result);
+                        }
+                    );
+                    res.send(true);
+        })
+    }
 });
 
 // Método GET de login que manda los datos de un usuario registrado si es que existe y si su sesión sigue activa
