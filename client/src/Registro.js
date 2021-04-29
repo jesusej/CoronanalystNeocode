@@ -3,7 +3,8 @@ import React, { useState } from "react";
 import {useHistory} from "react-router-dom";
 
 
-function Registro() {
+function Registro() {  
+  const history = useHistory();
   // Para registro
   const history = useHistory();
   const [errorStatus, setErrorStatus] = useState('')
@@ -51,27 +52,37 @@ function validarEmail() {
 
     return (
       // Inicia front end de Registro
-      <div className="Registro">
-        <h2>Registro</h2>
 
-        <label>Correo electrónico: </label> <br />
-        <input type = "text" name="username" placeholder="micorreo@ejemplo.com" required
-        onChange={(e) => {
-          setUsernameReg(e.target.value);
-        }}
-        /> <br/> <br/>
-
-        <label>Contraseña: </label> <br/>
-        <input type = "password" name="password" placeholder="********" required
-        onChange={(e) => {
-          setPasswordReg(e.target.value);
-        }}
-        /> <br/> <br/> 
-        <div className="button">
-        <button onClick={validarEmail}>Registrarse</button>
+      <div className="main">
+        <h1>Registro</h1>
+        <div className="centered-container__login">
+          Correo electrónico:
+        </div>
+        <div className="centered-container__login">
+          <input type = "text" placeholder="micorreo@ejemplo.com" name="username" required
+          onChange={(e) => {
+            setUsernameReg(e.target.value);
+          }}
+          />
+        </div>
+        <div className="centered-container__login">
+          Contraseña:
+        </div>
+        <div className="centered-container__login">
+          <input type = "password" placeholder="*****" name="password" required
+          onChange={(e) => {
+            setPasswordReg(e.target.value);
+          }}
+          />
+        </div>
+        <div className="centered-container">
+          <div className="button">      
+            <button onClick={()=> history.push("/")}>Home</button>
+            <button onClick={validarEmail}>Registrarse</button>
+          </div>
         </div>
 
-         <p className = "error">{errorStatus}</p>
+        <p className = "error">{errorStatus}</p>
       </div>
     );
   }
