@@ -49,7 +49,7 @@ function App() {
                       {/* ^ Back End ^ */}
 
             
-            <h3>{loginStatus + " " + id}</h3>
+            {loginStatus && <h3>Bienvenido {loginStatus} </h3>}
 
             <LoginContext.Provider value={{ loginStatus, setLoginStatus }} >
             
