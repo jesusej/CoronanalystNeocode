@@ -14,6 +14,7 @@ function Home() {
             <div className = "centered-container">
               <button onClick={()=> history.push("/login")}>Login</button>
               <button onClick={()=> history.push("/registro")}>Registro</button>
+              <br></br><br></br>
             </div> 
       </div>
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-04-2021 a las 02:06:51
+-- Tiempo de generación: 29-04-2021 a las 17:21:59
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.2
 
@@ -42,7 +42,9 @@ INSERT INTO `cuenta` (`idCuenta`, `idTipo_De_Cuenta`, `Usuario`, `Contraseña`) 
 (1, 3, 'adm', '$2b$10$jvZWD7TqKJs.kg3j1V7GKulqRjJDMnRTZhYQjPiOdHBcOzukGQroi'),
 (2, 2, 'cli', '$2b$10$0tbc23ZIQiW.akxQT264w.hGbfd9PHRtbtJ8/WznXrbq9mJTkeeO6'),
 (3, 1, 'us', '$2b$10$b66Zdfo7pgc8dJDCzyejt.IbY/YYZ60J0byMRaE6UdLVy2WQwk2fK'),
-(92, 1, 'jesus', '$2b$10$9OMzul3s9jjz7gQl4hzu8uPACpO2DPbttZyUxLaIoQP32yNAOlyQi');
+(92, 1, 'jesus', '$2b$10$9OMzul3s9jjz7gQl4hzu8uPACpO2DPbttZyUxLaIoQP32yNAOlyQi'),
+(93, 1, 'no@no.no', '$2b$10$TXHMTPOzZQ.ei9W5SD1qXOygOs5707n9G/DUTGlCjLqIRL7WyyAB.'),
+(94, 1, 'nose@nose.nose', '$2b$10$yc1rJ1ZOuxLqHEfVUSTPEuwBgjJFea/9bynYwKkZ8ChyEHQcvwL36');
 
 -- --------------------------------------------------------
 
@@ -82,11 +84,11 @@ CREATE TABLE `opciones` (
 --
 
 INSERT INTO `opciones` (`idOpciones`, `idPreguntas`, `Opcion`) VALUES
-(101, 1, 'M�s de 10 veces al mes'),
+(101, 1, 'Más de 10 veces al mes'),
 (102, 1, '6 a 10 veces al mes'),
 (103, 1, '1 a 5 veces al mes.'),
 (104, 1, '1 vez cada varios meses'),
-(105, 1, 'No realizaba compras en l�nea'),
+(105, 1, 'No realizaba compras en línea'),
 (201, 2, 'Mercado Libre'),
 (202, 2, 'Amazon'),
 (203, 2, 'Facebook Marketplace'),
@@ -94,40 +96,40 @@ INSERT INTO `opciones` (`idOpciones`, `idPreguntas`, `Opcion`) VALUES
 (205, 2, 'eBay'),
 (206, 2, 'E-shop propia de cada marca (Nike, Supreme, Walmart, Liverpool, etc.)'),
 (207, 2, 'Otros'),
-(208, 2, 'No realizaba compras en l��nea'),
-(301, 3, 'Tarjeta de cr�dito'),
-(302, 3, 'Tarjeta de d�bito'),
+(208, 2, 'No realizaba compras en línea'),
+(301, 3, 'Tarjeta de crédito'),
+(302, 3, 'Tarjeta de débito'),
 (303, 3, 'Paypal'),
 (304, 3, 'Mercado Pago'),
 (305, 3, 'Efectivo'),
-(306, 3, 'Transferencia electr�nica'),
-(307, 3, 'Dep�sito en tiendas de conveniencia (Oxxo, 7Eleven, etc.)'),
+(306, 3, 'Transferencia electrónica'),
+(307, 3, 'Depósito en tiendas de conveniencia (Oxxo, 7Eleven, etc.)'),
 (308, 3, 'Otro'),
-(309, 3, 'No realizaba compras en l�nea'),
+(309, 3, 'No realizaba compras en línea'),
 (401, 4, 'Ropa'),
 (402, 4, 'Comida a domicilio (Rappi, UberEats, etc.)'),
 (403, 4, 'Super a domicilio (víveres)'),
 (404, 4, 'Muebles y/o electrodomésticos'),
 (405, 4, 'Coleccionables'),
-(406, 4, 'Libros (f��sicos o electr�nicos)'),
-(407, 4, 'Computadoras y/o electr�nicos'),
-(408, 4, 'Herramientas y ferreter�a'),
-(409, 4, 'Entretenimiento (m�sica, tv, videojuegos, juguetes, etc.)'),
+(406, 4, 'Libros (físicos o electrónicos)'),
+(407, 4, 'Computadoras y/o electrónicos'),
+(408, 4, 'Herramientas y ferretería'),
+(409, 4, 'Entretenimiento (música, tv, videojuegos, juguetes, etc.)'),
 (410, 4, 'Programas o aplicaciones'),
 (411, 4, 'Reservaciones y boletos'),
 (412, 4, 'Artículos de higiene'),
 (413, 4, 'Artí­culos deportivos'),
-(414, 4, 'No realizaba compras en l�nea'),
+(414, 4, 'No realizaba compras en línea'),
 (415, 4, 'Otros'),
-(501, 5, '7 horas o m�s al d��a'),
-(502, 5, '6 a 2 horas al d�a'),
+(501, 5, '7 horas o más al día'),
+(502, 5, '6 a 2 horas al día'),
 (503, 5, '6 a 2 horas a la semana'),
 (504, 5, 'Menos de dos horas a la semana'),
-(601, 6, 'M�s de 10 veces por mes'),
+(601, 6, 'Más de 10 veces por mes'),
 (602, 6, '10 a 6 veces al mes'),
 (603, 6, '5 a 1 vez al mes'),
 (604, 6, '1 vez cada varios meses'),
-(605, 6, 'No realizo compras en l��nea'),
+(605, 6, 'No realizo compras en línea'),
 (701, 7, 'Mercado Libre'),
 (702, 7, 'Amazon'),
 (703, 7, 'Facebook Marketplace'),
@@ -135,33 +137,33 @@ INSERT INTO `opciones` (`idOpciones`, `idPreguntas`, `Opcion`) VALUES
 (705, 7, 'eBay'),
 (706, 7, 'E-shop propia de cada marca (Nike, Supreme, Walmart, Liverpool, etc.)'),
 (707, 7, 'Otros'),
-(708, 7, 'No realizo compras en l�nea'),
-(801, 8, 'Tarjeta de cr�dito'),
-(802, 8, 'Tarjeta de d�bito'),
+(708, 7, 'No realizo compras en línea'),
+(801, 8, 'Tarjeta de crédito'),
+(802, 8, 'Tarjeta de débito'),
 (803, 8, 'Paypal'),
 (804, 8, 'Mercado Pago'),
 (805, 8, 'Efectivo'),
-(806, 8, 'Transferencia Electr�nica'),
-(807, 8, 'Dep�sito en tiendas de conveniencia (Oxxo, 7Eleven, etc.)'),
+(806, 8, 'Transferencia Electrónica'),
+(807, 8, 'Depósito en tiendas de conveniencia (Oxxo, 7Eleven, etc.)'),
 (808, 8, 'Otro'),
-(809, 8, 'No realizo compras en l�nea'),
+(809, 8, 'No realizo compras en línea'),
 (901, 9, 'Ropa'),
 (902, 9, 'Comida a domicilio (Rappi, UberEats, etc.)'),
-(903, 9, 'Super a domicilio (v�veres)'),
+(903, 9, 'Super a domicilio (víveres)'),
 (904, 9, 'Muebles y/o electrodomésticos'),
 (905, 9, 'Coleccionables'),
-(906, 9, 'Libros (f��sicos o electr�nicos)'),
-(907, 9, 'Computadoras y/o electr�nicos'),
-(908, 9, 'Herramientas y ferreter��a'),
-(909, 9, 'Entretenimiento (m�sica, tv, videojuegos, juguetes, etc.)'),
+(906, 9, 'Libros (físicos o electrónicos)'),
+(907, 9, 'Computadoras y/o electrónicos'),
+(908, 9, 'Herramientas y ferretería'),
+(909, 9, 'Entretenimiento (música, tv, videojuegos, juguetes, etc.)'),
 (910, 9, 'Programas o aplicaciones'),
 (911, 9, 'Reservaciones y boletos'),
 (912, 9, 'Artículos de higiene'),
 (913, 9, 'Artículos deportivos'),
-(914, 9, 'No realizaba compras en l�nea'),
+(914, 9, 'No realizaba compras en línea'),
 (915, 9, 'Otros'),
-(1001, 10, '7 horas o m�s al d�a'),
-(1002, 10, '6 a 2 horas al d��a'),
+(1001, 10, '7 horas o más al día'),
+(1002, 10, '6 a 2 horas al día'),
 (1003, 10, '6 a 2 horas a la semana'),
 (1004, 10, 'Menos de 2 horas a la semana'),
 (1101, 11, 'Menos de 1,000'),
@@ -169,13 +171,13 @@ INSERT INTO `opciones` (`idOpciones`, `idPreguntas`, `Opcion`) VALUES
 (1103, 11, '2,500 - 5,000'),
 (1104, 11, '5,000 - 7,500'),
 (1105, 11, '7,500 - 10,000'),
-(1106, 11, 'M�s de 10,000'),
-(1201, 12, 'F�sico'),
-(1202, 12, 'L�nea'),
-(1301, 13, 'S�'),
+(1106, 11, 'Más de 10,000'),
+(1201, 12, 'Físico'),
+(1202, 12, 'Línea'),
+(1301, 13, 'Sí'),
 (1302, 13, 'No'),
 (1401, 14, 'Diabetes'),
-(1402, 14, 'Hipertensi�n'),
+(1402, 14, 'Hipertensión'),
 (1403, 14, 'Obesidad'),
 (1404, 14, 'Asma'),
 (1405, 14, 'Condiciones cardiacas'),
@@ -184,16 +186,16 @@ INSERT INTO `opciones` (`idOpciones`, `idPreguntas`, `Opcion`) VALUES
 (1408, 14, 'Otros no listados'),
 (1409, 14, 'Ninguna'),
 (1501, 15, 'Ansiedad'),
-(1502, 15, 'Estr�s'),
-(1503, 15, 'Depresi�n'),
-(1504, 15, 'D�ficit de atenci�n'),
-(1505, 15, 'Baja de rendimiento laboral/acad�mico'),
+(1502, 15, 'Estrés'),
+(1503, 15, 'Depresión'),
+(1504, 15, 'Déficit de atención'),
+(1505, 15, 'Baja de rendimiento laboral/académico'),
 (1506, 15, 'Baja autoestima'),
 (1507, 15, 'Otros no enlistados'),
 (1508, 15, 'No me he sentido afectado'),
-(1601, 16, 'Aument�'),
-(1602, 16, 'Permaneci� igual que antes'),
-(1603, 16, 'Disminuy�');
+(1601, 16, 'Aumentó'),
+(1602, 16, 'Permaneció igual que antes'),
+(1603, 16, 'Disminuyó');
 
 -- --------------------------------------------------------
 
@@ -212,22 +214,22 @@ CREATE TABLE `preguntas` (
 --
 
 INSERT INTO `preguntas` (`idPreguntas`, `Pregunta`, `Tipo`) VALUES
-(1, '�Qu� tan seguido compraba en l�nea?', 'Radio'),
-(2, '�Qu� plataformas utilizaba para realizar compras en l��nea?', 'Checkbox'),
-(3, '�Qu� m�todos de pago utilizaba m�s para realizar sus compras en l�nea?', 'Checkbox'),
-(4, '�De cu�les de las siguientes categor��as realizaba compras?', 'Checkbox'),
-(5, '�Cu�nto tiempo estima que se encontraba usando la computadora para actividades diarias?', 'Radio'),
-(6, '�Qu� tan seguido compra en l�nea ahora?', 'Radio'),
-(7, '�Qu� plataformas utiliza para realizar compras en l��nea?', 'Checkbox'),
-(8, '�Qu� m�todo de pago utiliza usted para sus compras en internet?', 'Checkbox'),
-(9, '�De cu�les de las siguientes categor�as ha realizado compras?', 'Checkbox'),
-(10, '�Cu�nto tiempo estima que usa la computadora para actividades diarias? ', 'Radio'),
-(11, '�En promedio cu+anto dinero estima que gasta en compras en l��nea al mes?', 'Radio'),
-(12, '�Actualmente compras m�s seguido en f��sico o en l�nea?', 'Radio'),
-(13, '�Desde que empez� la pandemia, ha presentado s��ntomas relacionados al COVID-19?', 'Radio'),
-(14, '�Usted sufre de alguna de las siguientes condiciones m�dicas?', 'Checkbox'),
-(15, '�A causa de la pandemia usted se ha sentido relacionado con algunas de las siguientes situaciones?', 'Checkbox'),
-(16, 'Durante la pandemia, �c�mo ha cambiado su actividad f�sica?', 'Radio');
+(1, '¿Qué tan seguido compraba en línea?', 'Radio'),
+(2, '¿Qué plataformas utilizaba para realizar compras en línea?', 'Checkbox'),
+(3, '¿Qué métodos de pago utilizaba más para realizar sus compras en línea? ', 'Checkbox'),
+(4, '\r\n¿De cuáles de las siguientes categorías realizaba compras?\r\n', 'Checkbox'),
+(5, '¿Cuánto tiempo estima que se encontraba usando la computadora para actividades diarias?', 'Radio'),
+(6, '¿Qué tan seguido compra en línea ahora?', 'Radio'),
+(7, '¿Qué plataformas utiliza para realizar compras en línea?', 'Checkbox'),
+(8, '¿Qué método de pago utiliza usted para sus compras en internet?', 'Checkbox'),
+(9, '\r\n¿De cuáles de las siguientes categorías ha realizado compras?\r\n', 'Checkbox'),
+(10, '¿Cuánto tiempo estima que usa la computadora para actividades diarias?', 'Radio'),
+(11, '¿En promedio cuánto dinero estima que gasta en compras en línea al mes? ', 'Radio'),
+(12, '¿Actualmente compras más seguido en físico o en línea?', 'Radio'),
+(13, '¿Desde que empezó la pandemia, ha presentado síntomas relacionados al COVID-19?', 'Radio'),
+(14, '¿Usted sufre de alguna de las siguientes condiciones médicas?', 'Checkbox'),
+(15, '¿A causa de la pandemia usted se ha sentido relacionado con algunas de las siguientes situaciones?', 'Checkbox'),
+(16, 'Durante la pandemia, ¿Cómo ha cambiado su actividad física?', 'Radio');
 
 -- --------------------------------------------------------
 
@@ -325,7 +327,7 @@ ALTER TABLE `tipo_de_cuenta`
 -- AUTO_INCREMENT de la tabla `cuenta`
 --
 ALTER TABLE `cuenta`
-  MODIFY `idCuenta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
+  MODIFY `idCuenta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
 
 --
 -- AUTO_INCREMENT de la tabla `datos_personales`

@@ -61,8 +61,8 @@ function Datos () {
 
         //grafica 1 de pregunta 1 y 6
         graph1 = <Chart
-            width={500}
-            height={400}
+            width={400}
+            height={300}
             chartType="ColumnChart"
             loader={<div>Loading Chart</div>}
             data={[
@@ -74,9 +74,10 @@ function Datos () {
             [response.data[4].Opcion, response.data[4].total, response.data[41].total]
             ]}
             options={{
+            backgroundColor: "#f5f5f5",
 //            colors: ['', ''], //cambia color, pero no se me ocurre a que color ponerlo ahorita
             title: response.data[40].Pregunta,
-            chartArea: { width: '50%' },
+            chartArea: { width: '40%' },
             hAxis: {
                 title: 'Opciones',
                 minValue: 0,
@@ -89,7 +90,7 @@ function Datos () {
             //grafica 2 de pregunta 4 y 9
             graph2 = <Chart
             width={500}
-            height={400}
+            height={300}
             chartType="ColumnChart"
             loader={<div>Loading Chart</div>}
             data={[
@@ -112,9 +113,10 @@ function Datos () {
             
             ]}
             options={{
+            backgroundColor: "#f5f5f5",
 //            colors: ['', ''], //cambia color, pero no se me ocurre a que color ponerlo ahorita
             title: response.data[22].Pregunta,
-            chartArea: { width: '50%' },
+            chartArea: { width: '40%' },
             hAxis: {
                 title: 'Opciones',
                 minValue: 0,
@@ -126,8 +128,8 @@ function Datos () {
 
             //grafica 3 de pregunta 11
             graph3 = <Chart
-            width={500}
-            height={400}
+            width={400}
+            height={300}
             chartType="PieChart"
             loader={<div>Loading Chart</div>}
             data={[
@@ -140,9 +142,10 @@ function Datos () {
             [response.data[79].Opcion, response.data[79].total]
             ]}
             options={{
+            backgroundColor: "#f5f5f5",
 //            colors: ['', ''], //cambia color, pero no se me ocurre a que color ponerlo ahorita
             title: response.data[79].Pregunta,
-            chartArea: { width: '50%' },
+            // chartArea: { width: '50%' },
             hAxis: {
                 title: 'Opciones',
                 minValue: 0,
@@ -154,8 +157,8 @@ function Datos () {
 
             //grafica 4 de pregunta 2 y 7
             graph4 = <Chart
-            width={500}
-            height={400}
+            width={400}
+            height={300}
             chartType="ColumnChart"
             loader={<div>Loading Chart</div>}
             data={[
@@ -170,9 +173,10 @@ function Datos () {
             [response.data[13].Opcion, response.data[13].total, response.data[49].total]
             ]}
             options={{
+            backgroundColor: "#f5f5f5",
 //            colors: ['', ''], //cambia color, pero no se me ocurre a que color ponerlo ahorita
             title: response.data[6].Pregunta,
-            chartArea: { width: '50%' },
+            chartArea: { width: '40%' },
             hAxis: {
                 title: 'Opciones',
                 minValue: 0,
@@ -184,8 +188,8 @@ function Datos () {
 
             //grafica 5 de pregunta 3 y 8
             graph5 = <Chart
-            width={500}
-            height={400}
+            width={400}
+            height={300}
             chartType="ColumnChart"
             loader={<div>Loading Chart</div>}
             data={[
@@ -201,9 +205,10 @@ function Datos () {
             [response.data[22].Opcion, response.data[22].total, response.data[58].total]
             ]}
             options={{
+                backgroundColor: "#f5f5f5",
 //            colors: ['', ''], //cambia color, pero no se me ocurre a que color ponerlo ahorita
             title: response.data[0].Pregunta,
-            chartArea: { width: '50%' },
+            chartArea: { width: '40%' },
             hAxis: {
                 title: 'Opciones',
                 minValue: 0,
@@ -227,7 +232,6 @@ function Datos () {
       return(
         <div className="Datos">
             <h3> Pagina de Datos</h3>
-            <p>Pagina donde se muestran los datos </p>
             <div className="Graficas">
                 {grafica1}
                 {grafica2}
@@ -242,6 +246,7 @@ function Datos () {
             <h3>{"id cuenta " + idTipoCuenta}</h3>
 
             <button onClick={()=> history.push("/menu_Usuario")}>Regresar al menú principal</button>
+            <br></br><br></br><br></br>
             {/* <button onClick={checkIdTipoCuenta}> Regresar al menú de cuenta</button> */}
           </div>
     );

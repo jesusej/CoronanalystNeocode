@@ -356,12 +356,7 @@ select {
   color: whitesmoke;
 }
 
-.centeredContainer{
-  margin: auto;
-  padding: 10px;
-  width: 50%;
-  text-align: center;
-}
+
 
 .login{
   font-family: "titleFont";
@@ -385,20 +380,28 @@ select {
 
 * {
   font-family: "textFont";
-  font-size: 3vh;
+  /* font-size: 2vw; */
+  font-size: 1rem;
   margin: 0;
   padding: 0;
+}
+
+.centeredContainer{
+  margin: auto;
+  padding: 10px;
+  width: 10%;
+  text-align: center;
 }
 
 .content{
   display: flex;
   flex-direction: column;
   height: 100vh;
-
-
 }
 
 .header{
+  /* z-index: 1000; */
+  /* height: 10vmax; */
   background-color: whitesmoke;
   flex-basis: 100px;
   display: inline-flex;
@@ -413,7 +416,7 @@ select {
 .coronanalysTitle{
   font-family: "titleFont";
   font-size: 8vw;
-  margin-top: 1vh;
+  margin-top: 1.5vmax;
 }
 
 .main{
@@ -421,23 +424,27 @@ select {
   flex-basis: 300px;
   flex-grow: 2;
   flex-shrink: 1;
-  overflow: scroll;
+  overflow: auto;
 
 }
 
 h1{
-  font-family: "titleFont";
-  font-size: 8vh;
+  font-size: 6vh;
   padding: 0;
-  margin-left: 1vw;
+  margin-left: 7vw;
 }
 
 h2{
-  font-family: "titleFont";
-  font-size: 3vh;
+  font-size: 2.5vh;
   padding: 0;
-  margin-left: 1vw;
+  margin-left: 7vw;
   text-transform: uppercase;
+}
+
+h3{
+  font-size: 2vh;
+  padding: 0;
+  margin-left: 7vw;
 }
 
 .main__text{
@@ -445,13 +452,13 @@ h2{
   padding-bottom: 0;
   align-content: center;
   justify-content: center;
-  overflow: scroll;
+  overflow: auto;
 }
 
   
 button {
-  width: 30vmin;
-  height: 12vh;
+  width: 22vmin;
+  height: 10vh;
   background-color: #c70000;
   border-color: #c70000;
   border-style: solid;
@@ -462,7 +469,7 @@ button {
   transition-property: all;
   transition-duration: .3s;
 
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
   
 }
 
@@ -509,13 +516,11 @@ button:hover{
 
 .footer{
   background-color: rgb(31, 38, 46);
-  flex-grow: 2;
+  /* flex-grow: 2; */
   text-align: center;
   flex-shrink: 10;
-  color: whitesmoke;
-
+  color: #f5f5f5;
 }
-
 
 /*Encueta h3*/
 .Encuesta h3{
@@ -524,6 +529,7 @@ button:hover{
 
 
 .Graficas {
+  padding: 1rem;
   display: flex;
   margin-bottom: 10%;
 }
@@ -534,7 +540,7 @@ button:hover{
   .content{
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      grid-template-rows: 20vh 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   }
 
   .header{
