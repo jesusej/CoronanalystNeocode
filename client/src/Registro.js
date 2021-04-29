@@ -1,15 +1,19 @@
 import Axios from "axios";
-import React, { useState } from "react";
-import {useHistory} from "react-router-dom";
+import React, { useState, useContext } from "react";
+import {Redirect, useHistory} from "react-router-dom";
+import { idContext, idTipoCuentaContext, LoginContext } from "./Helper/Context";
 
 
 function Registro() {  
-
   const history = useHistory();
-  const [errorStatus, setErrorStatus] = useState('')
+  // Para registro
   const [usernameReg, setUsernameReg] = useState('')
   const [passwordReg, setPasswordReg] = useState('')
-  const [regResponse, setRegResponse] = useState('')
+  const [loggedIn, setLoggedIn] = useState('');
+
+  const {setLoginStatus} = useContext(LoginContext);
+  const {setId} = useContext(idContext);
+  const {setIdTipoCuenta} = useContext(idTipoCuentaContext);
 
 const register = () => {
   Axios.post("http://localhost:3001/register", {
@@ -21,15 +25,33 @@ const register = () => {
     if (response.data === false)
     {
       if (usernameReg !== '' && passwordReg !== '')
-        setRegResponse("El correo electrónico ya se encuentra registrado");
+        alert("El correo electrónico ya se encuentra registrado");
       else if (usernameReg === '' || passwordReg === '')
-        setRegResponse("Favor de llenar los campos de correo y/o contraseña completamente antes de registrarse");
+        alert("Favor de llenar los campos de correo y/o contraseña completamente antes de registrarse");
     }
     else if (response.data === true)
     {
       console.log(response);
-      alert("Se ha registrado exitosamente");
-      //history.push("/menu_usuario");
+      alert("Usuario registrado exitosamente");
+      Axios.post("http://localhost:3001/login", {
+        username: usernameReg,
+        password: passwordReg,
+      }).then((response) => {
+    
+        console.log(response.data);
+    
+        if(response.data.message) {
+          setLoggedIn(false);
+        } else {
+            setLoginStatus(response.data[0].Usuario);
+
+            setIdTipoCuenta(response.data[0].idTipo_De_Cuenta);
+            console.log(idTipoCuentaContext);
+
+            setLoggedIn(true);
+            setId(response.data[0].idCuenta);
+          }
+      });
     }
   });
 };
@@ -48,6 +70,11 @@ function validarEmail() {
    alert("Por favor ingrese una dirección de correo electrónico válida");
   }
 }
+
+  if(loggedIn){
+    return <Redirect to = "/menu_usuario" />
+  }
+
 
     return (
       // Inicia front end de Registro
@@ -81,7 +108,6 @@ function validarEmail() {
           </div>
         </div>
 
-        <p className = "error">{errorStatus}</p>
       </div>
     );
   }

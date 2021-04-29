@@ -54,12 +54,11 @@ function App() {
               
               <div className="conexiones">
                 <Route exact path="/" component={Home}/>
-                <Route path="/registro" component={Registro}/>
-                  
 
                 <idTipoCuentaContext.Provider value = {{idTipoCuenta, setIdTipoCuenta}} >
                 <idContext.Provider value = {{id, setId}} >
                   <Route path="/login" component={Login}/>
+                  <Route path="/registro" component={Registro}/>
 
                   <Route path="/menu_usuario" component={MenuUsuario}/>
                   <Route path="/menu_cliente" component={MenuCliente}/>
