@@ -1,35 +1,37 @@
+import React, {useState } from "react";
+import {useHistory} from "react-router-dom";
 import Axios from "axios";
-import React, { useState } from "react";
 
+function CrearCliente() {
+    const history = useHistory();
 
-function Registro() {
-  // Para registro
   const [errorStatus, setErrorStatus] = useState('')
   const [usernameReg, setUsernameReg] = useState('')
   const [passwordReg, setPasswordReg] = useState('')
   const [regResponse, setRegResponse] = useState('')
-
-const register = () => {
-  Axios.post("http://localhost:3001/register", {
+  const [delResponse, setDelResponse] = useState('')
+  
+const registerClient = () => {
+  Axios.post("http://localhost:3001/register_client", {
     username: usernameReg,
     password: passwordReg,
   }).then((response) => {
     console.log(response);
-    
-    if (response.data === false)
+    if (response.data == false)
     {
-      if (usernameReg !== '' && passwordReg !== '')
-        setRegResponse("El correo electrónico ya se encuentra registrado");
-      else if (usernameReg === '' || passwordReg === '')
-        setRegResponse("Favor de llenar los campos de correo y/o contraseña completamente antes de registrarse");
-    }
-    else if (response.data === true)
-    {
-      console.log(response);
-      setRegResponse("Usuario registrado exitosamente");
-    }
+        if (usernameReg !== '' && passwordReg !== '')
+          setRegResponse("El correo electrónico ya se encuentra registrado");
+        else if (usernameReg === '' || passwordReg === '')
+          setRegResponse("Llene los campos de correo y/o contraseña completamente antes de registrarse");
+      }
+      else if (response.data === true)
+      {
+        console.log(response);
+        setRegResponse("Cliente registrado exitosamente");
+      }
   });
 };
+
 
 function validarEmail() {
   var valor = usernameReg;
@@ -38,7 +40,7 @@ function validarEmail() {
   if (emailRegex.test(valor)){
    //alert("La dirección de email " + valor + " es correcta.");
    console.log("La dirección de email " + valor + " es correcta.");
-   register();
+   registerClient();
   } else {
    //alert("La dirección de email es incorrecta.");
    console.log("La dirección de email " + valor + " es incorrecta.");
@@ -47,9 +49,14 @@ function validarEmail() {
 }
 
     return (
-      // Inicia front end de Registro
-      <div className="Registro">
-        <h2>Registro</h2>
+      <div className="CrearCliente">
+        <div className="buttons">
+        <button onClick={()=> history.push("/menu_admin")}>Regresar al menú de sesión</button>
+        <button onClick={validarEmail}>Crear cuenta cliente</button>
+        </div>
+        {regResponse}
+
+        <h2>Crear cuenta Cliente</h2>
 
         <label>Correo electrónico: </label> <br />
         <input type = "text" name="username" required
@@ -64,14 +71,10 @@ function validarEmail() {
           setPasswordReg(e.target.value);
         }}
         /> <br/> <br/> 
-        <div className="button">
-        <button onClick={validarEmail}>Registrarse</button>
-        </div>
-        {regResponse}
-
+           
          <p className = "error">{errorStatus}</p>
       </div>
     );
   }
  
-export default Registro;
+export default CrearCliente;
