@@ -132,7 +132,6 @@ const encuesta = () => {
               setIsCheckedPublic(isChecked);
 
             }}/> {todo[i]}
-            <br />
           </label> 
           );
         }
@@ -221,9 +220,9 @@ const encuesta = () => {
               {preguntas}
             </ul>
 
+            <button onClick={sendAnswers}>Terminar Encuesta</button>
             
             <br /><br />
-            <button onClick={sendAnswers}>Terminar Encuesta</button>
           </div>
     );
 }

@@ -4,8 +4,7 @@ import {useHistory} from "react-router-dom";
 
 
 function Registro() {  
-  const history = useHistory();
-  // Para registro
+
   const history = useHistory();
   const [errorStatus, setErrorStatus] = useState('')
   const [usernameReg, setUsernameReg] = useState('')
