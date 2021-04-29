@@ -14,13 +14,14 @@ import MenuAdmin from "./MenuAdmin";
 import MenuCliente from "./MenuCliente";
 import CuentasAdmin from "./CuentasAdmin";
 
-import { LoginContext, idContext } from "./Helper/Context";
+import { LoginContext, idContext, idTipoCuentaContext } from "./Helper/Context";
 
 function App() {
 
   // Constante loginStatus para definir estado del login dependiente del cookie (se necesita mejorar, ver variables globales)
   const [loginStatus, setLoginStatus] = useState("")
   const [id, setId] = useState("")
+  const [idTipoCuenta, setIdTipoCuenta] = useState("");
 
   Axios.defaults.withCredentials = true;
   
@@ -49,29 +50,39 @@ function App() {
                       {/* ^ Back End ^ */}
 
             
-            <h3>{loginStatus + " " + id}</h3>
+            <h3>{loginStatus + " " + id + " " + idTipoCuenta}</h3>
 
             <LoginContext.Provider value={{ loginStatus, setLoginStatus }} >
             
-              <div className="conexiones">
+
+            <div className="paginas">
                 <Route exact path="/" component={Home}/>
                 <Route path="/registro" component={Registro}/>
-                  
-
+                
+                <idTipoCuentaContext.Provider value = {{idTipoCuenta, setIdTipoCuenta}} >
                 <idContext.Provider value = {{id, setId}} >
-                  <Route path="/login" component={Login}/>
+                
 
-                  <Route path="/menu_usuario" component={MenuUsuario}/>
-                  <Route path="/menuCliente" component={MenuCliente}/>
-                  <Route path="/menuAdmin" component={MenuAdmin}/>
-                  
-                  <Route path="/datos_personales" component={DatosPersonales}/> 
-                  <Route path="/encuesta" component={Encuesta}/>
-                </ idContext.Provider>
+                <Route path="/login" component={Login}/>
 
-                <Route path="/datos" component={Datos}/>
+                <Route path="/menu_usuario" component={MenuUsuario}/>
+                <Route path="/menu_cliente" component={MenuCliente}/>
+                <Route path="/menu_admin" component={MenuAdmin}/>
+                
+                <Route path="/datos_personales" component={DatosPersonales}/> 
+                <Route path="/encuesta" component={Encuesta}/>
+                <Route exact path="/datos" component={Datos}/>
+
+
                 <Route path="/cuentas_admin" component={CuentasAdmin}/> 
-              </div>
+            
+                </idContext.Provider>                
+                </idTipoCuentaContext.Provider>
+              
+                
+                
+            </div>
+
             </ LoginContext.Provider>
 
           </div>
