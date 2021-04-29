@@ -83,7 +83,7 @@ if (registroExitoso == true) {
             {/* <p>Pagina donde se muestran los campos para llenar los datos personales </p> */}
       
             <div className ="centeredContainer">
-            <h1 className = "datosPersonales"> Datos Personales</h1>
+            <h2 className = "datosPersonales"> Datos Personales</h2>
 
             <label> Género </label> <br />
             <select type="text"  name="gender" required
@@ -235,18 +235,6 @@ if (registroExitoso == true) {
 
             <h2>{regResponse}</h2>
             <h2>{registroExitoso}</h2>
-
-            {genero} <br />
-            {edad} <br />
-            {estadoCivil} <br />
-            {nivelEstudios} <br />
-            {ocupacion} <br />
-            {ingreso} <br />
-            {localidad} <br />
-            {ip} <br />
-            {dispositivo} <br />
-            {so} <br />
-            {id} <br />
 
             { /* Insertar IP, sistema operativo y dispositivo */ }
 

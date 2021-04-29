@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Redirect, useHistory } from "react-router-dom";
 import Axios from "axios";
 
 import { LoginContext, idContext } from "./Helper/Context";
@@ -7,29 +7,29 @@ import { LoginContext, idContext } from "./Helper/Context";
 function CerrarSesion () {
     const history = useHistory();
 
-    const {loginStatus, setLoginStatus} = useContext(LoginContext);
-    const {id, setId} = useContext(idContext);
+    const { setLoginStatus } = useContext(LoginContext);
+    const { setId } = useContext(idContext);
 
-    var loggedOff = false;
+    const [loggedOff, setLoggedOff] = useState("");
 
     const logOff = () => {
         Axios.get("http://localhost:3001/logoff").then((response) => {
             console.log(response);
-            loggedOff = true;
+            setLoggedOff(true);
         });
-        if(loggedOff == true){
-            setId("");
-            setLoginStatus("");
-            history.push("/login");
-        }
     };
+
+    if(loggedOff){
+        setId("");
+        setLoginStatus("");
+        return <Redirect to = "/" />;
+    }
 
     return(
         <div className="cerrarsesion">
             <h3> ¿Realmente desea cerrar sesión? </h3>
 
-            <button onClick={logOff}>Si</button>
-            <button onClick={()=> history.push("/menu_Usuario")}>No</button>
+            <button onClick={logOff}>Estoy seguro</button>
         </div>
     );
 }
