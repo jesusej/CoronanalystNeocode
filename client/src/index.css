@@ -187,8 +187,14 @@ button:hover{
 .Encuesta {
   margin-left: 10%;
 }
+
 .Encuesta h3{
   margin-left: 0%;
+  font-size: 1em;
+}
+
+.Encuesta h2 {
+  font-size: 1.2em;
 }
 
 .datosPersonales {
