@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import Axios from "axios";
 import {Redirect, useHistory} from "react-router-dom";
 
-import { idContext } from "./Helper/Context";
+import { idContext, idTipoCuentaContext } from "./Helper/Context";
 
 
 function Encuesta () {
@@ -17,6 +17,7 @@ const [isCheckedPublic, setIsCheckedPublic] = useState("");
 
 
 const {id} = useContext(idContext);
+const {idTipoCuenta} = useContext(idTipoCuentaContext);
 
 var respuestas = [/*Guarda una clase respuesta*/];
 
@@ -176,6 +177,10 @@ const encuesta = () => {
           {
             alert("Ya ha contestado la encuesta, por favor regrese al menú principal");
           }
+          else if ((idTipoCuenta == 2) || (idTipoCuenta == 3))
+        {
+            alert("Su tipo de cuenta no permite registrar resultados");
+        }
           else
           {
                 Axios.post("http://localhost:3001/resultados", {

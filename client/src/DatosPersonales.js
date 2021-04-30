@@ -3,7 +3,7 @@ import Axios from "axios";
 import {useHistory} from "react-router-dom";
 import { Redirect } from "react-router-dom";
 
-import { idContext } from "./Helper/Context";
+import { idContext, idTipoCuentaContext } from "./Helper/Context";
 
 function DatosPersonales () {
     const history = useHistory();
@@ -11,6 +11,7 @@ function DatosPersonales () {
     const [registroExitoso, setRegistroExitoso] = useState("");
 
     const {id} = useContext(idContext);
+    const {idTipoCuenta} = useContext(idTipoCuentaContext);
 
     //Datos Personales
     const [genero, setGenero] = useState("")
@@ -43,6 +44,10 @@ function DatosPersonales () {
         if (response1.data == true)
         {
             alert("Ya cuenta con datos registrados, por favor regrese al menú");
+        }
+        else if ((idTipoCuenta == 2) || (idTipoCuenta == 3))
+        {
+            alert("Su tipo de cuenta no permite registrar resultados");
         }
         else
         {
