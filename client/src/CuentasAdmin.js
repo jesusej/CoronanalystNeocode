@@ -127,7 +127,11 @@ function CuentasAdmnin() {
     }
     else
     {
-      {CrearCliente()}
+      return(
+      <Popup position="center">
+        {CrearCliente()}
+      </Popup>
+      );
     }
   }
 
@@ -149,9 +153,11 @@ function CuentasAdmnin() {
   return(
     <div className="cuentasAdmin">
     <button onClick={checkIdMenu}>Volver al menú</button>
-      <Popup trigger={<button> Crear cuenta cliente</button>}>
-          {checkId}
-      </Popup>
+    <Popup trigger={<button>Crear cuenta cliente</button>} position="center">
+                <idTipoCuentaContext-Provider value = {{idTipoCuenta}} >
+                  {CrearCliente()}
+                </idTipoCuentaContext-Provider>
+            </Popup>
       <br></br><br></br>
           
       <ul>

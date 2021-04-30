@@ -19,7 +19,7 @@ function MenuCliente () {
         <div className="main">
           <div className = "titulo"><h1>Menú de Cliente</h1></div>
           <div className = "centered-container__cliente">
-            <button className="button__cliente" onClick={()=> history.push("/")}>Visualizar Datos</button>
+            <button className="button__cliente" onClick={()=> history.push("/datos")}>Visualizar Datos</button>
             <Popup trigger={<button>Cerrar sesión</button>} position="center">
                   <LoginContext.Provider value = {{loginStatus, setLoginStatus}} >
                     <idContext-Provider value = {{id, setId}} >
