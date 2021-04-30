@@ -37,8 +37,16 @@ function DatosPersonales () {
         console.log(genero);
         console.log(edad);
 
-
-        Axios.post("http://localhost:3001/datos_personales", {
+        Axios.post("http://localhost:3001/checkPersonalData", {
+        id: id
+    }).then((response1) => {
+        if (response1.data == true)
+        {
+            alert("Ya cuenta con datos registrados, por favor regrese al menú");
+        }
+        else
+        {
+            Axios.post("http://localhost:3001/datos_personales", {
             genero, genero,
             edad: edad,
             estadoCivil: estadoCivil,
@@ -75,7 +83,8 @@ function DatosPersonales () {
             }
             
         });
-
+        }
+    });
 };
 
 if (registroExitoso == true) {
@@ -238,7 +247,6 @@ if (registroExitoso == true) {
         </div>
 
 
-            { /* Insertar IP, sistema operativo y dispositivo */ }
 
             <div className= "selectReg">
                 

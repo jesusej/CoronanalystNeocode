@@ -168,26 +168,38 @@ const encuesta = () => {
 
       if (callDatabase == true)
       {
-        Axios.post("http://localhost:3001/resultados", {
+        Axios.post("http://localhost:3001/checkAnswers", {
           id: id,
-          answers: respuestasPublic,
 
-        }).then((response) => {
-
-          console.log("response de axios");
-          console.log(response);
-
-          if (response.data == true)
+        }).then((response1) => {
+          if (response1.data == true)
           {
-            setRegistroExitoso(true);
+            alert("Ya ha contestado la encuesta, por favor regrese al menú principal");
           }
-          else if (response.data == false)
+          else
           {
-            setRegistroExitoso(false);
-            alert("Por favor inicie sesión");
-          }
+                Axios.post("http://localhost:3001/resultados", {
+              id: id,
+              answers: respuestasPublic,
+
+            }).then((response) => {
+
+              console.log("response de axios");
+              console.log(response);
+
+              if (response.data == true)
+              {
+                setRegistroExitoso(true);
+              }
+              else if (response.data == false)
+              {
+                setRegistroExitoso(false);
+                alert("Por favor inicie sesión");
+              }
           
-        });
+            });
+          }
+      });
       }
       else if (callDatabase == false)
       {

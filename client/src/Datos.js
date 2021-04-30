@@ -40,17 +40,16 @@ function Datos () {
 
     const datos = () => {
 
-        if (!id)
+    if (!id)
     {
         alert("Inicia sesión para ver los resultados de la encuesta");
     }
     else
     {
-        Axios.post("http://localhost:3001/checkAnswers", {
+        Axios.post("http://localhost:3001/checkPersonalData", {
             id: id,
         })
         .then((response1) => {
-   
 
             if((response1.data == false) && (idTipoCuenta == 1))
             {
@@ -58,7 +57,18 @@ function Datos () {
             }
             else
             {
-                Axios.post("http://localhost:3001/datos", {
+                Axios.post("http://localhost:3001/checkAnswers", {
+            id: id,
+                })
+                    .then((response2) => {
+
+                    if((response2.data == false) && (idTipoCuenta == 1))
+                    {
+                        alert("Para poder ver los datos, es necesario que contestes antes la encuesta");
+                    }
+                    else
+                    {
+                        Axios.post("http://localhost:3001/datos", {
                 })
                   .then((response) => {
           
@@ -233,15 +243,12 @@ function Datos () {
                       setGrafica4Public(graph4);
                       setGrafica5Public(graph5);
                   });
+
+                    }
+                })
             }
-
-
-
         })
-
-        
-    }
-      };
+    }};
 
       
       useEffect(() => {
