@@ -28,8 +28,7 @@ function CerrarSesion () {
     return(
         <div className="cerrarsesion">
             <h3> ¿Realmente desea cerrar sesión? </h3>
-
-            <button onClick={logOff}>Estoy seguro</button>
+                <button onClick={logOff}>Estoy seguro</button>
         </div>
     );
 }
