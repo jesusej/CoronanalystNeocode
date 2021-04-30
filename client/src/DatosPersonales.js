@@ -25,71 +25,69 @@ function DatosPersonales () {
     const [ip, setIp] = useState("")
     const [dispositivo, setDispositivo] = useState("")
     const [so, setSo] = useState("")
-    
-    
-
-    const [regResponse, setRegResponse] = useState("")
 
     const regDatPer = () => {
-        setIp("null");
-        setDispositivo("null");
-        setSo("null");
+        if (!id){
+            alert("Por favor inicie sesión antes de contestar");
+            setRegistroExitoso(false);
+            console.log(registroExitoso);
+            history.push("login");
+        } else {
+            setIp("null");
+            setDispositivo("null");
+            setSo("null");
 
-        console.log(genero);
-        console.log(edad);
+            console.log(genero);
+            console.log(edad);
 
-        Axios.post("http://localhost:3001/checkPersonalData", {
-        id: id
-    }).then((response1) => {
-        if (response1.data == true)
-        {
-            alert("Ya cuenta con datos registrados, por favor regrese al menú");
-        }
-        else if ((idTipoCuenta == 2) || (idTipoCuenta == 3))
-        {
-            alert("Su tipo de cuenta no permite registrar resultados");
-        }
-        else
-        {
-            Axios.post("http://localhost:3001/datos_personales", {
-            genero, genero,
-            edad: edad,
-            estadoCivil: estadoCivil,
-            nivelEstudios: nivelEstudios,
-            ocupacion: ocupacion,
-            ingreso: ingreso,
-            localidad: localidad,   
-            ip: ip,
-            dispositivo: dispositivo,
-            so:so,
-            id:id,
-
-        }).then((response) => {
-            console.log(response);
-
-            if ((response.data == false) && ((genero === '') || (edad === '') || (nivelEstudios === '') ||
-            (localidad === '') ||  (estadoCivil === '') || (ingreso === '') ||
-            (ocupacion === '')))
+            Axios.post("http://localhost:3001/checkPersonalData", {
+            id: id
+        }).then((response1) => {
+            if (response1.data == true)
             {
-                alert("Por favor llene todos los datos antes de registrarse");
-                setRegistroExitoso(false);
-                console.log(registroExitoso);
+                alert("Ya cuenta con datos registrados, por favor regrese al menú");
             }
-            else if((id === '')){
-                alert("Por favor inicie sesión antes de contestar");
-                setRegistroExitoso(false);
-                console.log(registroExitoso);
-            }
-            else if (response.data == true)
+            else if ((idTipoCuenta == 2) || (idTipoCuenta == 3))
             {
-                alert("Ha registrado los datos correctamente");
-                setRegistroExitoso(true);
-                console.log(registroExitoso);
+                alert("Su tipo de cuenta no permite registrar resultados");
             }
-            
+            else
+            {
+                Axios.post("http://localhost:3001/datos_personales", {
+                genero, genero,
+                edad: edad,
+                estadoCivil: estadoCivil,
+                nivelEstudios: nivelEstudios,
+                ocupacion: ocupacion,
+                ingreso: ingreso,
+                localidad: localidad,   
+                ip: ip,
+                dispositivo: dispositivo,
+                so:so,
+                id:id,
+
+            }).then((response) => {
+                console.log(response);
+
+                if ((response.data == false) && ((genero === '') || (edad === '') || (nivelEstudios === '') ||
+                (localidad === '') ||  (estadoCivil === '') || (ingreso === '') ||
+                (ocupacion === '')))
+                {
+                    alert("Por favor llene todos los datos antes de registrarse");
+                    setRegistroExitoso(false);
+                    console.log(registroExitoso);
+                }
+                else if (response.data == true)
+                {
+                    alert("Ha registrado los datos correctamente");
+                    setRegistroExitoso(true);
+                    console.log(registroExitoso);
+                }
+                
+            });
+            }
         });
-        }
-    });
+    }
 };
 
 if (registroExitoso == true) {

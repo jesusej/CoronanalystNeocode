@@ -148,74 +148,75 @@ const encuesta = () => {
 
   
   const sendAnswers = () => {
+    if(!id){
+      alert("Sucedió un error, por favor inicie sesión");
+      history.push("/login");
+    } else {
+      console.log("respuestasPublic");
+      console.log(respuestasPublic);
+      console.log("isCheckedPublic");
+      console.log(isCheckedPublic);
+      
+      var callDatabase = true;
 
-    console.log("respuestasPublic");
-    console.log(respuestasPublic);
-    console.log("isCheckedPublic");
-    console.log(isCheckedPublic);
-    
-    var callDatabase = true;
-
-    if (respuestasPublic){
-
-      for (var i = 0; i < isCheckedPublic.length; i++)
-      {
-        if (isCheckedPublic[i] == false)
+      if (respuestasPublic){
+        for (var i = 0; i < isCheckedPublic.length; i++)
         {
-          callDatabase = false;
+          if (isCheckedPublic[i] == false)
+          {
+            callDatabase = false;
+          }
+        }
+
+
+        if (callDatabase == true)
+        {
+          Axios.post("http://localhost:3001/checkAnswers", {
+            id: id,
+
+          }).then((response1) => {
+            if (response1.data == true)
+            {
+              alert("Ya ha contestado la encuesta, por favor regrese al menú principal");
+            }
+            else if ((idTipoCuenta == 2) || (idTipoCuenta == 3))
+          {
+              alert("Su tipo de cuenta no permite registrar resultados");
+          }
+            else
+            {
+                  Axios.post("http://localhost:3001/resultados", {
+                id: id,
+                answers: respuestasPublic,
+
+              }).then((response) => {
+
+                console.log("response de axios");
+                console.log(response);
+
+                if (response.data == true)
+                {
+                  setRegistroExitoso(true);
+                }
+                else if (response.data == false)
+                {
+                  setRegistroExitoso(false);
+                }
+            
+              });
+            }
+        });
+        }
+        else if (callDatabase == false)
+        {
+          alert("Por favor responda a todas las preguntas antes de terminar la encuesta")
         }
       }
-
-
-      if (callDatabase == true)
-      {
-        Axios.post("http://localhost:3001/checkAnswers", {
-          id: id,
-
-        }).then((response1) => {
-          if (response1.data == true)
-          {
-            alert("Ya ha contestado la encuesta, por favor regrese al menú principal");
-          }
-          else if ((idTipoCuenta == 2) || (idTipoCuenta == 3))
+        else 
         {
-            alert("Su tipo de cuenta no permite registrar resultados");
+          alert("Por favor responda a todas las preguntas antes de terminar la encuesta");
         }
-          else
-          {
-                Axios.post("http://localhost:3001/resultados", {
-              id: id,
-              answers: respuestasPublic,
-
-            }).then((response) => {
-
-              console.log("response de axios");
-              console.log(response);
-
-              if (response.data == true)
-              {
-                setRegistroExitoso(true);
-              }
-              else if (response.data == false)
-              {
-                setRegistroExitoso(false);
-                alert("Por favor inicie sesión");
-              }
-          
-            });
-          }
-      });
-      }
-      else if (callDatabase == false)
-      {
-        alert("Por favor responda a todas las preguntas antes de terminar la encuesta")
-      }
     }
-      else 
-      {
-        alert("Por favor responda a todas las preguntas antes de terminar la encuesta");
-      }
-    
   };
 
   if(!preguntas){

@@ -27,7 +27,8 @@ function Datos () {
         }
         else if (!idTipoCuenta)
         {
-            alert("No has iniciado sesión, presiona el Logo PK para proceder a ello");
+            alert("No has iniciado sesión, se redireccionará a la página de iniciar sesión");
+            history.push("/login");
         }
     };
 
@@ -43,6 +44,7 @@ function Datos () {
     if (!id)
     {
         alert("Inicia sesión para ver los resultados de la encuesta");
+        history.push("/login");
     }
     else
     {
