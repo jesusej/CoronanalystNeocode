@@ -448,13 +448,24 @@ h3{
 }
 
 .main__text{
+  margin: 0 2vw;
+  margin-bottom: 2vh;
+  border-radius: 64px; /* Probablemente cambiar por otro más dinámico */
   padding: 1vw 2vw 2vw 2vw;
-  padding-bottom: 0;
   align-content: center;
   justify-content: center;
   overflow: auto;
-  /* color:whitesmoke;
-  background-color: #c70000; */
+  /* color:whitesmoke;*/
+  background-color: #c70000; 
+}
+
+.main__text h1 {
+  text-align: center;
+  margin-left: 0;
+}
+
+.main__text p {
+  margin: 2vh 0;
 }
 
   
