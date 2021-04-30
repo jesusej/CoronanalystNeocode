@@ -66,11 +66,12 @@ function App() {
                   
                   <Route path="/datos_personales" component={DatosPersonales}/> 
                   <Route path="/encuesta" component={Encuesta}/>
+                  
+                  <Route path="/datos" component={Datos}/>
+                  <Route path="/cuentas_admin" component={CuentasAdmin}/> 
                 </ idContext.Provider>
                 </ idTipoCuentaContext.Provider>
 
-                <Route path="/datos" component={Datos}/>
-                <Route path="/cuentas_admin" component={CuentasAdmin}/> 
               </div>
 
             </ LoginContext.Provider>

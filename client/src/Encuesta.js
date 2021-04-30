@@ -92,6 +92,8 @@ const encuesta = () => {
       
       for(i = 0; i < todo.length; i++){
         if (id[i] < 100){
+          if(i > 0)
+            questions.push(<br/>);
           questions.push(<h3 key = {"q" + idPregPar}> {todo[i]} </h3>);
           idPregPar = id[i];
         } else {
@@ -210,11 +212,9 @@ const encuesta = () => {
   }
     return(
         <div className="Encuesta">
-            <h2>Pagina de Encuesta</h2>
+          <br></br>
 
-
-            <h4>Compras y estado en pandemia</h4>
-            <p>Pagina donde se muestran todas las preguntas con su respuesta </p>
+            <h2>Compras y estado en pandemia</h2>
 
 
             <ul>
@@ -222,6 +222,7 @@ const encuesta = () => {
             </ul>
 
             <div className="centeredContainer">
+              <button onClick={()=> history.push("/menu_usuario")}>Regresar al menú</button>
               <button onClick={sendAnswers}>Terminar Encuesta</button>
             </div>
             <br /><br />

@@ -5,28 +5,27 @@ import Popup from "reactjs-popup";
 import './PopUp.css';
 import CrearCliente from "./CrearCliente";
 
-import { idContext } from "./Helper/Context";
+import { idTipoCuentaContext } from "./Helper/Context";
 
 function CuentasAdmnin() {
 
   const history = useHistory();
   const [cuentas, setCuentas] = useState("");
   const [borrarCuentaCliente, setBorrarCuentaCliente] = useState("");
-  const [borrarCuentaUsuario, setBorrarCuentaUsuario] = useState("");
   const [eraseResponse, setEraseResponse] = useState("");
 
-  const {id} = useContext(idContext);
+  const {idTipoCuenta} = useContext(idTipoCuentaContext);
 
   const registroCuentas = () => {
 
-    if (id != 3)
+    if (idTipoCuenta != 3)
     {
       alert("Solo el administrador puede modificar las cuentas");
     }
     else
     {
       Axios.post("http://localhost:3001/cuentas_admin", {
-      id: id,
+      id: idTipoCuenta,
   })
     .then((response) => {
 
@@ -51,9 +50,6 @@ function CuentasAdmnin() {
             todas.push(response.data[i].Usuario);
             id.push(response.data[i].idCuenta);
             idTipo.push(response.data[i].idTipo_De_Cuenta);
-
-            //console.log(todas[i]);
-            //console.log(id[i]); 
             
           }
 
@@ -90,15 +86,9 @@ function CuentasAdmnin() {
                 if (idTipo[i] === 1)
                   {
                   accounts.push(
-                    <label>
-                      <input type="Radio" name="1" id={id[i]} value={todas[i]}
-                      onClick={(e) => {
-                
-                        setBorrarCuentaUsuario(e.target.value);
-                        
-                      }}/> {todas[i]}
-                      <br />
-                    </label> 
+                      <ul>
+                        <li/> {todas[i]}
+                      </ul>
                     );
                   }
                 }
@@ -128,29 +118,26 @@ function CuentasAdmnin() {
     }
   )};
 
-  const eliminarUsuario = () => {
-    Axios.post("http://localhost:3001/eliminar_cuenta", {
-      cuenta: borrarCuentaUsuario,
-  })
-    .then((response) => {
-      console.log(response.data);
-      if (response.data === true)
-      {
-        setEraseResponse("La cuenta correspondiente al nombre de usuario " + borrarCuentaUsuario + " ha sido elimanda exitosamente");
-      }
-      else {
-        setEraseResponse("La cuenta no ha sido eliminada");
-    }
-    });
-  };
+
 
   const checkId = () => {
-    if (id != 3)
+    if (idTipoCuenta != 3)
+    {
+      alert("No es posible acceder a este apartado");
+    }
+    else
+    {
+      {CrearCliente()}
+    }
+  }
+
+  const checkIdMenu = () => {
+    if (idTipoCuenta != 3)
     {
       alert("No es posible acceder a este apartado");
     }
     else{
-
+      history.push("/menu_admin");
     }
   }
 
@@ -161,7 +148,7 @@ function CuentasAdmnin() {
 
   return(
     <div className="cuentasAdmin">
-    <button onClick={()=> history.push("/menu_admin")}>Regresar al menú de sesión</button>
+    <button onClick={checkIdMenu}>Volver al menú</button>
       <Popup trigger={<button> Crear cuenta cliente</button>}>
           {checkId}
       </Popup>
@@ -170,12 +157,8 @@ function CuentasAdmnin() {
       <ul>
         {cuentas}
       </ul>
-      {borrarCuentaCliente}<br></br>
-      {borrarCuentaUsuario}<br></br>
-      {eraseResponse}
 
       <button onClick={eliminarCliente}>Eliminar cuenta Cliente</button>
-      <button onClick={eliminarUsuario}>Eliminar cuenta Usuario</button>
     </div>
   );
 }

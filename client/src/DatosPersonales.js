@@ -78,7 +78,6 @@ if (registroExitoso == true) {
 } 
     return(
         <div>
-            <h2> Pagina de Encuesta</h2>
             
             {/* <p>Pagina donde se muestran los campos para llenar los datos personales </p> */}
       
@@ -233,8 +232,6 @@ if (registroExitoso == true) {
             <br /> <br />
         </div>
 
-            <h2>{regResponse}</h2>
-            <h2>{registroExitoso}</h2>
 
             { /* Insertar IP, sistema operativo y dispositivo */ }
 

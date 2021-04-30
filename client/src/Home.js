@@ -7,7 +7,7 @@ function Home() {
 
   return(
       <div className="main">
-        <div className = "titulo"><h1>Home</h1></div>
+        <div className = "titulo"></div>
             <div className = "centered-container">
               <button onClick={()=> history.push("/login")}>Login</button>
               <button onClick={()=> history.push("/registro")}>Registro</button>

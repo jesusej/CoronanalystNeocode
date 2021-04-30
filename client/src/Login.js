@@ -23,7 +23,13 @@ function Login() {
   const [errorStatus, setErrorStatus] = useState("");
 
   const login = () => {
-    Axios.post("http://localhost:3001/login", {
+    if(!username || !password)
+    {
+      alert("Por favor llene ambos campos antes de iniciar sesión");
+    }
+    else
+    {
+      Axios.post("http://localhost:3001/login", {
       username: username,
       password: password,
     }).then((response) => {
@@ -32,6 +38,7 @@ function Login() {
   
       if(response.data.message) {
         setErrorStatus(response.data.message);
+        alert("No existe la combinación de correo y contraseña");
         setLoggedIn(false);
       } else {
           setLoginStatus(response.data[0].Usuario);
@@ -44,6 +51,9 @@ function Login() {
           setId(response.data[0].idCuenta);
         }
     });
+
+    }
+    
   };
 
   // Checa si el loggedIn es verdadero para redireccionarlo al menu de Usuario  
@@ -96,14 +106,8 @@ function Login() {
         <button onClick={login}>Log in</button>
       </div>
     </div>  
-        
-        
-    {/* Termina front end de login */}
-    <h2>{errorStatus}</h2>
-
           
     </div>
-
     
   );
 }

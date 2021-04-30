@@ -197,6 +197,7 @@ app.post('/checkAnswers', (req, res) => {
             [id],
             (err, result) => {
                 console.log(err);
+                console.log(result);
     
                 if ((result.length > 0) || (id == '')){
                     //res.send({message:"Ya hay registros"});
@@ -255,12 +256,13 @@ app.post('/resultados', (req, res) => {
 
 app.post('/cuentas_admin', (req, res) => {
 
-    const id = req.body.id;
 
-    // if (id != 3)
-    // {
-    //     res.send(false);
-    // }
+    const idTipo = req.body.id;
+
+    if (idTipo != 3)
+    {
+        res.send(false);
+    }
 
     db.query(
         "SELECT * FROM cuenta WHERE idTipo_De_Cuenta = 1 OR idTipo_De_Cuenta = 2",
@@ -290,12 +292,15 @@ app.post('/eliminar_cuenta', (req, res) => {
             "DELETE FROM cuenta WHERE Usuario = ?",
             [cuenta],
             (err, result) => {
-                console.log(err);
+                if (err)
+                {
+                    console.log(err);
+                    res.send(false);
+                }
             }
         );
         res.send(true);
     }
-     
 });
 
 app.get('/getUnityData', (req, res) => {   
