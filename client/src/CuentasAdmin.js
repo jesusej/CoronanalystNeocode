@@ -81,13 +81,13 @@ function CuentasAdmnin() {
             }
             else if (j === 1)
             {
-              accounts.push(<h3> Cuentas de tipo Usuario: </h3>);
+              accounts.push(<h3> <br></br><br></br>Cuentas de tipo Usuario: </h3>);
               for(i = 0; i < todas.length; i++){
                 if (idTipo[i] === 1)
                   {
                   accounts.push(
                       <ul>
-                        <li/> {todas[i]}
+                        <li> {todas[i]}</li>
                       </ul>
                     );
                   }
@@ -120,21 +120,6 @@ function CuentasAdmnin() {
 
 
 
-  const checkId = () => {
-    if (idTipoCuenta != 3)
-    {
-      alert("No es posible acceder a este apartado");
-    }
-    else
-    {
-      return(
-      <Popup position="center">
-        {CrearCliente()}
-      </Popup>
-      );
-    }
-  }
-
   const checkIdMenu = () => {
     if (idTipoCuenta != 3)
     {
@@ -152,19 +137,21 @@ function CuentasAdmnin() {
 
   return(
     <div className="cuentasAdmin">
-    <button onClick={checkIdMenu}>Volver al menú</button>
-    <Popup trigger={<button>Crear cuenta cliente</button>} position="center">
-                <idTipoCuentaContext-Provider value = {{idTipoCuenta}} >
-                  {CrearCliente()}
-                </idTipoCuentaContext-Provider>
-            </Popup>
-      <br></br><br></br>
-          
-      <ul>
-        {cuentas}
-      </ul>
-
-      <button onClick={eliminarCliente}>Eliminar cuenta Cliente</button>
+      <div className="flexbotonadmin">
+        <button onClick={checkIdMenu}>Volver al menú</button>
+        <Popup trigger={<button>Crear cuenta cliente</button>} position="bottom">
+                    <idTipoCuentaContext-Provider value = {{idTipoCuenta}} >
+                      {CrearCliente()}
+                    </idTipoCuentaContext-Provider>
+                </Popup>
+        <button onClick={eliminarCliente}>Eliminar cuenta Cliente</button>
+     </div>
+      <div className="listclient">
+        <u1>
+          {cuentas}
+        </u1>
+      </div>  
+     
     </div>
   );
 }

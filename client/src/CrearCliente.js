@@ -63,25 +63,32 @@ function validarEmail() {
 
     return (
       <div className="CrearCliente">
-        <div className="buttons">
-        <button onClick={()=> history.push("/menu_admin")}>Regresar al menú de sesión</button>
-        <button onClick={validarEmail}>Crear cuenta cliente</button>
+
+
+        <div className="centered-container__crearclient">
+          Correo electrónico:
         </div>
+        <div className="centered-container__crearclient">
+          <input type = "text" name="username" placeholder="micorreo@ejemplo.com" required
+          onChange={(e) => {
+            setUsernameReg(e.target.value);
+          }}
+          />
+          </div>
 
-
-        <label>Correo electrónico: </label> <br />
-        <input type = "text" name="username" placeholder="micorreo@ejemplo.com" required
-        onChange={(e) => {
-          setUsernameReg(e.target.value);
-        }}
-        /> <br/> <br/>
-
-        <label>Contraseña: </label> <br/>
-        <input type = "password" name="password" placeholder="*****" required
-        onChange={(e) => {
-          setPasswordReg(e.target.value);
-        }}
-        /> <br/> <br/> 
+        <div className="centered-container__crearclient">
+          Contraseña:
+        </div>
+        <div className="centered-container__crearclient">
+          <input type = "password" name="password" placeholder="*****" required
+          onChange={(e) => {
+            setPasswordReg(e.target.value);
+          }}
+          />
+        </div> 
+        <div className="button">
+          <button onClick={validarEmail}>Crear cuenta cliente</button>
+        </div>
            
          <p className = "error">{errorStatus}</p>
       </div>

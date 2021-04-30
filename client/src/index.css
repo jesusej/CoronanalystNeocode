@@ -113,7 +113,7 @@ h3{
 }
 .cerrarsesion button{
   width: 12vmax;
-  margin-left :2.5vmax;
+  margin-left :1.4vmax;
 }
   
 button {
@@ -139,21 +139,6 @@ button:hover{
   color: red;
 }
 
-.button__cliente{
-  width: 35vh;
-  height: 20vh;
-  background-color: #c70000;
-  border-color: #c70000;
-  border-style: solid;
-  border-width: 8px;
-  color: whitesmoke;
-  transition: all .3s linear;
-  transition-property: all;
-  transition-duration: .3s;
-
-  overflow-x: hidden;
- 
-}
 
 .centered-container{
   text-align: center;
@@ -171,12 +156,20 @@ button:hover{
   border: 2px solid rgba(0, 0, 0, 0.719);
 }
 
-.centered-container__cliente{
-  flex-wrap: wrap;
+.centered-container__crearclient {
   font-family: "titleFont";
-  font-size: 5vh;
-  margin: 1vh;
   text-align: center;
+  margin: 1vh;
+}
+.centered-container_crearclient input{
+  border: 2px solid rgba(0, 0, 0, 0.719);
+}
+.listclient {
+  margin: 3rem;
+}
+.flexbotonadmin{
+  margin: 1vmax;
+  display: flex;
 }
 
 .footer{

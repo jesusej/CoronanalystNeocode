@@ -80,9 +80,9 @@ function App() {
           <footer className="footer">
             <div>Aviso de privacidad</div>
             <p>
-              La compañia Neocode recopila datos como correo electronico y otros datos sensibles como edad, información económica, localizacion, etc.
-              con el fin de hacer un zondeo de mercado y vizualisar los datos. Cuando accede a este sitio web y responde
-              la encuesta se asume que esta dando consentimiento para que guardemos estos datos. Los datos no se proveen a terceros.
+              La compañía Neocode recopila datos como correo electrónico y otros datos sensibles como edad, información económica, localización, etc.
+              con el fin de hacer un sondeo de mercado y visualizar los datos. Cuando accede a este sitio web y responde
+              la encuesta, se asume que está dando consentimiento para que guardemos estos datos. Los datos no se proveen a terceros.
             </p>
           </footer>
           

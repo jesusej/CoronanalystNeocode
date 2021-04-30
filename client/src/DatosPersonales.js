@@ -56,9 +56,14 @@ function DatosPersonales () {
 
             if ((response.data == false) && ((genero === '') || (edad === '') || (nivelEstudios === '') ||
             (localidad === '') ||  (estadoCivil === '') || (ingreso === '') ||
-            (ocupacion === '') || (id === '')))
+            (ocupacion === '')))
             {
                 alert("Por favor llene todos los datos antes de registrarse");
+                setRegistroExitoso(false);
+                console.log(registroExitoso);
+            }
+            else if((id === '')){
+                alert("Por favor inicie sesión antes de contestar");
                 setRegistroExitoso(false);
                 console.log(registroExitoso);
             }
